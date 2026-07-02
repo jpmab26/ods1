@@ -1,0 +1,24 @@
+{
+  "tratamento": "t0_gemini_flash",
+  "user_story_id": "US01",
+  "repeticao": 1,
+  "timestamp": "2026-06-30T17:36:07.089144+00:00",
+  "latencia_s": 9.859,
+  "tokens_entrada": 546,
+  "tokens_saida": 563,
+  "custo_usd": 0.001571,
+  "model_backend": "gemini_flash",
+  "pipeline": "zero_shot",
+  "modo": "real",
+  "intermediarios": {
+    "casos_atuais": "### US01-CT01 — Admin cadastra usuário com perfil 'Aluno'\n- **Pré-condição:** Admin autenticado na tela de gestão de usuários. Não há usuário com o email 'aluno.novo@dominio.com' no sistema.\n- **Objetivo:** Validar o cadastro bem-sucedido de um novo usuário com o perfil 'Aluno'.\n- **Resultado esperado:** Usuário é criado com nome 'Aluno Teste', email 'aluno.novo@dominio.com', perfil 'Aluno' e status 'Pendente'. Uma senha temporária é exibida ao admin.\n- **Tipo:** Principal\n- **Critérios cobertos:** BDD1\n\n### US01-CT02 — Admin cadastra usuário com perfil 'Professor'\n- **Pré-condição:** Admin autenticado na tela de gestão de usuários. Não há usuário com o email 'professor.novo@dominio.com' no sistema.\n- **Objetivo:** Validar o cadastro bem-sucedido de um novo usuário com o perfil 'Professor'.\n- **Resultado esperado:** Usuário é criado com nome 'Professor Teste', email 'professor.novo@dominio.com', perfil 'Professor' e status 'Pendente'. Uma senha temporária é exibida ao admin.\n- **Tipo:** Principal\n- **Critérios cobertos:** BDD1\n\n### US01-CT03 — Admin cadastra usuário com perfil 'Admin'\n- **Pré-condição:** Admin autenticado na tela de gestão de usuários. Não há usuário com o email 'admin.novo@dominio.com' no sistema.\n- **Objetivo:** Validar o cadastro bem-sucedido de um novo usuário com o perfil 'Admin'.\n- **Resultado esperado:** Usuário é criado com nome 'Admin Teste', email 'admin.novo@dominio.com', perfil 'Admin' e status 'Pendente'. Uma senha temporária é exibida ao admin.\n- **Tipo:** Principal\n- **Critérios cobertos:** BDD1\n\n### US01-CT04 — Admin tenta cadastrar usuário com email já existente\n- **Pré-condição:** Admin autenticado na tela de gestão de usuários. Já existe um usuário com o email 'existente@dominio.com' no sistema.\n- **Objetivo:** Validar que o sistema rejeita o cadastro de um usuário com um email já em uso.\n- **Resultado esperado:** O sistema exibe a mensagem 'Email já cadastrado'. Nenhum novo usuário é criado.\n- **Tipo:** Erro\n- **Critérios coberto"
+  },
+  "precisao": 1.0,
+  "recall": 0.4,
+  "f1": 0.5714,
+  "verbosidade_media": 32.0,
+  "pct_extraneous": 0.0,
+  "vp": 4,
+  "fp": 0,
+  "fn": 6
+}

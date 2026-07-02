@@ -1,0 +1,24 @@
+{
+  "tratamento": "t0_gemini_flash",
+  "user_story_id": "US01",
+  "repeticao": 2,
+  "timestamp": "2026-06-30T17:36:16.177832+00:00",
+  "latencia_s": 9.088,
+  "tokens_entrada": 546,
+  "tokens_saida": 458,
+  "custo_usd": 0.001309,
+  "model_backend": "gemini_flash",
+  "pipeline": "zero_shot",
+  "modo": "real",
+  "intermediarios": {
+    "casos_atuais": "### US01-CT01 — Cadastrar usuário com perfil 'aluno'\n- **Pré-condição:** Admin autenticado na tela de gestão de usuários.\n- **Objetivo:** Validar o cadastro bem-sucedido de um novo usuário com o perfil 'aluno'.\n- **Resultado esperado:** O sistema cria um novo usuário com o perfil 'aluno', status 'Pendente', e exibe uma senha temporária ao admin.\n- **Tipo:** principal\n- **Critérios cobertos:** BDD 1\n\n### US01-CT02 — Cadastrar usuário com perfil 'professor'\n- **Pré-condição:** Admin autenticado na tela de gestão de usuários.\n- **Objetivo:** Validar o cadastro bem-sucedido de um novo usuário com o perfil 'professor'.\n- **Resultado esperado:** O sistema cria um novo usuário com o perfil 'professor', status 'Pendente', e exibe uma senha temporária ao admin.\n- **Tipo:** principal\n- **Critérios cobertos:** BDD 1\n\n### US01-CT03 — Cadastrar usuário com perfil 'admin'\n- **Pré-condição:** Admin autenticado na tela de gestão de usuários.\n- **Objetivo:** Validar o cadastro bem-sucedido de um novo usuário com o perfil 'admin'.\n- **Resultado esperado:** O sistema cria um novo usuário com o perfil 'admin', status 'Pendente', e exibe uma senha temporária ao admin.\n- **Tipo:** principal\n- **Critérios cobertos:** BDD 1\n\n### US01-CT04 — Tentar cadastrar usuário com email já existente\n- **Pré-condição:** Admin autenticado na tela de gestão de usuários; Um usuário com o email informado já existe no sistema.\n- **Objetivo:** Validar que o sistema rejeita o cadastro de um usuário com um email já existente.\n- **Resultado esperado:** O sistema exibe a mensagem 'Email já cadastrado' e o novo usuário não é criado.\n- **Tipo:** alternativo/negativo\n- **Critérios cobertos:** BDD 2"
+  },
+  "precisao": 1.0,
+  "recall": 0.4,
+  "f1": 0.5714,
+  "verbosidade_media": 30.75,
+  "pct_extraneous": 0.0,
+  "vp": 4,
+  "fp": 0,
+  "fn": 6
+}

@@ -1,0 +1,26 @@
+{
+  "tratamento": "t1",
+  "user_story_id": "US08",
+  "repeticao": 2,
+  "timestamp": "2026-07-01T14:26:01.697634+00:00",
+  "latencia_s": 243.007,
+  "tokens_entrada": 181650,
+  "tokens_saida": 28079,
+  "custo_usd": 0.124692,
+  "model_backend": "gemini_flash",
+  "pipeline": "multiagent",
+  "modo": "real",
+  "intermediarios": {
+    "casos_atuais": "### US08-CT01 — Aprovação de indicação sem monitor pré-existente\n- **Pré-condição:** Admin autenticado e na tela de gestão de indicações pendentes. Existe uma indicação de monitor com status \"Pendente de aprovação\" para uma disciplina que não possui monitor ativo. O aluno indicado não é monitor ativo em nenhuma outra disciplina.\n- **Objetivo:** Aprovar uma indicação de monitor para uma disciplina que atualmente não possui um monitor.\n- **Resultado esperado:** O status do vínculo da indicação muda para \"Ativo\". O aluno passa a ter o papel de monitor e acesso à disciplina correspondente.\n- **Tipo:** principal\n- **Critérios cobertos:** Cenário 1\n- **Origem:** US08\n\n### US08-CT02 — Aprovação de alteração de monitor para disciplina com monitor pré-existente\n- **Pré-condição:** Admin autenticado e na tela de gestão de indicações pendentes. Existe uma indicação de monitor com status \"Pendente de aprovação de alteração de monitor\" para uma disciplina que já possui um monitor ativo. O novo aluno indicado não é monitor ativo em nenhuma outra disciplina.\n- **Objetivo:** Aprovar a indicação de um novo monitor para uma disciplina que já tem um monitor ativo, substituindo o monitor existente.\n- **Resultado esperado:** O sistema exibe uma solicitação de confirmação para a alteração do monitor. Após a confirmação, o status do vínculo da indicação muda para \"Ativo\". Apenas o aluno indicado no novo vínculo passa a ter acesso como monitor da disciplina. O vínculo do monitor antigo para essa disciplina deve ser desativado.\n- **Tipo:** principal\n- **Critérios cobertos:** Cenário 2\n- **Origem:** US08\n\n### US08-CT03 — Rejeição de indicação com registro de motivo\n- **Pré-condição:** Admin autenticado e na tela de gestão de indicações pendentes. Existe uma indicação de monitor com status \"Pendente de aprovação\".\n- **Objetivo:** Rejeitar uma indicação de monitor informando um motivo válido.\n- **Resultado esperado:** O status do vínculo da indicação muda para \"Rejeitado\". O motivo informado p",
+    "critica_cobertura": "## Lacunas identificadas\n_Nenhuma lacuna identificada nesta rodada._",
+    "relatorio_factual": "## Verificação factual\n### US08-CT01\n- **Status:** SUPORTADO\n- **Evidência:** \"Cenário 1: Aprovação de disciplina sem monitor Given: admin visualiza indicação com status \"Pendente de aprovação\" When: aprova a indicação Then: vínculo muda para \"Ativo\" e o aluno passa a ter acesso como monitor da disciplina\" (user_stories/individual/us08.md, tipo: us, confiança: alta) e \"Para aprovar: POST /monitorias/<id>/aprovar ... Se não: atualiza status para ATIVO\" (docs/logica-tecnica-sprint-2.md, tipo: md, confiança: alta)\n- **Fonte:** user_stories/individual/us08.md (tipo: us), docs/logica-tecnica-sprint-2.md (tipo: documentação)\n\n### US08-CT02\n- **Status:** SUPORTADO\n- **Evidência:** \"Cenário 2: Aprovação de disciplina com monitor Given: admin visualiza indicação com status \"Pendente de aprovação de alteração de monitor\" (uma vez que esta disciplina já tem monitor) When: aprova a alteração Then: sistema pergunta para confirmar a alteração do monitor antigo pelo novo e, caso aceito, o vínculo muda para \"Ativo\" e apenas o aluno novo passa a ter acesso como monitor da disciplina\" (user_stories/individual/us08.md, tipo: us, confiança: alta)\n- **Fonte:** user_stories/individual/us08.md (tipo: us)\n\n### US08-CT03\n- **Status:** SUPORTADO\n- **Evidência:** \"Cenário 3: Rejeição com motivo Given: admin visualiza indicação com status \"Pendente de aprovação\" When: rejeita informando o motivo Then: vínculo muda para \"Rejeitado\" e o motivo é registrado\" (user_stories/individual/us08.md, tipo: us, confiança: alta) e \"Para rejeitar: POST /monitorias/<id>/rejeitar - Registra motivo informado pelo admin - Atualiza status para REJEITADO\" (docs/logica-tecnica-sprint-2.md, tipo: md, confiança: alta)\n- **Fonte:** user_stories/individual/us08.md (tipo: us), docs/logica-tecnica-sprint-2.md (tipo: documentação)\n\n### US08-CT04\n- **Status:** SUPORTADO\n- **Evidência:** \"Cenário 4: Indicação processada sai da fila Given: admin aprova ou rejeita uma indicação When: retorna à lista de pendentes Then: a indic"
+  },
+  "precisao": 0.5,
+  "recall": 0.7778,
+  "f1": 0.6087,
+  "verbosidade_media": 26.07,
+  "pct_extraneous": 0.0,
+  "vp": 7,
+  "fp": 7,
+  "fn": 2
+}

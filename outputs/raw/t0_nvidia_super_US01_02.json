@@ -1,0 +1,24 @@
+{
+  "tratamento": "t0_nvidia_super",
+  "user_story_id": "US01",
+  "repeticao": 2,
+  "timestamp": "2026-06-30T17:48:52.558180+00:00",
+  "latencia_s": 35.825,
+  "tokens_entrada": 599,
+  "tokens_saida": 1611,
+  "custo_usd": 0.0,
+  "model_backend": "nvidia_super",
+  "pipeline": "zero_shot",
+  "modo": "real",
+  "intermediarios": {
+    "casos_atuais": "### US01-CT01 — Cadastro bem-sucedido de usuário aluno\n- **Pré-condição:** Admin autenticado na tela de gestão de usuários; nenhum usuário com o mesmo email existe no sistema.\n- **Objetivo:** Validar que o sistema cria usuário com status Pendente e exibe senha temporária ao admin ao preencher nome, email e papel válidos (aluno).\n- **Resultado esperado:** Usuário é criado, aparece na lista com status Pendente, e uma senha temporária é exibida ao admin (ex.: em modal ou toast).\n- **Tipo:** principal\n- **Critérios cobertos:** AC1\n\n### US01-CT02 — Cadastro bem-sucedido de usuário professor\n- **Pré-condição:** Admin autenticado na tela de gestão de usuários; nenhum usuário com o mesmo email existe no sistema.\n- **Objetivo:** Validar que o sistema cria usuário com status Pendente e exibe senha temporária ao admin ao preencher nome, email e papel válidos (professor).\n- **Resultado esperado:** Usuário é criado, aparece na lista com status Pendente, e uma senha temporária é exibida ao admin.\n- **Tipo:** principal\n- **Critérios cobertos:** AC1\n\n### US01-CT03 — Cadastro bem-sucedido de usuário admin\n- **Pré-condição:** Admin autenticado na tela de gestão de usuários; nenhum usuário com o mesmo email existe no sistema.\n- **Objetivo:** Validar que o sistema cria usuário com status Pendente e exibe senha temporária ao admin ao preencher nome, email e papel válidos (admin).\n- **Resultado esperado:** Usuário é criado, aparece na lista com status Pendente, e uma senha temporária é exibida ao admin.\n- **Tipo:** principal\n- **Critérios cobertos:** AC1\n\n### US01-CT04 — Rejeição de cadastro com email já existente\n- **Pré-condição:** Admin autenticado na tela de gestão de usuários; já existe um usuário com o email informado no sistema.\n- **Objetivo:** Verificar que o sistema impede o cadastro de usuário com email duplicado e exibe mensagem adequada.\n- **Resultado esperado:** Sistema rejeita o cadastro, não cria o usuário e exibe a mensagem \"Email já cadastrado\".\n- **Tipo:** alternativo\n-"
+  },
+  "precisao": 0.5714,
+  "recall": 0.4,
+  "f1": 0.4706,
+  "verbosidade_media": 30.57,
+  "pct_extraneous": 14.29,
+  "vp": 4,
+  "fp": 3,
+  "fn": 6
+}

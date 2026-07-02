@@ -1,0 +1,24 @@
+{
+  "tratamento": "t0_gemini",
+  "user_story_id": "US01",
+  "repeticao": 2,
+  "timestamp": "2026-06-30T17:29:35.143059+00:00",
+  "latencia_s": 12.825,
+  "tokens_entrada": 546,
+  "tokens_saida": 1349,
+  "custo_usd": 0.000594,
+  "model_backend": "gemini",
+  "pipeline": "zero_shot",
+  "modo": "real",
+  "intermediarios": {
+    "casos_atuais": "### US01-CT01 — Cadastro de novo usuário com perfil Aluno\n- **Pré-condição:** Admin autenticado no sistema, na tela de gestão de usuários.\n- **Objetivo:** Validar o cadastro de um novo usuário com o perfil \"aluno\".\n- **Resultado esperado:** O usuário é criado com o status \"Pendente\", e uma senha temporária é exibida para o admin. O usuário \"aluno\" é listado na tela de gestão de usuários.\n- **Tipo:** principal\n- **Critérios cobertos:** AC1\n\n### US01-CT02 — Cadastro de novo usuário com perfil Professor\n- **Pré-condição:** Admin autenticado no sistema, na tela de gestão de usuários.\n- **Objetivo:** Validar o cadastro de um novo usuário com o perfil \"professor\".\n- **Resultado esperado:** O usuário é criado com o status \"Pendente\", e uma senha temporária é exibida para o admin. O usuário \"professor\" é listado na tela de gestão de usuários.\n- **Tipo:** principal\n- **Critérios cobertos:** AC1\n\n### US01-CT03 — Cadastro de novo usuário com perfil Admin\n- **Pré-condição:** Admin autenticado no sistema, na tela de gestão de usuários.\n- **Objetivo:** Validar o cadastro de um novo usuário com o perfil \"admin\".\n- **Resultado esperado:** O usuário é criado com o status \"Pendente\", e uma senha temporária é exibida para o admin. O usuário \"admin\" é listado na tela de gestão de usuários.\n- **Tipo:** principal\n- **Critérios cobertos:** AC1\n\n### US01-CT04 — Tentar cadastrar email já existente\n- **Pré-condição:** Admin autenticado no sistema, na tela de gestão de usuários. Um usuário com o email \"teste@exemplo.com\" já existe no sistema.\n- **Objetivo:** Validar a rejeição do cadastro quando o email já está em uso.\n- **Resultado esperado:** O sistema exibe a mensagem de erro \"Email já cadastrado\" e não cria o novo usuário.\n- **Tipo:** principal\n- **Critérios cobertos:** AC2\n\n### US01-CT05 — Cadastro com campo Nome vazio\n- **Pré-condição:** Admin autenticado no sistema, na tela de gestão de usuários.\n- **Objetivo:** Validar o comportamento do sistema ao tentar cadastrar um usuário com o ca"
+  },
+  "precisao": 0.8182,
+  "recall": 0.9,
+  "f1": 0.8571,
+  "verbosidade_media": 36.91,
+  "pct_extraneous": 54.55,
+  "vp": 9,
+  "fp": 2,
+  "fn": 1
+}

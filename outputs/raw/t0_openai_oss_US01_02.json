@@ -1,0 +1,24 @@
+{
+  "tratamento": "t0_openai_oss",
+  "user_story_id": "US01",
+  "repeticao": 2,
+  "timestamp": "2026-06-30T17:58:01.059587+00:00",
+  "latencia_s": 61.066,
+  "tokens_entrada": 594,
+  "tokens_saida": 1239,
+  "custo_usd": 0.0,
+  "model_backend": "openai_oss",
+  "pipeline": "zero_shot",
+  "modo": "real",
+  "intermediarios": {
+    "casos_atuais": "### US01-CT01 — Cadastro com dados válidos (perfil aluno)  \n- **Pré‑condição:** Admin autenticado na tela de gestão de usuários; email a ser cadastrado ainda não existe no banco.  \n- **Objetivo:** Verificar criação de usuário com perfil *aluno* usando informações corretas.  \n- **Resultado esperado:** Sistema cria o usuário com status **Pendente** e exibe senha temporária ao admin.  \n- **Tipo:** principal  \n- **Critérios cobertos:** AC1  \n\n### US01-CT02 — Cadastro com dados válidos (perfil professor)  \n- **Pré‑condição:** Admin autenticado; email inexistente.  \n- **Objetivo:** Verificar criação de usuário com perfil *professor*.  \n- **Resultado esperado:** Usuário criado com status **Pendente** e senha temporária mostrada ao admin.  \n- **Tipo:** principal  \n- **Critérios cobertos:** AC1  \n\n### US01-CT03 — Cadastro com dados válidos (perfil admin)  \n- **Pré‑condição:** Admin autenticado; email inexistente.  \n- **Objetivo:** Verificar criação de usuário com perfil *admin*.  \n- **Resultado esperado:** Usuário criado com status **Pendente** e senha temporária exibida.  \n- **Tipo:** principal  \n- **Critérios cobertos:** AC1  \n\n### US01-CT04 — Tentativa de cadastro com email já existente  \n- **Pré‑condição:** Admin autenticado; email já cadastrado no sistema (qualquer perfil).  \n- **Objetivo:** Garantir que o sistema impede duplicação de email.  \n- **Resultado esperado:** Cadastro rejeitado com mensagem **'Email já cadastrado'**.  \n- **Tipo:** negativo  \n- **Critérios cobertos:** AC2  \n\n### US01-CT05 — Campo nome vazio  \n- **Pré‑condição:** Admin autenticado; email inexistente.  \n- **Objetivo:** Verificar validação de campo obrigatório *nome*.  \n- **Resultado esperado:** Sistema impede o cadastro e exibe mensagem de erro indicando que o nome é obrigatório.  \n- **Tipo:** negativo  \n- **Critérios cobertos:** a confirmar  \n\n### US01-CT06 — Campo email vazio  \n- **Pré‑condição:** Admin autenticado; nome preenchido, perfil selecionado.  \n- **Objetivo:** Verificar validação de c"
+  },
+  "precisao": 0.5833,
+  "recall": 0.7,
+  "f1": 0.6364,
+  "verbosidade_media": 22.67,
+  "pct_extraneous": 0.0,
+  "vp": 7,
+  "fp": 5,
+  "fn": 3
+}

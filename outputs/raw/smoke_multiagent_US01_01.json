@@ -1,0 +1,18 @@
+{
+  "tratamento": "smoke_multiagent",
+  "user_story_id": "US01",
+  "repeticao": 1,
+  "timestamp": "2026-06-30T15:47:24.959171+00:00",
+  "latencia_s": 5.059,
+  "tokens_entrada": 0,
+  "tokens_saida": 0,
+  "custo_usd": 0.0,
+  "model_backend": "dryrun",
+  "pipeline": "multiagent",
+  "modo": "dry_run",
+  "intermediarios": {
+    "casos_atuais": "### US00-CT01 — [dry_run] Caso de teste fictício\n- **Pré-condição:** Usuário autenticado\n- **Objetivo:** Validar fluxo principal\n- **Resultado esperado:** Sistema processa e retorna sucesso\n- **Tipo:** principal\n- **Critérios cobertos:** dry_run\n- **Verificação:** NAO_VERIFICAVEL — evidência: dry_run — fonte: dry_run (tipo: código)\n- **Origem:** A1\n- **Aprovado humano:** pendente\n",
+    "critica_cobertura": "## Lacunas identificadas\n_Nenhuma lacuna identificada nesta rodada._\n",
+    "relatorio_factual": "## Verificação factual\n### US00-CT01\n- **Status:** NAO_VERIFICAVEL\n- **Evidência:** [dry_run] Sem verificações reais.\n- **Fonte:** dry_run (tipo: código)\n"
+  }
+}

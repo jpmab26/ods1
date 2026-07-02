@@ -1,0 +1,25 @@
+{
+  "tratamento": "t2",
+  "user_story_id": "US08",
+  "repeticao": 1,
+  "timestamp": "2026-06-30T21:59:29.692455+00:00",
+  "latencia_s": 653.81,
+  "tokens_entrada": 92624,
+  "tokens_saida": 40782,
+  "custo_usd": 0.0,
+  "model_backend": "nvidia_super",
+  "pipeline": "multiagent",
+  "modo": "real",
+  "intermediarios": {
+    "casos_atuais": "### US08-CT01 — Aprovação de disciplina sem monitor e sem aluno já monitor em outra disciplina\n- **Pré-condição:** Admin autenticado; existe indicação com status \"Pendente de aprovação\"; a disciplina vinculada não possui monitor ativo; o aluno indicado não possui nenhuma monitoria ativa em nenhuma disciplina.\n- **Objetivo:** Validar que a aprovação bem‑sucedida altera o vínculo para \"Ativo\" e concede acesso de monitor ao aluno.\n- **Resultado esperado:** O sistema atualiza o status da indicação para \"Ativo\"; o aluno passa a ter acesso como monitor da disciplina; a indicação não aparece mais na lista de pendentes.\n- **Tipo:** principal\n- **Critérios cobertos:** Cenário 1 (Aprovação de disciplina sem monitor); regra de unicidade de monitoria (não há conflito)\n- **Origem:** A1\n\n### US08-CT02 — Aprovação de disciplina que já possui monitor (confirmação aceita)\n- **Pré-condição:** Admin autenticado; existe indicação com status \"Pendente de aprovação\"; a disciplina já possui um monitor ativo (outro aluno); o aluno indicado não possui monitoria ativa em nenhuma disciplina.\n- **Objetivo:** Validar que, ao aprovar a indicação, o sistema solicita confirmação de substituição e, ao confirmar, substitui o monitor antigo pelo novo.\n- **Resultado esperado:** O sistema apresenta tela/prompt de confirmação; após aceitação, o status da indicação muda para \"Ativo\"; o monitor anterior deixa de ter acesso à disciplina; somente o novo aluno tem acesso; a indicação some da lista de pendentes.\n- **Tipo:** principal\n- **Critérios cobertos:** Cenário 2 (Aprovação de disciplina com monitor); regra de unicidade (substituição permitida)\n- **Origem:** A1\n\n### US08-CT03 — Aprovação de disciplina que já possui monitor (confirmação cancelada)\n- **Pré-condição:** Admin autenticado; existe indicação com status \"Pendente de aprovação\"; a disciplina já possui um monitor ativo (outro aluno); o aluno indicado não possui monitoria ativa em nenhuma disciplina.\n- **Objetivo:** Validar que, ao recusar a confi",
+    "critica_cobertura": "## Lacunas identificadas\n### LC15 — Aprovação de impedida por aluno já monitor em outra disciplina quando a disciplina já possui monitor (cenário de alteração)\n- **Tipo:** alternativo  \n- **Justificativa:** A regra de unicidade (“aluno já possui monitoria ativa em qualquer disciplina”) é verificada no momento da aprovação, independentemente de a disciplina já ter um monitor ou não. Nenhum dos casos atuais testa a situação em que a indicação está para **alteração de monitor** (disciplina com monitor ativo) e o aluno indicado já é monitor em outra disciplina – o que deve resultar em rejeição com erro `ALUNO_JA_MONITOR` antes de qualquer pedido de confirmação.\n\n### LC16 — Tentativa de aprovação de alteração de monitor com confirmação aceita, mas bloqueada por unicidade\n- **Tipo:** alternativo  \n- **Justificativa:** Mesmo que o admin confirme a substituição do monitor antigo pelo novo, a validação de unicidade deve impedir a operação. O sistema deve retornar erro `ALUNO_JA_MONITOR` **antes** de exibir o prompt de confirmação. Esse fluxo (confirmação seguida de falha por unicidade) não está coberto pelos casos existentes.\n\n### LC17 — Tentativa de aprovação de alteração de monitor com confirmação cancelada quando o aluno já é monitor em outra disciplina\n- **Tipo:** alternativo  \n- **Justificativa:** Se o admin cancela a confirmação de substituição, a indicação deve permanecer com status *Pendente de aprovação de alteração de monitor* e nenhum vínculo deve ser alterado. Esse cenário combina a validação de unicidade (que não é atingida porque a operação é cancelada) com o comportamento de cancelamento específico para indicações de alteração, que ainda não possui caso de teste dedicado."
+  },
+  "precisao": 0.3529,
+  "recall": 0.6667,
+  "f1": 0.4615,
+  "verbosidade_media": 29.65,
+  "pct_extraneous": 5.88,
+  "vp": 6,
+  "fp": 11,
+  "fn": 3
+}

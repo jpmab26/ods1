@@ -1,0 +1,13 @@
+[
+  {"id_caso": "US01-CT01", "correto": true, "extraneous": true},
+  {"id_caso": "US01-CT02", "correto": true, "extraneous": true},
+  {"id_caso": "US01-CT03", "correto": true, "extraneous": true},
+  {"id_caso": "US01-CT04", "correto": true, "extraneous": false},
+  {"id_caso": "US01-CT05", "correto": true, "extraneous": true},
+  {"id_caso": "US01-CT06", "correto": true, "extraneous": true},
+  {"id_caso": "US01-CT07", "correto": true, "extraneous": true},
+  {"id_caso": "US01-CT08", "correto": false, "categoria_defeito": "Incorrect Fact"},
+  {"id_caso": "US01-CT09", "correto": false, "categoria_defeito": "Incorrect Fact"},
+  {"id_caso": "US01-CT10", "correto": true, "extraneous": false},
+  {"id_caso": "US01-CT11", "correto": true, "extraneous": false}
+]

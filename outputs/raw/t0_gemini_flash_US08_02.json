@@ -1,0 +1,24 @@
+{
+  "tratamento": "t0_gemini_flash",
+  "user_story_id": "US08",
+  "repeticao": 2,
+  "timestamp": "2026-06-30T17:36:49.261117+00:00",
+  "latencia_s": 17.351,
+  "tokens_entrada": 751,
+  "tokens_saida": 1034,
+  "custo_usd": 0.00281,
+  "model_backend": "gemini_flash",
+  "pipeline": "zero_shot",
+  "modo": "real",
+  "intermediarios": {
+    "casos_atuais": "### US08-CT01 — Aprovar indicação de monitor para disciplina sem monitor prévio\n- **Pré-condição:** Admin logado. Existe uma indicação de monitor para uma disciplina sem monitor ativo com status \"Pendente de aprovação\".\n- **Objetivo:** Aprovar uma indicação de monitor para uma disciplina que não possui monitor ativo.\n- **Resultado esperado:** O vínculo do aluno com a disciplina muda para \"Ativo\". O aluno indicado passa a ter acesso como monitor da disciplina.\n- **Tipo:** principal\n- **Critérios cobertos:** Cenário 1\n\n### US08-CT02 — Aprovar alteração de monitor para disciplina com monitor prévio (confirmando)\n- **Pré-condição:** Admin logado. Existe uma indicação de alteração de monitor para uma disciplina que já possui monitor ativo, com status \"Pendente de aprovação de alteração de monitor\".\n- **Objetivo:** Aprovar uma alteração de monitor para uma disciplina que já possui monitor ativo, aceitando a confirmação da substituição.\n- **Resultado esperado:** O sistema solicita confirmação da alteração do monitor antigo pelo novo. Após aceita, o vínculo do aluno novo muda para \"Ativo\" e apenas ele passa a ter acesso como monitor da disciplina. O monitor antigo é desativado ou tem seu acesso removido.\n- **Tipo:** principal\n- **Critérios cobertos:** Cenário 2\n\n### US08-CT03 — Rejeitar indicação de monitor com motivo\n- **Pré-condição:** Admin logado. Existe uma indicação de monitor para uma disciplina com status \"Pendente de aprovação\" (ou \"Pendente de aprovação de alteração de monitor\").\n- **Objetivo:** Rejeitar uma indicação de monitor informando um motivo válido.\n- **Resultado esperado:** O vínculo do aluno com a disciplina muda para \"Rejeitado\" e o motivo informado é registrado.\n- **Tipo:** principal\n- **Critérios cobertos:** Cenário 3\n\n### US08-CT04 — Indicação aprovada não aparece mais na lista de pendentes\n- **Pré-condição:** Admin logado. Uma indicação foi aprovada (cenários US08-CT01 ou US08-CT02 foram executados com sucesso).\n- **Objetivo:** Verificar que uma ind"
+  },
+  "precisao": 0.5714,
+  "recall": 0.4444,
+  "f1": 0.5,
+  "verbosidade_media": 36.14,
+  "pct_extraneous": 0.0,
+  "vp": 4,
+  "fp": 3,
+  "fn": 5
+}

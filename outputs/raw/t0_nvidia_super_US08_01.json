@@ -1,0 +1,24 @@
+{
+  "tratamento": "t0_nvidia_super",
+  "user_story_id": "US08",
+  "repeticao": 1,
+  "timestamp": "2026-06-30T17:49:21.714194+00:00",
+  "latencia_s": 29.155,
+  "tokens_entrada": 796,
+  "tokens_saida": 3076,
+  "custo_usd": 0.0,
+  "model_backend": "nvidia_super",
+  "pipeline": "zero_shot",
+  "modo": "real",
+  "intermediarios": {
+    "casos_atuais": "### US08-CT01 — Aprovação de indicação para disciplina sem monitor\n- **Pré-condição:** Existe uma indicação de monitor com status \"Pendente de aprovação\" vinculada a uma disciplina que atualmente não possui monitor atribuído; o admin está autenticado e na tela de lista de pendências.\n- **Objetivo:** Verificar que ao aprovar a indicação o vínculo passa para \"Ativo\" e o aluno ganha acesso como monitor da disciplina.\n- **Resultado esperado:** Sistema atualiza o status da indicação para \"Ativo\", registra o aluno como monitor da disciplina e exibe mensagem de sucesso.\n- **Tipo:** principal\n- **Critérios cobertos:** AC1\n\n### US08-CT02 — Aprovação de indicação para disciplina com monitor existente, confirmando substituição\n- **Pré-condição:** Existe uma indicação de monitor com status \"Pendente de aprovação de alteração de monitor\" para uma disciplina que já possui um monitor ativo; o admin está autenticado e visualiza a indicação.\n- **Objetivo:** Validar que, ao aprovar a alteração e confirmar a substituição, o monitor antigo é substituído pelo novo e o vínculo fica \"Ativo\".\n- **Resultado esperado:** Sistema solicita confirmação de substituição; após confirmação, atualiza o status da indicação para \"Ativo\", remove o acesso do monitor antigo e atribui o novo aluno como monitor da disciplina.\n- **Tipo:** principal\n- **Critérios cobertos:** AC2\n\n### US08-CT03 — Aprovação de indicação para disciplina com monitor existente, cancelando substituição\n- **Pré-condição:** Existe uma indicação de monitor com status \"Pendente de aprovação de alteração de monitor\" para disciplina com monitor ativo; admin na tela da indicação.\n- **Objetivo:** Verificar que, ao iniciar a aprovação e cancelar a confirmação de substituição, nenhuma alteração ocorre.\n- **Resultado esperado:** Sistema apresenta a tela de confirmação; ao selecionar \"Cancelar\", mantém o status da indicação como \"Pendente de aprovação de alteração de monitor\" e preserva o monitor atual.\n- **Tipo:** alternativo\n- **Critérios co"
+  },
+  "precisao": 0.625,
+  "recall": 0.5556,
+  "f1": 0.5882,
+  "verbosidade_media": 37.62,
+  "pct_extraneous": 25.0,
+  "vp": 5,
+  "fp": 3,
+  "fn": 4
+}

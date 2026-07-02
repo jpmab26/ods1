@@ -1,0 +1,24 @@
+{
+  "tratamento": "t0_gemini_flash",
+  "user_story_id": "US08",
+  "repeticao": 1,
+  "timestamp": "2026-06-30T17:36:31.909412+00:00",
+  "latencia_s": 15.731,
+  "tokens_entrada": 751,
+  "tokens_saida": 924,
+  "custo_usd": 0.002535,
+  "model_backend": "gemini_flash",
+  "pipeline": "zero_shot",
+  "modo": "real",
+  "intermediarios": {
+    "casos_atuais": "### US08-CT01 — Aprovação de indicação de monitor sem pré-existente\n- **Pré-condição:** Admin logado. Existe uma indicação de monitor para uma disciplina que *não possui monitor atualmente*, com status \"Pendente de aprovação\".\n- **Objetivo:** Aprovar uma indicação de monitor para uma disciplina sem monitor pré-existente.\n- **Resultado esperado:** O status do vínculo da indicação muda para \"Ativo\". O aluno indicado passa a ter acesso como monitor da disciplina no sistema.\n- **Tipo:** principal\n- **Critérios cobertos:** Cenário 1\n\n### US08-CT02 — Aprovação de alteração de monitor com confirmação\n- **Pré-condição:** Admin logado. Existe uma indicação de alteração de monitor para uma disciplina que *já possui monitor*, com status \"Pendente de aprovação de alteração de monitor\".\n- **Objetivo:** Aprovar a alteração de monitor, confirmando a substituição do monitor antigo pelo novo.\n- **Resultado esperado:** O sistema exibe uma caixa de diálogo para confirmar a alteração do monitor antigo pelo novo. Após a confirmação, o status do vínculo do aluno novo muda para \"Ativo\". O aluno novo passa a ter acesso como monitor da disciplina, e o aluno antigo perde esse acesso.\n- **Tipo:** principal\n- **Critérios cobertos:** Cenário 2\n\n### US08-CT03 — Rejeição de indicação com motivo\n- **Pré-condição:** Admin logado. Existe uma indicação de monitor (seja \"Pendente de aprovação\" ou \"Pendente de aprovação de alteração de monitor\" – o Cenário 3 especifica \"Pendente de aprovação\", então usaremos essa) com status \"Pendente de aprovação\".\n- **Objetivo:** Rejeitar uma indicação de monitor, fornecendo um motivo.\n- **Resultado esperado:** O status do vínculo da indicação muda para \"Rejeitado\". O motivo informado é registrado e associado à indicação.\n- **Tipo:** principal\n- **Critérios cobertos:** Cenário 3\n\n### US08-CT04 — Indicação \"Pendente de aprovação\" não visível na lista após aprovação\n- **Pré-condição:** Admin logado. Uma indicação de monitor com status \"Pendente de aprovação\" foi aprova"
+  },
+  "precisao": 0.6667,
+  "recall": 0.4444,
+  "f1": 0.5333,
+  "verbosidade_media": 37.17,
+  "pct_extraneous": 0.0,
+  "vp": 4,
+  "fp": 2,
+  "fn": 5
+}

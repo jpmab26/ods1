@@ -1,0 +1,25 @@
+{
+  "tratamento": "t1",
+  "user_story_id": "US01",
+  "repeticao": 1,
+  "timestamp": "2026-07-01T14:12:04.958184+00:00",
+  "latencia_s": 162.532,
+  "tokens_entrada": 68913,
+  "tokens_saida": 10037,
+  "custo_usd": 0.045766,
+  "model_backend": "gemini_flash",
+  "pipeline": "multiagent",
+  "modo": "real",
+  "intermediarios": {
+    "casos_atuais": "### US01-CT01 — Cadastro de usuário com perfil 'Aluno'\n- **Pré-condição:** Admin autenticado na tela de gestão de usuários.\n- **Objetivo:** Validar o cadastro bem-sucedido de um novo usuário com o perfil 'Aluno'.\n- **Resultado esperado:** O usuário é criado com status \"Pendente\", uma senha temporária é exibida ao admin na tela e o usuário possui o perfil \"Aluno\".\n- **Tipo:** principal\n- **Critérios cobertos:** US01 (BDD Cenário 1), EP01 (Cenário 1 de aceitação)\n- **Origem:** A1\n\n### US01-CT02 — Cadastro de usuário com perfil 'Monitor'\n- **Pré-condição:** Admin autenticado na tela de gestão de usuários.\n- **Objetivo:** Validar o cadastro bem-sucedido de um novo usuário com o perfil 'Monitor'.\n- **Resultado esperado:** O usuário é criado com status \"Pendente\", uma senha temporária é exibida ao admin na tela e o usuário possui o perfil \"Monitor\".\n- **Tipo:** principal\n- **Critérios cobertos:** US01 (BDD Cenário 1), EP01 (Cenário 1 de aceitação)\n- **Origem:** A1\n\n### US01-CT03 — Cadastro de usuário com perfil 'Professor'\n- **Pré-condição:** Admin autenticado na tela de gestão de usuários.\n- **Objetivo:** Validar o cadastro bem-sucedido de um novo usuário com o perfil 'Professor'.\n- **Resultado esperado:** O usuário é criado com status \"Pendente\", uma senha temporária é exibida ao admin na tela e o usuário possui o perfil \"Professor\".\n- **Tipo:** principal\n- **Critérios cobertos:** US01 (BDD Cenário 1), EP01 (Cenário 1 de aceitação)\n- **Origem:** A1\n\n### US01-CT04 — Cadastro de usuário com perfil 'Admin'\n- **Pré-condição:** Admin autenticado na tela de gestão de usuários.\n- **Objetivo:** Validar o cadastro bem-sucedido de um novo usuário com o perfil 'Admin'.\n- **Resultado esperado:** O usuário é criado com status \"Pendente\", uma senha temporária é exibida ao admin na tela e o usuário possui o perfil \"Admin\".\n- **Tipo:** principal\n- **Critérios cobertos:** US01 (BDD Cenário 1), EP01 (Cenário 1 de aceitação)\n- **Origem:** A1\n\n### US01-CT05 — Tentativa de cadastro com emai",
+    "critica_cobertura": "## Lacunas identificadas\n\n### LC01 — Cadastro com email em formato inválido\n- **Tipo:** borda\n- **Justificativa:** Embora os casos existentes verifiquem a ausência e a duplicidade do email, não há testes que garantam a validação do *formato* do email. Um usuário pode tentar cadastrar emails malformados (ex: `usuario@`, `usuario.com`, `emailsemarroba`) que, apesar de presentes, não são válidos para comunicação, e o sistema deve rejeitá-los explicitamente.\n\n### LC02 — Cadastro com papel (perfil) inválido ou inexistente\n- **Tipo:** borda\n- **Justificativa:** O contexto (`docs/entrega-sprint-1.md`) especifica que o \"papel deve ser ALUNO/MONITOR/PROFESSOR/ADMIN\". Os casos atuais cobrem os papéis válidos e a ausência do campo 'papel', mas não verificam o comportamento do sistema quando um papel *inválido* (ex: 'Gerente', 'Estagiario') é fornecido. O sistema deve rejeitar o cadastro e informar que o papel é inválido.\n\n### LC03 — Tentativa de cadastro por usuário não-admin\n- **Tipo:** erro\n- **Justificativa:** A user story começa com \"Como admin, quero cadastrar...\", o que implica que a funcionalidade é restrita apenas a usuários com perfil de administrador. Não existe um caso de teste que verifique se um usuário sem permissões de admin (ex: Aluno, Professor) consegue acessar a tela de cadastro ou submeter o formulário de criação de usuário. É essencial testar essa restrição de acesso para garantir a segurança do sistema.\n\n### LC04 — Cadastro com nome fora dos limites de tamanho (mínimo/máximo)\n- **Tipo:** borda\n- **Justificativa:** Embora o campo 'nome' seja obrigatório, não há testes que validem limites de tamanho (mínimo ou máximo). É comum que campos de texto tenham restrições de comprimento para garantir a integridade dos dados no banco e a apresentação adequada na interface. Sem tais testes, um nome excessivamente curto ou longo pode causar problemas inesperados. O contexto recuperado não especificou limites, reforçando a necessidade de testar essa lacuna.\n\n### LC05 —"
+  },
+  "precisao": 0.6875,
+  "recall": 1.0,
+  "f1": 0.8148,
+  "verbosidade_media": 24.0,
+  "pct_extraneous": 0.0,
+  "vp": 11,
+  "fp": 5,
+  "fn": 0
+}

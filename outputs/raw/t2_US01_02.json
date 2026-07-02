@@ -1,0 +1,26 @@
+{
+  "tratamento": "t2",
+  "user_story_id": "US01",
+  "repeticao": 2,
+  "timestamp": "2026-06-30T21:48:35.881660+00:00",
+  "latencia_s": 681.203,
+  "tokens_entrada": 313131,
+  "tokens_saida": 58101,
+  "custo_usd": 0.0,
+  "model_backend": "nvidia_super",
+  "pipeline": "multiagent",
+  "modo": "real",
+  "intermediarios": {
+    "casos_atuais": "### US01-CT01 — Cadastro bem-sucedido de usuário com perfil válido\n- **Pré-condição:** Admin autenticado na tela de gestão de usuários; sistema com banco de dados limpo (nenhum usuário com o mesmo email)\n- **Objetivo:** Verificar que o usuário é criado com status Pendente e senha temporária exibida ao admin quando todos os campos obrigatórios são preenchidos corretamente\n- **Resultado esperado:** Sistema cria usuário, define status = \"Pendente\", gera senha temporária (10 caracteres alfanuméricos), exibe a senha ao admin e armazena o hash da senha no banco\n- **Tipo:** principal\n- **Critérios cobertos:** Cenário 1 (BDD) + Fluxo principal (docs/entrega-sprint-1.md)\n- **Origem:** US01\n\n### US01-CT02 — Tentativa de cadastro com email já existente\n- **Pré-condição:** Admin autenticado na tela de gestão de usuários; já existe um usuário cadastrado com o email a ser usado\n- **Objetivo:** Garantir que o sistema rejeite o cadastro quando o email informado já está em uso\n- **Resultado esperado:** Sistema impede a criação, retorna mensagem de erro \"Email já cadastrado\" e não altera o banco de dados\n- **Tipo:** alternativo\n- **Critérios cobertos:** Cenário 2 (BDD)\n- **Origem:** US01\n\n### US01-CT03 — Tentativa de cadastro com campo nome ausente\n- **Pré-condição:** Admin autenticado na tela de gestão de usuários; formulário com email e papel preenchidos, nome deixado vazio\n- **Objetivo:** Validar que o sistema bloqueia o envio quando o campo nome obrigatório não é preenchido\n- **Resultado esperado:** Sistema impede a confirmação, destaca o campo nome como obrigatório e não cria o usuário\n- **Tipo:** alternativo\n- **Critérios cobertos:** Campos obrigatórios ausentes (docs/criterios-de-aceitacao.md#___EP01___Perfis_e_Autentica__o)\n- **Origem:** US01\n\n### US01-CT04 — Tentativa de cadastro com campo email ausente\n- **Pré-condição:** Admin autenticado na tela de gestão de usuários; formulário com nome e papel preenchidos, email deixado vazio\n- **Objetivo:** Validar que o sistema bloque",
+    "critica_cobertura": "We have to output the final answer: we already the test cases now need to output nothing more new query.",
+    "relatorio_factual": "## Verificação factual\n### US01-CT01\n- **Status:** SUPORTADO\n- **Evidência:** O fluxo principal descreve criação com status \"Pendente\" e exibição de senha temporária; o serviço valida campos, normaliza papel, gera senha temporária e armazena seu hash; o repositório insere com status='PENDENTE' e senha_temporaria=TRUE.\n- **Fonte:** docs/entrega-sprint-1.md#___US01___Cadastro_de_usu_rios_com_perfis (tipo: documentação); backend/usuarios/service.py#create_user (tipo: código, confiança: média); backend/usuarios/repository.py#create_user (tipo: código, confiança: alta)\n\n### US01-CT02\n- **Status:** SUPORTADO\n- **Evidência:** O serviço verifica se o e‑mail normalizado já existe e retorna \"Email já cadastrado\"; os critérios de aceitação descrevem esse cenário.\n- **Fonte:** user_stories/individual/us01.md (tipo: user story, confiança: alta); docs/criterios-de-aceitacao.md#___EP01___Perfis_e_Autentica__o (tipo: documentação, confiança: alta); backend/usuarios/service.py#create_user (tipo: código, confiança: média)\n\n### US01-CT03\n- **Status:** SUPORTADO\n- **Evidência:** O serviço verifica se nome ou e‑mail normalizado estão vazios e retorna \"Nome e email são obrigatórios\"; os critérios de aceitação afirmam que o sistema impede o envio e aponta o campo faltando.\n- **Fonte:** docs/criterios-de-aceitacao.md#___EP01___Perfis_e_Autentica__o (tipo: documentação, confiança: alta); backend/usuarios/service.py#create_user (tipo: código, confiança: média)\n\n### US01-CT04\n- **Status:** SUPORTADO\n- **Evidência:** O serviço verifica se nome ou e‑mail normalizado estão vazios e retorna \"Nome e email são obrigatórios\"; os critérios de aceitação afirmam que o sistema impede o envio e aponta o campo faltando.\n- **Fonte:** docs/criterios-de-aceitacao.md#___EP01___Perfis_e_Autentica__o (tipo: documentação, confiança: alta); backend/usuarios/service.py#create_user (tipo: código, confiança: média)\n\n### US01-CT05\n- **Status:** SUPORTADO\n- **Evidência:** O serviço normaliza o papel para maiúsculas e "
+  },
+  "precisao": 0.6667,
+  "recall": 1.0,
+  "f1": 0.8,
+  "verbosidade_media": 22.71,
+  "pct_extraneous": 0.0,
+  "vp": 10,
+  "fp": 5,
+  "fn": 0
+}

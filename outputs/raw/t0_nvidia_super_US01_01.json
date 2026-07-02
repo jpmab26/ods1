@@ -1,0 +1,24 @@
+{
+  "tratamento": "t0_nvidia_super",
+  "user_story_id": "US01",
+  "repeticao": 1,
+  "timestamp": "2026-06-30T17:48:16.732487+00:00",
+  "latencia_s": 27.643,
+  "tokens_entrada": 599,
+  "tokens_saida": 1577,
+  "custo_usd": 0.0,
+  "model_backend": "nvidia_super",
+  "pipeline": "zero_shot",
+  "modo": "real",
+  "intermediarios": {
+    "casos_atuais": "### US01-CT01 — Cadastro bem-sucedido de usuário aluno\n- **Pré-condição:** Admin autenticado na tela de gestão de usuários\n- **Objetivo:** Validar criação de usuário com papel aluno, status Pendente e exibição de senha temporária\n- **Resultado esperado:** Sistema cria o usuário, define status como Pendente e exibe a senha temporária ao admin\n- **Tipo:** principal\n- **Critérios cobertos:** AC1\n\n### US01-CT02 — Cadastro bem-sucedido de usuário professor\n- **Pré-condição:** Admin autenticado na tela de gestão de usuários\n- **Objetivo:** Validar criação de usuário com papel professor, status Pendente e exibição de senha temporária\n- **Resultado esperado:** Sistema cria o usuário, define status como Pendente e exibe a senha temporária ao admin\n- **Tipo:** principal\n- **Critérios cobertos:** AC1\n\n### US01-CT03 — Cadastro bem-sucedido de usuário admin\n- **Pré-condição:** Admin autenticado na tela de gestão de usuários\n- **Objetivo:** Validar criação de usuário com papel admin, status Pendente e exibição de senha temporária\n- **Resultado esperado:** Sistema cria o usuário, define status como Pendente e exibe a senha temporária ao admin\n- **Tipo:** principal\n- **Critérios cobertos:** AC1\n\n### US01-CT04 — Tentativa de cadastro com nome vazio\n- **Pré-condição:** Admin autenticado na tela de gestão de usuários\n- **Objetivo:** Verificar comportamento do sistema quando o campo nome está vazio\n- **Resultado esperado:** Sistema rejeita o cadastro e exibe mensagem de erro indicando que o nome é obrigatório\n- **Tipo:** alternativa\n- **Critérios cobertos:** a confirmar\n\n### US01-CT05 — Tentativa de cadastro com e-mail inválido\n- **Pré-condição:** Admin autenticado na tela de gestão de usuários\n- **Objetivo:** Verificar comportamento do sistema quando o e-mail tem formato inválido\n- **Resultado esperado:** Sistema rejeita o cadastro e exibe mensagem de erro indicando formato de e-mail inválido\n- **Tipo:** alternativa\n- **Critérios cobertos:** a confirmar\n\n### US01-CT06 — Tentativa de c"
+  },
+  "precisao": 0.875,
+  "recall": 0.7,
+  "f1": 0.7778,
+  "verbosidade_media": 28.5,
+  "pct_extraneous": 0.0,
+  "vp": 7,
+  "fp": 1,
+  "fn": 3
+}

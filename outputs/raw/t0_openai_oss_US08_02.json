@@ -1,0 +1,24 @@
+{
+  "tratamento": "t0_openai_oss",
+  "user_story_id": "US08",
+  "repeticao": 2,
+  "timestamp": "2026-06-30T18:04:45.133574+00:00",
+  "latencia_s": 72.518,
+  "tokens_entrada": 779,
+  "tokens_saida": 1290,
+  "custo_usd": 0.0,
+  "model_backend": "openai_oss",
+  "pipeline": "zero_shot",
+  "modo": "real",
+  "intermediarios": {
+    "casos_atuais": "### US08-CT01 — Aprovar indicação quando disciplina não possui monitor  \n- **Pré‑condição:** Admin autenticado; indicação exibida com status **“Pendente de aprovação”**; disciplina sem monitor cadastrado.  \n- **Objetivo:** Verificar que ao aprovar a indicação o vínculo da disciplina passa para “Ativo” e o aluno indicado obtém acesso como monitor.  \n- **Resultado esperado:** Sistema altera o status da indicação para “Ativo”, cria o vínculo monitor‑disciplina e o novo monitor consegue acessar as funcionalidades de monitor da disciplina.  \n- **Tipo:** principal  \n- **Critérios cobertos:** Cenário 1  \n\n### US08-CT02 — Aprovar indicação quando disciplina já tem monitor (confirmação aceita)  \n- **Pré‑condição:** Admin autenticado; indicação exibida com status **“Pendente de aprovação de alteração de monitor”**; disciplina já possui monitor antigo.  \n- **Objetivo:** Validar o fluxo de aprovação de troca de monitor com confirmação positiva.  \n- **Resultado esperado:** Sistema exibe pergunta de confirmação; admin confirma; status da indicação muda para “Ativo”, vínculo do monitor antigo é desativado e o novo monitor passa a ter acesso exclusivo como monitor da disciplina.  \n- **Tipo:** principal  \n- **Critérios cobertos:** Cenário 2  \n\n### US08-CT03 — Aprovar indicação quando disciplina já tem monitor (confirmação recusada)  \n- **Pré‑condição:** Admin autenticado; indicação com status **“Pendente de aprovação de alteração de monitor”**; disciplina com monitor antigo.  \n- **Objetivo:** Verificar o comportamento quando o admin cancela a troca de monitor.  \n- **Resultado esperado:** Sistema exibe pergunta de confirmação; admin recusa; indicação permanece com status “Pendente de aprovação de alteração de monitor” e nenhum vínculo é alterado.  \n- **Tipo:** alternativo  \n- **Critérios cobertos:** a confirmar (confirmação recusada não explicitada na US)  \n\n### US08-CT04 — Rejeitar indicação informando motivo (status pendente padrão)  \n- **Pré‑condição:** Admin autenticado; indicaçã"
+  },
+  "precisao": 0.6,
+  "recall": 0.6667,
+  "f1": 0.6316,
+  "verbosidade_media": 32.9,
+  "pct_extraneous": 0.0,
+  "vp": 6,
+  "fp": 4,
+  "fn": 3
+}

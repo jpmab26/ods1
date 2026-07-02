@@ -1,0 +1,24 @@
+{
+  "tratamento": "t0_nvidia_super",
+  "user_story_id": "US08",
+  "repeticao": 2,
+  "timestamp": "2026-06-30T17:49:39.837349+00:00",
+  "latencia_s": 18.122,
+  "tokens_entrada": 796,
+  "tokens_saida": 1764,
+  "custo_usd": 0.0,
+  "model_backend": "nvidia_super",
+  "pipeline": "zero_shot",
+  "modo": "real",
+  "intermediarios": {
+    "casos_atuais": "###US08-CT01 — Aprovação de indicação sem monitor existente  \n- **Pré-condição:** Existe uma indicação de monitor com status \"Pendente de aprovação\" vinculada a uma disciplina que atualmente não possui monitor atribuído; o admin está autenticado e na tela de indicações pendentes.  \n- **Objetivo:** Validar que a aprovação da indicação altera o vínculo para \"Ativo\" e concede ao aluno o acesso como monitor da disciplina.  \n- **Resultado esperado:** Após o admin clicar em \"Aprovar\", o status da indicação muda para \"Ativo\", o aluno passa a ter permissões de monitor naquela disciplina e a indicação não aparece mais na lista de pendentes.  \n- **Tipo:** principal  \n- **Critérios cobertos:** Cenário 1  \n\n### US08-CT02 — Aprovação de indicação com monitor existente (confirmação de substituição)  \n- **Pré-condição:** Existe uma indicação de monitor com status \"Pendente de aprovação de alteração de monitor\" vinculada a uma disciplina que já possui um monitor atribuído; o admin está autenticado e na tela de indicações pendentes.  \n- **Objetivo:** Validar que, ao aprovar a indicação, o sistema solicita confirmação de substituição do monitor antigo e, ao confirmar, o vínculo passa para \"Ativo\" e somente o novo aluno obtém acesso como monitor.  \n- **Resultado esperado:** Após o admin clicar em \"Aprovar\", o sistema exibe um diálogo de confirmação; ao aceitar, o status da indicação muda para \"Ativo\", o monitor anterior perde o acesso e o novo aluno passa a ter acesso como monitor da disciplina; a indicação some da lista de pendentes.  \n- **Tipo:** principal  \n- **Critérios cobertos:** Cenário 2  \n\n### US08-CT03 — Rejeição de indicação com motivo informado  \n- **Pré-condição:** Existe uma indicação de monitor com status \"Pendente de aprovação\"; o admin está autenticado e na tela de indicações pendentes.  \n- **Objetivo:** Validar que a rejeição da indicação, ao informar um motivo, altera o vínculo para \"Rejeitado\" e registra o motivo fornecido.  \n- **Resultado esperado:** Após o admin "
+  },
+  "precisao": 0.5714,
+  "recall": 0.4444,
+  "f1": 0.5,
+  "verbosidade_media": 50.5,
+  "pct_extraneous": 0.0,
+  "vp": 4,
+  "fp": 3,
+  "fn": 5
+}

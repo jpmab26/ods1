@@ -1,0 +1,24 @@
+{
+  "tratamento": "t0_gemini",
+  "user_story_id": "US08",
+  "repeticao": 2,
+  "timestamp": "2026-06-30T17:33:25.155429+00:00",
+  "latencia_s": 12.64,
+  "tokens_entrada": 751,
+  "tokens_saida": 1567,
+  "custo_usd": 0.000702,
+  "model_backend": "gemini",
+  "pipeline": "zero_shot",
+  "modo": "real",
+  "intermediarios": {
+    "casos_atuais": "### US08-CT01 — Aprovação de indicação de monitor para disciplina sem monitor\n- **Pré-condição:** Um admin está logado. Existe uma indicação de monitor para uma disciplina com status \"Pendente de aprovação\". A disciplina não possui nenhum monitor ativo associado.\n- **Objetivo:** Validar a aprovação de uma nova indicação de monitor para uma disciplina que ainda não tem monitor.\n- **Resultado esperado:** O status do vínculo do monitor com a disciplina muda para \"Ativo\". O novo monitor ganha acesso de monitor para a disciplina.\n- **Tipo:** principal\n- **Critérios cobertos:** AC1\n\n### US08-CT02 — Aprovação de alteração de monitor para disciplina já com monitor\n- **Pré-condição:** Um admin está logado. Existe uma indicação de monitor para uma disciplina com status \"Pendente de aprovação de alteração de monitor\". A disciplina já possui um monitor ativo associado.\n- **Objetivo:** Validar a aprovação da substituição de um monitor existente por um novo.\n- **Resultado esperado:** O sistema exibe uma confirmação para o admin substituir o monitor antigo pelo novo. Após a confirmação do admin, o vínculo do novo monitor com a disciplina muda para \"Ativo\". Apenas o novo monitor passa a ter acesso como monitor da disciplina.\n- **Tipo:** principal\n- **Critérios cobertos:** AC2\n\n### US08-CT03 — Rejeição de indicação de monitor com motivo\n- **Pré-condição:** Um admin está logado. Existe uma indicação de monitor com status \"Pendente de aprovação\".\n- **Objetivo:** Validar a rejeição de uma indicação de monitor com o registro de um motivo.\n- **Resultado esperado:** O status do vínculo do monitor com a disciplina muda para \"Rejeitado\". O motivo informado pelo admin é registrado no sistema associado à indicação.\n- **Tipo:** principal\n- **Critérios cobertos:** AC3\n\n### US08-CT04 — Indicação processada (aprovada) removida da lista de pendências\n- **Pré-condição:** Um admin está logado. Existe uma indicação de monitor com status \"Pendente de aprovação\".\n- **Objetivo:** Validar que uma indicaç"
+  },
+  "precisao": 0.7,
+  "recall": 0.7778,
+  "f1": 0.7368,
+  "verbosidade_media": 43.7,
+  "pct_extraneous": 20.0,
+  "vp": 7,
+  "fp": 3,
+  "fn": 2
+}

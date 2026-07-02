@@ -1,0 +1,9 @@
+[
+  {"id_caso": "US08-CT01", "correto": true, "extraneous": true},
+  {"id_caso": "US08-CT02", "correto": false, "categoria_defeito": "Incorrect Fact"},
+  {"id_caso": "US08-CT03", "correto": true, "extraneous": true},
+  {"id_caso": "US08-CT04", "correto": true, "extraneous": false},
+  {"id_caso": "US08-CT05", "correto": true, "extraneous": false},
+  {"id_caso": "US08-CT06", "correto": false, "categoria_defeito": "Incorrect Fact"},
+  {"id_caso": "US08-CT07", "correto": true, "extraneous": false}
+]
