@@ -375,6 +375,12 @@ Construído manualmente por 2 revisores (revisor1 + revisor2) para US01/US08, es
 
 Todos verificados **SUPORTADO** contra código executável (`backend/usuarios/service.py`, `backend/usuarios/repository.py`, `backend/usuarios/routes.py`) — nenhum caso cita `backend/tests/` (proibido pelo protocolo do projeto).
 
+**Achados de código durante a construção (não incluídos no oráculo):**
+- `create_user` **não valida formato de e-mail** — só checa presença, trim e duplicidade case-insensitive (`normalized_email = email.strip().lower()`); um e-mail sintaticamente inválido (sem `@`, sem domínio, com espaço interno, com múltiplos `@`) é aceito normalmente, sem nenhuma checagem de formato no código. Este foi, isoladamente, o gap de requisito mais citado (incorretamente, como se fosse validado) pelos casos gerados em toda a rodada — 11 dos 438 casos revisados (Seção 2.5) assumem essa validação e foram rotulados `Incorrect Fact` por isso.
+- `create_user` **aceita nome composto só por espaços** — o check `if not nome` roda **antes** do `.strip()`; uma string só de espaços é truthy, passa no check, e é armazenada como `""` (vazio) após `nome.strip()` no `INSERT`. Não incluído no oráculo por não ser um dos 4 cenários oficiais da US, mas gerou 3 rótulos `Incorrect Fact` (casos que assumiam rejeição).
+
+Nenhum dos dois achados acima foi corretamente identificado por nenhuma das 438 execuções — em todo caso gerado que tocou nesses dois temas, o agente assumiu (incorretamente) que a validação existia. Contraste com o achado da Seção 6.3 (US08), onde parte das execuções **corrigiu** corretamente a alegação fabricada.
+
 ### US08 — Admin aprova ou rejeita indicação de monitor (9 casos)
 
 | ID | Nome | Tipo | Critério |
@@ -550,6 +556,12 @@ Um padrão recorrente nos agentes: eles inventam um fluxo de "confirmação de s
 - **Todos os demais tratamentos (T0×4 e T1):** repetem a alegação fabricada — confirmação de substituição, "monitor antigo desativado/perde acesso" — em praticamente toda execução que testa o cenário de "disciplina já tem monitor", citando como evidência a user story em prosa (Cenário 2) em vez do código real.
 
 **Conclusão honesta:** a regra de A3 para esse padrão específico só funciona de forma confiável com o backend Nemotron Super (usado em T2); com Gemini Flash (T1) e em zero-shot (sem A3, por definição), o padrão se repete. Isso não é uma propriedade do prompt isolada do modelo — o mesmo prompt de A3 roda em T1 e T2, e só é seguido consistentemente em um dos dois.
+
+**Nota metodológica — alucinação do co-gerador vs. bug real do `monitoria-app`:** o `monitoria-app` tem gaps de validação reais e documentados (Seção 3): `create_user` não valida formato de e-mail nem rejeita nome só-com-espaços; `deactivate_user` reprocessa silenciosamente um usuário já inativo em vez de retornar erro; e a regra "aluno já é monitor" só é checada na aprovação, nunca na indicação. Esses quatro gaps são propriedades reais do sistema-alvo, não defeitos do co-gerador — mas a forma como cada execução **descreve** esses pontos é que determina se o caso é VP ou FP. Nos 438 casos revisados, essa distinção se comportou de forma bem desigual entre os quatro gaps:
+- **E-mail sem validação de formato e nome só-com-espaços:** nenhuma das 438 execuções descreveu corretamente esses dois gaps — todo caso que tocou nesses temas assumiu (incorretamente) que a validação existia, gerando 14 rótulos `Incorrect Fact` (11 + 3, Seção 3). Aqui a alucinação é total: o co-generator nunca verificou este ponto contra o código real em nenhum backend/tratamento.
+- **"Aluno já é monitor" só na aprovação / ausência de lógica de substituição em US08:** ao contrário, 6 execuções (concentradas em T2) descreveram corretamente esse comportamento com evidência de código, e foram rotuladas VP — exatamente o padrão qualitativo desta seção.
+
+A lição para o relatório: a verificação factual (A3) funciona de forma **desigual entre temas**, não só entre backends — reduzir alucinação em um padrão específico (substituição de monitor, só com Nemotron Super) não significa que o pipeline generaliza automaticamente para outros gaps do sistema-alvo (validação de e-mail, nome). Nenhum dos 6 tratamentos verificou espontaneamente os gaps de `usuarios/service.py` contra o código antes de assumir que a validação existia.
 
 ### 6.4 Latência
 
