@@ -1,0 +1,24 @@
+{
+  "tratamento": "t0_gemini_flash",
+  "user_story_id": "US07",
+  "repeticao": 2,
+  "timestamp": "2026-07-05T13:50:16.142549+00:00",
+  "latencia_s": 12.248,
+  "tokens_entrada": 632,
+  "tokens_saida": 658,
+  "custo_usd": 0.0,
+  "model_backend": "gemini_flash",
+  "pipeline": "zero_shot",
+  "modo": "real",
+  "intermediarios": {
+    "casos_atuais": "### US07-CT01 — Indicação bem-sucedida de aluno como monitor\n- **Pré-condição:** Professor autenticado na tela de uma de suas disciplinas. Existe um aluno válido cadastrado no sistema.\n- **Objetivo:** Validar a criação de vínculo de monitoria com status \"Pendente de aprovação\" após indicação.\n- **Resultado esperado:** Vínculo de monitoria é criado para o aluno na disciplina, com status \"Pendente de aprovação\".\n- **Tipo:** Principal\n- **Critérios cobertos:** Cenário 1\n\n### US07-CT02 — Indicação de usuário com papel de professor (não aluno)\n- **Pré-condição:** Professor autenticado na tela de uma de suas disciplinas. Existe um usuário cadastrado com papel \"professor\" (e sem papel \"aluno\").\n- **Objetivo:** Validar que o sistema rejeita a indicação de um usuário que não possui o papel \"aluno\".\n- **Resultado esperado:** Sistema exibe uma mensagem de erro indicando que o papel do usuário é inválido para indicação como monitor.\n- **Tipo:** Exceção\n- **Critérios cobertos:** Cenário 2\n\n### US07-CT03 — Indicação de usuário sem papel de aluno (sem papel específico)\n- **Pré-condição:** Professor autenticado na tela de uma de suas disciplinas. Existe um usuário cadastrado sem o papel \"aluno\" (e sem outro papel específico como \"professor\" ou \"admin\").\n- **Objetivo:** Validar que o sistema rejeita a indicação de um usuário que não possui o papel \"aluno\".\n- **Resultado esperado:** Sistema exibe uma mensagem de erro indicando que o papel do usuário é inválido para indicação como monitor.\n- **Tipo:** Exceção\n- **Critérios cobertos:** Cenário 2\n\n### US07-CT04 — Disciplina de outro professor não aparece nas opções de indicação\n- **Pré-condição:** Professor autenticado. Existe uma disciplina cadastrada que não é de responsabilidade do professor autenticado.\n- **Objetivo:** Validar que o professor não consegue visualizar ou selecionar disciplinas que não são de sua responsabilidade para indicação de monitor.\n- **Resultado esperado:** A disciplina que não é de responsabilidade do professo"
+  },
+  "precisao": 1.0,
+  "recall": 1.0,
+  "f1": 1.0,
+  "verbosidade_media": 34.0,
+  "pct_extraneous": 0.0,
+  "vp": 5,
+  "fp": 0,
+  "fn": 0
+}

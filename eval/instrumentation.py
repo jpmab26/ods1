@@ -1,9 +1,9 @@
 """
 Instrumentação centralizada de tokens, latência e custo por execução.
 
-Preços de tabela vigentes em 29/06/2026 (confirmar antes de usar):
-  - gemini-2.5-flash-lite:              US$0,10/M tokens entrada, US$0,40/M saída
-  - gemini-2.5-flash:                   US$0,30/M entrada, US$2,50/M saída
+Todos os backends usados no experimento rodam em tier gratuito:
+  - gemini-2.5-flash:                   US$0,00 (free tier Google AI Studio,
+                                         cota diária por projeto/modelo)
   - nvidia/nemotron-3-ultra-550b-a55b:  US$0,00 (free tier OpenRouter)
   - nvidia/nemotron-3-super-120b-a12b:  US$0,00 (free tier OpenRouter)
   - openai/gpt-oss-120b:                US$0,00 (free tier OpenRouter)
@@ -15,8 +15,7 @@ from dataclasses import dataclass
 
 
 _PRICES: dict[str, dict[str, float]] = {
-    "gemini-2.5-flash-lite":    {"input": 0.10, "output": 0.40},
-    "gemini-2.5-flash":         {"input": 0.30, "output": 2.50},
+    "gemini-2.5-flash":         {"input": 0.0,  "output": 0.0},
     "nvidia-nemotron-ultra":    {"input": 0.0,  "output": 0.0},
     "nvidia-nemotron-super":    {"input": 0.0,  "output": 0.0},
     "openai-gpt-oss-120b":      {"input": 0.0,  "output": 0.0},
@@ -39,7 +38,6 @@ class ExecutionRecord:
 
 def compute_cost(tokens_in: int, tokens_out: int, backend: str) -> float:
     key_map = {
-        "gemini":       "gemini-2.5-flash-lite",
         "gemini_flash": "gemini-2.5-flash",
         "nvidia":       "nvidia-nemotron-ultra",
         "nvidia_super": "nvidia-nemotron-super",

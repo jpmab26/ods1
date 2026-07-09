@@ -1,48 +1,55 @@
-### US01-CT01 — Cadastro bem-sucedido de usuário aluno
-- **Pré-condição:** Admin autenticado na tela de gestão de usuários; nenhum usuário com o mesmo email existe no sistema.
-- **Objetivo:** Validar que o sistema cria usuário com status Pendente e exibe senha temporária ao admin ao preencher nome, email e papel válidos (aluno).
-- **Resultado esperado:** Usuário é criado, aparece na lista com status Pendente, e uma senha temporária é exibida ao admin (ex.: em modal ou toast).
+### US01-CT01 — Cadastro de usuário aluno com dados válidos
+- **Pré-condição:** Admin autenticado na tela de gestão de usuários
+- **Objetivo:** Verificar criação bem-sucedida de usuário com papel aluno
+- **Resultado esperado:** Usuário criado com status Pendente e senha temporária exibida ao admin
 - **Tipo:** principal
 - **Critérios cobertos:** AC1
 
-### US01-CT02 — Cadastro bem-sucedido de usuário professor
-- **Pré-condição:** Admin autenticado na tela de gestão de usuários; nenhum usuário com o mesmo email existe no sistema.
-- **Objetivo:** Validar que o sistema cria usuário com status Pendente e exibe senha temporária ao admin ao preencher nome, email e papel válidos (professor).
-- **Resultado esperado:** Usuário é criado, aparece na lista com status Pendente, e uma senha temporária é exibida ao admin.
-- **Tipo:** principal
+### US01-CT02 — Cadastro de usuário professor com dados válidos
+- **Pré-condição:** Admin autenticado na tela de gestão de usuários
+- **Objetivo:** Verificar criação bem-sucedida de usuário com papel professor
+- **Resultado esperado:** Usuário criado com status Pendente e senha temporária exibida ao admin
+- **Tipo:** alternativa
 - **Critérios cobertos:** AC1
 
-### US01-CT03 — Cadastro bem-sucedido de usuário admin
-- **Pré-condição:** Admin autenticado na tela de gestão de usuários; nenhum usuário com o mesmo email existe no sistema.
-- **Objetivo:** Validar que o sistema cria usuário com status Pendente e exibe senha temporária ao admin ao preencher nome, email e papel válidos (admin).
-- **Resultado esperado:** Usuário é criado, aparece na lista com status Pendente, e uma senha temporária é exibida ao admin.
-- **Tipo:** principal
+### US01-CT03 — Cadastro de usuário admin com dados válidos
+- **Pré-condição:** Admin autenticado na tela de gestão de usuários
+- **Objetivo:** Verificar criação bem-sucedida de usuário com papel admin
+- **Resultado esperado:** Usuário criado com status Pendente e senha temporária exibida ao admin
+- **Tipo:** alternativa
 - **Critérios cobertos:** AC1
 
-### US01-CT04 — Rejeição de cadastro com email já existente
-- **Pré-condição:** Admin autenticado na tela de gestão de usuários; já existe um usuário com o email informado no sistema.
-- **Objetivo:** Verificar que o sistema impede o cadastro de usuário com email duplicado e exibe mensagem adequada.
-- **Resultado esperado:** Sistema rejeita o cadastro, não cria o usuário e exibe a mensagem "Email já cadastrado".
-- **Tipo:** alternativo
-- **Critérios cobertos:** AC2 (Given-When-Then segundo cenário)
+### US01-CT04 — Tentativa de cadastro com e-mail já existente
+- **Pré-condição:** Admin autenticado na tela de gestão de usuários; existe usuário com e-mail "existing@exemplo.com"
+- **Objetivo:** Validar rejeição de e-mail duplicado
+- **Resultado esperado:** Sistema exibe mensagem "Email já cadastrado" e não cria o usuário
+- **Tipo:** negativo
+- **Critérios cobertos:** AC2
 
-### US01-CT05 — Tentativa de cadastro com nome vazio (ambiguidade)
-- **Pré-condição:** Admin autenticado na tela de gestão de usuários; email informado não existe no sistema.
-- **Objetivo:** Verificar comportamento do sistema quando o campo nome está vazio (não especificado na user story).
-- **Resultado esperado:** a confirmar
-- **Tipo:** alternativo
+### US01-CT05 — Tentativa de cadastro com e-mail em formato inválido
+- **Pré-condição:** Admin autenticado na tela de gestão de usuários
+- **Objetivo:** Verificar comportamento ao informar e-mail fora do padrão esperado
+- **Resultado esperado:** a confirmar (regras de validação de formato de e-mail não especificadas na user story)
+- **Tipo:** a confirmar
 - **Critérios cobertos:** a confirmar
 
-### US01-CT06 — Tentativa de cadastro com email em formato inválido (ambiguidade)
-- **Pré-condição:** Admin autenticado na tela de gestão de usuários; nome e papel válidos informados.
-- **Objetivo:** Verificar comportamento do sistema quando o email está em formato inválido (não especificado na user story).
-- **Resultado esperado:** a confirmar
-- **Tipo:** alternativo
+### US01-CT06 — Tentativa de cadastro com nome vazio
+- **Pré-condição:** Admin autenticado na tela de gestão de usuários
+- **Objetivo:** Verificar comportamento ao deixar o nome em branco
+- **Resultado esperado:** a confirmar (regras de validação de nome não especificadas na user story)
+- **Tipo:** a confirmar
 - **Critérios cobertos:** a confirmar
 
-### US01-CT07 — Tentativa de cadastro com papel inválido (ambiguidade)
-- **Pré-condição:** Admin autenticado na tela de gestão de usuários; nome e email válidos e não duplicados informados.
-- **Objetivo:** Verificar comportamento do sistema quando o papel informado não é um dos esperados (aluno, professor, admin) (não especificado na user story).
-- **Resultado esperado:** a confirmar
-- **Tipo:** alternativo
+### US01-CT07 — Tentativa de cadastro com papel não previsto (ex.: coordenador)
+- **Pré-condição:** Admin autenticado na tela de gestão de usuários
+- **Objetivo:** Verificar comportamento ao informar papel diferente de aluno, professor ou admin
+- **Resultado esperado:** a confirmar (regras de validação de papel não especificadas na user story)
+- **Tipo:** a confirmar
+- **Critérios cobertos:** a confirmar
+
+### US01-CT08 — Tentativa de cadastro sem estar autenticado como admin
+- **Pré-condição:** Usuário não autenticado ou autenticado com papel não-admin na tela de gestão de usuários
+- **Objetivo:** Verificar se o sistema impede a operação quando o admin não está autenticado
+- **Resultado esperado:** a confirmar (regras de autorização não especificadas na user story)
+- **Tipo:** a confirmar
 - **Critérios cobertos:** a confirmar

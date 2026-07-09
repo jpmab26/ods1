@@ -1,16 +1,98 @@
 [
-  {"id_caso": "US01-CT01", "correto": false, "categoria_defeito": "Incorrect Fact"},
-  {"id_caso": "US01-CT02", "correto": true, "extraneous": false},
-  {"id_caso": "US01-CT03", "correto": true, "extraneous": false},
-  {"id_caso": "US01-CT04", "correto": true, "extraneous": false},
-  {"id_caso": "US01-CT05", "correto": false, "categoria_defeito": "Incorrect Fact"},
-  {"id_caso": "US01-CT06", "correto": true, "extraneous": false},
-  {"id_caso": "US01-CT07", "correto": false, "categoria_defeito": "Incorrect Fact"},
-  {"id_caso": "US01-CT08", "correto": false, "categoria_defeito": "Incorrect Fact"},
-  {"id_caso": "US01-CT09", "correto": false, "categoria_defeito": "Incorrect Fact"},
-  {"id_caso": "US01-CT10", "correto": false, "categoria_defeito": "Incorrect Fact"},
-  {"id_caso": "US01-CT11", "correto": true, "extraneous": false},
-  {"id_caso": "US01-CT12", "correto": true, "extraneous": false},
-  {"id_caso": "US01-CT13", "correto": true, "extraneous": false},
-  {"id_caso": "US01-CT14", "correto": false, "categoria_defeito": "Incorrect Fact"}
+  {
+    "id_caso": "US01-CT01",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "Cadastro com papel válido cria usuário com status PENDENTE, senha temporária de 10 caracteres alfanuméricos exibida ao admin, hash armazenado (create_user/repository.create_user)."
+  },
+  {
+    "id_caso": "US01-CT02",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "Cadastro com papel válido cria usuário com status PENDENTE, senha temporária de 10 caracteres alfanuméricos exibida ao admin, hash armazenado (create_user/repository.create_user)."
+  },
+  {
+    "id_caso": "US01-CT03",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "Cadastro com papel válido cria usuário com status PENDENTE, senha temporária de 10 caracteres alfanuméricos exibida ao admin, hash armazenado (create_user/repository.create_user)."
+  },
+  {
+    "id_caso": "US01-CT04",
+    "correto": false,
+    "categoria_defeito": "Incorrect Fact",
+    "justificativa": "VALID_ROLES = {ALUNO, PROFESSOR, ADMIN} em usuarios/service.py — MONITOR não é aceito neste fluxo de cadastro, mesmo o ENUM do banco permitindo o valor para outros fluxos internos."
+  },
+  {
+    "id_caso": "US01-CT05",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "get_user_by_email não filtra por status e compara email já normalizado (strip+lower) — duplicidade detectada corretamente."
+  },
+  {
+    "id_caso": "US01-CT06",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "'if not nome' bloqueia string vazia; mensagem real é 'Nome e email sao obrigatorios.' — comportamento de rejeição correto independente do texto exato."
+  },
+  {
+    "id_caso": "US01-CT07",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "'if not nome' bloqueia string vazia; mensagem real é 'Nome e email sao obrigatorios.' — comportamento de rejeição correto independente do texto exato."
+  },
+  {
+    "id_caso": "US01-CT08",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "role='' não está em VALID_ROLES={ALUNO,PROFESSOR,ADMIN} — rejeitado com 'Papel invalido.'"
+  },
+  {
+    "id_caso": "US01-CT09",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "Papel fora de {ALUNO,PROFESSOR,ADMIN} (ex.: 'estagiario') não está em VALID_ROLES — rejeitado."
+  },
+  {
+    "id_caso": "US01-CT10",
+    "correto": false,
+    "categoria_defeito": "Incorrect Fact",
+    "justificativa": "Apesar do hedge, o caso afirma que o sistema 'impede o envio' para email malformado — create_user não valida formato de email."
+  },
+  {
+    "id_caso": "US01-CT11",
+    "correto": false,
+    "categoria_defeito": "Incorrect Fact",
+    "justificativa": "strip() só remove espaços nas bordas; um espaço interno (ex.: 'user @example.com') não é validado nem rejeitado — o email é aceito como está."
+  },
+  {
+    "id_caso": "US01-CT12",
+    "correto": true,
+    "extraneous": true,
+    "justificativa": "Não há validação de caracteres no campo nome — qualquer string não-vazia é aceita e armazenada via nome.strip()."
+  },
+  {
+    "id_caso": "US01-CT13",
+    "correto": false,
+    "categoria_defeito": "Incorrect Fact",
+    "justificativa": "Afirma que o sistema aceita e cria o usuário mesmo com nome de 255 caracteres, mas a coluna nome é VARCHAR(120) — excede o limite real da tabela, sem tratamento gracioso no código."
+  },
+  {
+    "id_caso": "US01-CT14",
+    "correto": false,
+    "categoria_defeito": "Incorrect Fact",
+    "justificativa": "create_user faz SELECT (verifica duplicidade) e depois INSERT sem transação/lock — sob concorrência real, o padrão check-then-insert pode gerar erro de integridade não tratado (500), não a mensagem graciosa 'Email já cadastrado' descrita."
+  },
+  {
+    "id_caso": "US01-CT15",
+    "correto": true,
+    "extraneous": true,
+    "justificativa": "_generate_temp_password(length=10) gera exatamente 10 caracteres de string.ascii_letters+digits — bate com a regex [A-Za-z0-9]{10}."
+  },
+  {
+    "id_caso": "US01-CT16",
+    "correto": true,
+    "extraneous": true,
+    "justificativa": "Não há nenhuma integração de envio de email no fluxo de create_user; senha temporária só é passada para o template renderizado."
+  }
 ]

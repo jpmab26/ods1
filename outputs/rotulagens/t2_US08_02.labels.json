@@ -1,22 +1,86 @@
 [
-  {"id_caso": "US08-CT01", "correto": true, "extraneous": true},
-  {"id_caso": "US08-CT02", "correto": false, "categoria_defeito": "Incorrect Fact"},
-  {"id_caso": "US08-CT03", "correto": true, "extraneous": false},
-  {"id_caso": "US08-CT04", "correto": true, "extraneous": false},
-  {"id_caso": "US08-CT05", "correto": false, "categoria_defeito": "Incorrect Fact"},
-  {"id_caso": "US08-CT06", "correto": true, "extraneous": false},
-  {"id_caso": "US08-CT07", "correto": true, "extraneous": false},
-  {"id_caso": "US08-CT08", "correto": true, "extraneous": false},
-  {"id_caso": "US08-CT09", "correto": false, "categoria_defeito": "Incorrect Fact"},
-  {"id_caso": "US08-CT10", "correto": false, "categoria_defeito": "Incorrect Fact"},
-  {"id_caso": "US08-CT11", "correto": false, "categoria_defeito": "Incorrect Fact"},
-  {"id_caso": "US08-CT12", "correto": false, "categoria_defeito": "Incorrect Fact"},
-  {"id_caso": "US08-CT13", "correto": false, "categoria_defeito": "Incorrect Fact"},
-  {"id_caso": "US08-CT14", "correto": false, "categoria_defeito": "Incorrect Fact"},
-  {"id_caso": "US08-CT15", "correto": true, "extraneous": false},
-  {"id_caso": "US08-CT16", "correto": true, "extraneous": false},
-  {"id_caso": "US08-CT17", "correto": false, "categoria_defeito": "Incorrect Fact"},
-  {"id_caso": "US08-CT18", "correto": false, "categoria_defeito": "Incorrect Fact"},
-  {"id_caso": "US08-CT19", "correto": true, "extraneous": false},
-  {"id_caso": "US08-CT20", "correto": false, "categoria_defeito": "Incorrect Fact"}
+  {
+    "id_caso": "US08-CT01",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "approve_monitoria: SELECT confirma status=PENDENTE_APROVACAO + disciplina ATIVA; sem outro monitor ativo do aluno, UPDATE status='ATIVO' sucede."
+  },
+  {
+    "id_caso": "US08-CT02",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "approve_monitoria bloqueia com 'Aluno já possui monitoria ativa.' quando o aluno já tem outra monitoria com status ATIVO (id diferente) — checagem é por aluno, não por disciplina."
+  },
+  {
+    "id_caso": "US08-CT03",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "Análise correta e grounded em código: aprovação sucede diretamente, monitor existente da disciplina permanece ATIVO (podendo coexistir dois monitores ativos), sem solicitar confirmação."
+  },
+  {
+    "id_caso": "US08-CT04",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "reject_monitoria faz UPDATE status='REJEITADO', motivo_rejeicao=%s WHERE id=%s AND status='PENDENTE_APROVACAO' — motivo é persistido."
+  },
+  {
+    "id_caso": "US08-CT05",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "Análise correta: rejeição sem motivo sucede normalmente, motivo_rejeicao vira NULL/vazio, sem erro de validação."
+  },
+  {
+    "id_caso": "US08-CT06",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "list_pending_monitorias() filtra WHERE status='PENDENTE_APROVACAO' — uma vez aprovada/rejeitada, o status muda e a linha some da consulta."
+  },
+  {
+    "id_caso": "US08-CT07",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "SELECT em approve_monitoria/UPDATE em reject_monitoria exigem status='PENDENTE_APROVACAO' — para qualquer outro status, cai no caminho NAO_ENCONTRADA, flash 'Monitoria não encontrada ou já processada.' (a mensagem já cobre 'já processada')."
+  },
+  {
+    "id_caso": "US08-CT08",
+    "correto": false,
+    "categoria_defeito": "Incorrect Fact",
+    "justificativa": "require_role('ADMIN')/login_required redirecionam (302) com flash — não retornam um código HTTP 403 ou 401 como afirmado; nenhuma das duas alternativas do 'ou' corresponde ao comportamento real."
+  },
+  {
+    "id_caso": "US08-CT09",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "SELECT em approve_monitoria/UPDATE em reject_monitoria exigem status='PENDENTE_APROVACAO' — para qualquer outro status, cai no caminho NAO_ENCONTRADA, flash 'Monitoria não encontrada ou já processada.' (a mensagem já cobre 'já processada')."
+  },
+  {
+    "id_caso": "US08-CT10",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "SELECT em approve_monitoria/UPDATE em reject_monitoria exigem status='PENDENTE_APROVACAO' — para qualquer outro status, cai no caminho NAO_ENCONTRADA, flash 'Monitoria não encontrada ou já processada.' (a mensagem já cobre 'já processada')."
+  },
+  {
+    "id_caso": "US08-CT11",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "Análise correta: motivo só com espaços vira '' após strip() e depois None via 'or None' — rejeição sucede sem erro de validação, exatamente como descrito no RES (apesar do objetivo declarado ser o oposto)."
+  },
+  {
+    "id_caso": "US08-CT12",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "approve_monitoria nunca verifica o status de outro monitor da mesma disciplina — aprovação sucede diretamente independente do monitor existente estar ativo ou inativo, sem pedir confirmação."
+  },
+  {
+    "id_caso": "US08-CT13",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "O UPDATE final de approve_monitoria/reject_monitoria re-checa status='PENDENTE_APROVACAO' na cláusula WHERE — uma segunda chamada concorrente não casa nenhuma linha (rowcount=0) e cai no caminho NAO_ENCONTRADA, dando proteção real contra reprocessamento."
+  },
+  {
+    "id_caso": "US08-CT14",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "ALUNO_JA_MONITOR só verifica status='ATIVO' — outra indicação PENDENTE_APROVACAO do mesmo aluno em disciplina diferente não bloqueia nem é afetada pela aprovação desta."
+  }
 ]

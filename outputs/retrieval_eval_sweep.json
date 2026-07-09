@@ -1,0 +1,290 @@
+[
+  {
+    "k": 3,
+    "alta": 0.55,
+    "media": 0.35,
+    "min_sim": 0.15,
+    "recall_at_k": 0.2857,
+    "acertos": 4,
+    "total": 14
+  },
+  {
+    "k": 3,
+    "alta": 0.55,
+    "media": 0.35,
+    "min_sim": 0.1,
+    "recall_at_k": 0.2857,
+    "acertos": 4,
+    "total": 14
+  },
+  {
+    "k": 3,
+    "alta": 0.45,
+    "media": 0.3,
+    "min_sim": 0.15,
+    "recall_at_k": 0.2857,
+    "acertos": 4,
+    "total": 14
+  },
+  {
+    "k": 3,
+    "alta": 0.45,
+    "media": 0.3,
+    "min_sim": 0.1,
+    "recall_at_k": 0.2857,
+    "acertos": 4,
+    "total": 14
+  },
+  {
+    "k": 3,
+    "alta": 0.4,
+    "media": 0.25,
+    "min_sim": 0.15,
+    "recall_at_k": 0.2857,
+    "acertos": 4,
+    "total": 14
+  },
+  {
+    "k": 3,
+    "alta": 0.4,
+    "media": 0.25,
+    "min_sim": 0.1,
+    "recall_at_k": 0.2857,
+    "acertos": 4,
+    "total": 14
+  },
+  {
+    "k": 3,
+    "alta": 0.5,
+    "media": 0.3,
+    "min_sim": 0.15,
+    "recall_at_k": 0.2857,
+    "acertos": 4,
+    "total": 14
+  },
+  {
+    "k": 3,
+    "alta": 0.5,
+    "media": 0.3,
+    "min_sim": 0.1,
+    "recall_at_k": 0.2857,
+    "acertos": 4,
+    "total": 14
+  },
+  {
+    "k": 5,
+    "alta": 0.55,
+    "media": 0.35,
+    "min_sim": 0.15,
+    "recall_at_k": 0.4286,
+    "acertos": 6,
+    "total": 14
+  },
+  {
+    "k": 5,
+    "alta": 0.55,
+    "media": 0.35,
+    "min_sim": 0.1,
+    "recall_at_k": 0.4286,
+    "acertos": 6,
+    "total": 14
+  },
+  {
+    "k": 5,
+    "alta": 0.45,
+    "media": 0.3,
+    "min_sim": 0.15,
+    "recall_at_k": 0.4286,
+    "acertos": 6,
+    "total": 14
+  },
+  {
+    "k": 5,
+    "alta": 0.45,
+    "media": 0.3,
+    "min_sim": 0.1,
+    "recall_at_k": 0.4286,
+    "acertos": 6,
+    "total": 14
+  },
+  {
+    "k": 5,
+    "alta": 0.4,
+    "media": 0.25,
+    "min_sim": 0.15,
+    "recall_at_k": 0.4286,
+    "acertos": 6,
+    "total": 14
+  },
+  {
+    "k": 5,
+    "alta": 0.4,
+    "media": 0.25,
+    "min_sim": 0.1,
+    "recall_at_k": 0.4286,
+    "acertos": 6,
+    "total": 14
+  },
+  {
+    "k": 5,
+    "alta": 0.5,
+    "media": 0.3,
+    "min_sim": 0.15,
+    "recall_at_k": 0.4286,
+    "acertos": 6,
+    "total": 14
+  },
+  {
+    "k": 5,
+    "alta": 0.5,
+    "media": 0.3,
+    "min_sim": 0.1,
+    "recall_at_k": 0.4286,
+    "acertos": 6,
+    "total": 14
+  },
+  {
+    "k": 7,
+    "alta": 0.55,
+    "media": 0.35,
+    "min_sim": 0.15,
+    "recall_at_k": 0.5,
+    "acertos": 7,
+    "total": 14
+  },
+  {
+    "k": 7,
+    "alta": 0.55,
+    "media": 0.35,
+    "min_sim": 0.1,
+    "recall_at_k": 0.5,
+    "acertos": 7,
+    "total": 14
+  },
+  {
+    "k": 7,
+    "alta": 0.45,
+    "media": 0.3,
+    "min_sim": 0.15,
+    "recall_at_k": 0.5,
+    "acertos": 7,
+    "total": 14
+  },
+  {
+    "k": 7,
+    "alta": 0.45,
+    "media": 0.3,
+    "min_sim": 0.1,
+    "recall_at_k": 0.5,
+    "acertos": 7,
+    "total": 14
+  },
+  {
+    "k": 7,
+    "alta": 0.4,
+    "media": 0.25,
+    "min_sim": 0.15,
+    "recall_at_k": 0.5,
+    "acertos": 7,
+    "total": 14
+  },
+  {
+    "k": 7,
+    "alta": 0.4,
+    "media": 0.25,
+    "min_sim": 0.1,
+    "recall_at_k": 0.5,
+    "acertos": 7,
+    "total": 14
+  },
+  {
+    "k": 7,
+    "alta": 0.5,
+    "media": 0.3,
+    "min_sim": 0.15,
+    "recall_at_k": 0.5,
+    "acertos": 7,
+    "total": 14
+  },
+  {
+    "k": 7,
+    "alta": 0.5,
+    "media": 0.3,
+    "min_sim": 0.1,
+    "recall_at_k": 0.5,
+    "acertos": 7,
+    "total": 14
+  },
+  {
+    "k": 10,
+    "alta": 0.55,
+    "media": 0.35,
+    "min_sim": 0.15,
+    "recall_at_k": 0.7143,
+    "acertos": 10,
+    "total": 14
+  },
+  {
+    "k": 10,
+    "alta": 0.55,
+    "media": 0.35,
+    "min_sim": 0.1,
+    "recall_at_k": 0.7143,
+    "acertos": 10,
+    "total": 14
+  },
+  {
+    "k": 10,
+    "alta": 0.45,
+    "media": 0.3,
+    "min_sim": 0.15,
+    "recall_at_k": 0.7143,
+    "acertos": 10,
+    "total": 14
+  },
+  {
+    "k": 10,
+    "alta": 0.45,
+    "media": 0.3,
+    "min_sim": 0.1,
+    "recall_at_k": 0.7143,
+    "acertos": 10,
+    "total": 14
+  },
+  {
+    "k": 10,
+    "alta": 0.4,
+    "media": 0.25,
+    "min_sim": 0.15,
+    "recall_at_k": 0.7143,
+    "acertos": 10,
+    "total": 14
+  },
+  {
+    "k": 10,
+    "alta": 0.4,
+    "media": 0.25,
+    "min_sim": 0.1,
+    "recall_at_k": 0.7143,
+    "acertos": 10,
+    "total": 14
+  },
+  {
+    "k": 10,
+    "alta": 0.5,
+    "media": 0.3,
+    "min_sim": 0.15,
+    "recall_at_k": 0.7143,
+    "acertos": 10,
+    "total": 14
+  },
+  {
+    "k": 10,
+    "alta": 0.5,
+    "media": 0.3,
+    "min_sim": 0.1,
+    "recall_at_k": 0.7143,
+    "acertos": 10,
+    "total": 14
+  }
+]

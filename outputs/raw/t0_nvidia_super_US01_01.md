@@ -1,55 +1,55 @@
-### US01-CT01 — Cadastro bem-sucedido de usuário aluno
+### US01-CT01 — Cadastro de usuário aluno com dados válidos
 - **Pré-condição:** Admin autenticado na tela de gestão de usuários
-- **Objetivo:** Validar criação de usuário com papel aluno, status Pendente e exibição de senha temporária
-- **Resultado esperado:** Sistema cria o usuário, define status como Pendente e exibe a senha temporária ao admin
+- **Objetivo:** Verificar criação de usuário com papel aluno
+- **Resultado esperado:** Usuário criado com status Pendente e senha temporária exibida ao admin
 - **Tipo:** principal
 - **Critérios cobertos:** AC1
 
-### US01-CT02 — Cadastro bem-sucedido de usuário professor
+### US01-CT02 — Cadastro de usuário professor com dados válidos
 - **Pré-condição:** Admin autenticado na tela de gestão de usuários
-- **Objetivo:** Validar criação de usuário com papel professor, status Pendente e exibição de senha temporária
-- **Resultado esperado:** Sistema cria o usuário, define status como Pendente e exibe a senha temporária ao admin
+- **Objetivo:** Verificar criação de usuário com papel professor
+- **Resultado esperado:** Usuário criado com status Pendente e senha temporária exibida ao admin
 - **Tipo:** principal
 - **Critérios cobertos:** AC1
 
-### US01-CT03 — Cadastro bem-sucedido de usuário admin
+### US01-CT03 — Cadastro de usuário admin com dados válidos
 - **Pré-condição:** Admin autenticado na tela de gestão de usuários
-- **Objetivo:** Validar criação de usuário com papel admin, status Pendente e exibição de senha temporária
-- **Resultado esperado:** Sistema cria o usuário, define status como Pendente e exibe a senha temporária ao admin
+- **Objetivo:** Verificar criação de usuário com papel admin
+- **Resultado esperado:** Usuário criado com status Pendente e senha temporária exibida ao admin
 - **Tipo:** principal
 - **Critérios cobertos:** AC1
 
-### US01-CT04 — Tentativa de cadastro com nome vazio
+### US01-CT04 — Cadastro com nome vazio
 - **Pré-condição:** Admin autenticado na tela de gestão de usuários
-- **Objetivo:** Verificar comportamento do sistema quando o campo nome está vazio
-- **Resultado esperado:** Sistema rejeita o cadastro e exibe mensagem de erro indicando que o nome é obrigatório
-- **Tipo:** alternativa
+- **Objetivo:** Verificar comportamento ao deixar o nome em branco
+- **Resultado esperado:** Sistema rejeita o cadastro (mensagem de erro a confirmar)
+- **Tipo:** exceção
 - **Critérios cobertos:** a confirmar
 
-### US01-CT05 — Tentativa de cadastro com e-mail inválido
+### US01-CT05 — Cadastro com email vazio
 - **Pré-condição:** Admin autenticado na tela de gestão de usuários
-- **Objetivo:** Verificar comportamento do sistema quando o e-mail tem formato inválido
-- **Resultado esperado:** Sistema rejeita o cadastro e exibe mensagem de erro indicando formato de e-mail inválido
-- **Tipo:** alternativa
+- **Objetivo:** Verificar comportamento ao deixar o email em branco
+- **Resultado esperado:** Sistema rejeita o cadastro (mensagem de erro a confirmar)
+- **Tipo:** exceção
 - **Critérios cobertos:** a confirmar
 
-### US01-CT06 — Tentativa de cadastro com papel não permitido
+### US01-CT06 — Cadastro com papel inválido
 - **Pré-condição:** Admin autenticado na tela de gestão de usuários
-- **Objetivo:** Verificar comportamento do sistema quando o papel informado não está entre os valores permitidos (aluno, professor, admin)
-- **Resultado esperado:** Sistema rejeita o cadastro e exibe mensagem de erro indicando papel inválido
-- **Tipo:** alternativa
+- **Objetivo:** Verificar comportamento ao informar papel diferente de aluno, professor ou admin
+- **Resultado esperado:** Sistema rejeita o cadastro (mensagem de erro a confirmar)
+- **Tipo:** exceção
 - **Critérios cobertos:** a confirmar
 
-### US01-CT07 — Tentativa de cadastro com e-mail já existente
-- **Pré-condição:** Admin autenticado na tela de gestão de usuários; já existe um usuário cadastrado com o e-mail a ser utilizado
-- **Objetivo:** Validar rejeição de cadastro de e-mail duplicado
-- **Resultado esperado:** Sistema impede a criação e exibe a mensagem 'Email já cadastrado'
+### US01-CT07 — Cadastro com email já existente
+- **Pré-condição:** Admin autenticado na tela de gestão de usuários; existir usuário com o mesmo email cadastrado
+- **Objetivo:** Verificar tratamento de email duplicado
+- **Resultado esperado:** Sistema rejeita o cadastro com mensagem 'Email já cadastrado'
 - **Tipo:** alternativa
 - **Critérios cobertos:** AC2
 
-### US01-CT08 — Verificação de status e senha temporária após criação
-- **Pré-condição:** Admin autenticado na tela de gestão de usuários; cadastro realizado com dados válidos
-- **Objetivo:** Confirmar que o usuário criado possui status Pendente e que a senha temporária é exibida apenas uma vez
-- **Resultado esperado:** Na lista de usuários, o novo registro aparece com status Pendente; a senha temporária é mostrada na tela de confirmação e não está disponível em demais telas
-- **Tipo:** principal
-- **Critérios cobertos:** AC1
+### US01-CT08 — Cadastro com email em formato inválido
+- **Pré-condição:** Admin autenticado na tela de gestão de usuários
+- **Objetivo:** Verificar comportamento ao inserir email com formato inválido (ex: sem @)
+- **Resultado esperado:** Sistema rejeita o cadastro (mensagem de erro a confirmar)
+- **Tipo:** exceção
+- **Critérios cobertos:** a confirmar

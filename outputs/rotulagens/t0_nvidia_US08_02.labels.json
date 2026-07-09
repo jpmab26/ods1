@@ -1,12 +1,68 @@
 [
-  {"id_caso": "US08-CT01", "correto": true, "extraneous": false},
-  {"id_caso": "US08-CT02", "correto": false, "categoria_defeito": "Incorrect Fact"},
-  {"id_caso": "US08-CT03", "correto": false, "categoria_defeito": "Incorrect Fact"},
-  {"id_caso": "US08-CT04", "correto": true, "extraneous": false},
-  {"id_caso": "US08-CT05", "correto": false, "categoria_defeito": "Incorrect Fact"},
-  {"id_caso": "US08-CT06", "correto": true, "extraneous": false},
-  {"id_caso": "US08-CT07", "correto": true, "extraneous": false},
-  {"id_caso": "US08-CT08", "correto": false, "categoria_defeito": "Inconsistency"},
-  {"id_caso": "US08-CT09", "correto": true, "extraneous": false},
-  {"id_caso": "US08-CT10", "correto": false, "categoria_defeito": "Incorrect Fact"}
+  {
+    "id_caso": "US08-CT01",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "approve_monitoria: SELECT confirma status=PENDENTE_APROVACAO + disciplina ATIVA; sem outro monitor ativo do aluno, UPDATE status='ATIVO' sucede."
+  },
+  {
+    "id_caso": "US08-CT02",
+    "correto": false,
+    "categoria_defeito": "Incorrect Fact",
+    "justificativa": "approve_monitoria não implementa nenhuma lógica de confirmação nem de substituição de monitor — só verifica PENDENTE_APROVACAO+disciplina ATIVA e ALUNO_JA_MONITOR (checagem por aluno, não por disciplina). Se dois alunos diferentes forem aprovados para a mesma disciplina, ambos ficam com status ATIVO simultaneamente; nenhum 'monitor antigo' é desativado nem há tela de confirmação."
+  },
+  {
+    "id_caso": "US08-CT03",
+    "correto": false,
+    "categoria_defeito": "Incorrect Fact",
+    "justificativa": "approve_monitoria não implementa nenhuma lógica de confirmação nem de substituição de monitor — só verifica PENDENTE_APROVACAO+disciplina ATIVA e ALUNO_JA_MONITOR (checagem por aluno, não por disciplina). Se dois alunos diferentes forem aprovados para a mesma disciplina, ambos ficam com status ATIVO simultaneamente; nenhum 'monitor antigo' é desativado nem há tela de confirmação."
+  },
+  {
+    "id_caso": "US08-CT04",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "reject_monitoria faz UPDATE status='REJEITADO', motivo_rejeicao=%s WHERE id=%s AND status='PENDENTE_APROVACAO' — motivo é persistido."
+  },
+  {
+    "id_caso": "US08-CT05",
+    "correto": false,
+    "categoria_defeito": "Incorrect Fact",
+    "justificativa": "routes.py::rejeitar lê motivo=request.form.get('motivo','').strip() sem qualquer validação de vazio — repository.reject_monitoria aceita motivo_rejeicao vazio/None sem bloquear a rejeição."
+  },
+  {
+    "id_caso": "US08-CT06",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "list_pending_monitorias() filtra WHERE status='PENDENTE_APROVACAO' — uma vez aprovada/rejeitada, o status muda e a linha some da consulta."
+  },
+  {
+    "id_caso": "US08-CT07",
+    "correto": false,
+    "categoria_defeito": "Incorrect Fact",
+    "justificativa": "ALUNO_JA_MONITOR bloqueia a aprovação quando o aluno já tem OUTRA monitoria ATIVA — o caso afirma o oposto (que a aprovação sucede e o aluno ganha acesso também na nova disciplina)."
+  },
+  {
+    "id_caso": "US08-CT08",
+    "correto": false,
+    "categoria_defeito": "Incorrect Fact",
+    "justificativa": "Precondição impossível: UNIQUE(disciplina_id,aluno_id) impede uma linha 'Pendente' separada para o mesmo par aluno-disciplina que já está ATIVO — esse estado não pode existir no banco."
+  },
+  {
+    "id_caso": "US08-CT09",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "status=ATIVO é o mesmo flag consultado por has_active_monitoria/get_active_by_aluno para conceder acesso de monitor."
+  },
+  {
+    "id_caso": "US08-CT10",
+    "correto": false,
+    "categoria_defeito": "Incorrect Fact",
+    "justificativa": "approve_monitoria não implementa nenhuma lógica de confirmação nem de substituição de monitor — só verifica PENDENTE_APROVACAO+disciplina ATIVA e ALUNO_JA_MONITOR (checagem por aluno, não por disciplina). Se dois alunos diferentes forem aprovados para a mesma disciplina, ambos ficam com status ATIVO simultaneamente; nenhum 'monitor antigo' é desativado nem há tela de confirmação."
+  },
+  {
+    "id_caso": "US08-CT11",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "motivo_rejeicao é persistido na coluna e retornado por list_by_professor — consultável posteriormente."
+  }
 ]

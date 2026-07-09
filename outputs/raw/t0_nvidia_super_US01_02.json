@@ -2,23 +2,23 @@
   "tratamento": "t0_nvidia_super",
   "user_story_id": "US01",
   "repeticao": 2,
-  "timestamp": "2026-06-30T17:48:52.558180+00:00",
-  "latencia_s": 35.825,
+  "timestamp": "2026-07-05T14:18:18.839256+00:00",
+  "latencia_s": 62.076,
   "tokens_entrada": 599,
-  "tokens_saida": 1611,
+  "tokens_saida": 1824,
   "custo_usd": 0.0,
   "model_backend": "nvidia_super",
   "pipeline": "zero_shot",
   "modo": "real",
   "intermediarios": {
-    "casos_atuais": "### US01-CT01 — Cadastro bem-sucedido de usuário aluno\n- **Pré-condição:** Admin autenticado na tela de gestão de usuários; nenhum usuário com o mesmo email existe no sistema.\n- **Objetivo:** Validar que o sistema cria usuário com status Pendente e exibe senha temporária ao admin ao preencher nome, email e papel válidos (aluno).\n- **Resultado esperado:** Usuário é criado, aparece na lista com status Pendente, e uma senha temporária é exibida ao admin (ex.: em modal ou toast).\n- **Tipo:** principal\n- **Critérios cobertos:** AC1\n\n### US01-CT02 — Cadastro bem-sucedido de usuário professor\n- **Pré-condição:** Admin autenticado na tela de gestão de usuários; nenhum usuário com o mesmo email existe no sistema.\n- **Objetivo:** Validar que o sistema cria usuário com status Pendente e exibe senha temporária ao admin ao preencher nome, email e papel válidos (professor).\n- **Resultado esperado:** Usuário é criado, aparece na lista com status Pendente, e uma senha temporária é exibida ao admin.\n- **Tipo:** principal\n- **Critérios cobertos:** AC1\n\n### US01-CT03 — Cadastro bem-sucedido de usuário admin\n- **Pré-condição:** Admin autenticado na tela de gestão de usuários; nenhum usuário com o mesmo email existe no sistema.\n- **Objetivo:** Validar que o sistema cria usuário com status Pendente e exibe senha temporária ao admin ao preencher nome, email e papel válidos (admin).\n- **Resultado esperado:** Usuário é criado, aparece na lista com status Pendente, e uma senha temporária é exibida ao admin.\n- **Tipo:** principal\n- **Critérios cobertos:** AC1\n\n### US01-CT04 — Rejeição de cadastro com email já existente\n- **Pré-condição:** Admin autenticado na tela de gestão de usuários; já existe um usuário com o email informado no sistema.\n- **Objetivo:** Verificar que o sistema impede o cadastro de usuário com email duplicado e exibe mensagem adequada.\n- **Resultado esperado:** Sistema rejeita o cadastro, não cria o usuário e exibe a mensagem \"Email já cadastrado\".\n- **Tipo:** alternativo\n-"
+    "casos_atuais": "### US01-CT01 — Cadastro de usuário aluno com dados válidos\n- **Pré-condição:** Admin autenticado na tela de gestão de usuários\n- **Objetivo:** Verificar criação bem-sucedida de usuário com papel aluno\n- **Resultado esperado:** Usuário criado com status Pendente e senha temporária exibida ao admin\n- **Tipo:** principal\n- **Critérios cobertos:** AC1\n\n### US01-CT02 — Cadastro de usuário professor com dados válidos\n- **Pré-condição:** Admin autenticado na tela de gestão de usuários\n- **Objetivo:** Verificar criação bem-sucedida de usuário com papel professor\n- **Resultado esperado:** Usuário criado com status Pendente e senha temporária exibida ao admin\n- **Tipo:** alternativa\n- **Critérios cobertos:** AC1\n\n### US01-CT03 — Cadastro de usuário admin com dados válidos\n- **Pré-condição:** Admin autenticado na tela de gestão de usuários\n- **Objetivo:** Verificar criação bem-sucedida de usuário com papel admin\n- **Resultado esperado:** Usuário criado com status Pendente e senha temporária exibida ao admin\n- **Tipo:** alternativa\n- **Critérios cobertos:** AC1\n\n### US01-CT04 — Tentativa de cadastro com e-mail já existente\n- **Pré-condição:** Admin autenticado na tela de gestão de usuários; existe usuário com e-mail \"existing@exemplo.com\"\n- **Objetivo:** Validar rejeição de e-mail duplicado\n- **Resultado esperado:** Sistema exibe mensagem \"Email já cadastrado\" e não cria o usuário\n- **Tipo:** negativo\n- **Critérios cobertos:** AC2\n\n### US01-CT05 — Tentativa de cadastro com e-mail em formato inválido\n- **Pré-condição:** Admin autenticado na tela de gestão de usuários\n- **Objetivo:** Verificar comportamento ao informar e-mail fora do padrão esperado\n- **Resultado esperado:** a confirmar (regras de validação de formato de e-mail não especificadas na user story)\n- **Tipo:** a confirmar\n- **Critérios cobertos:** a confirmar\n\n### US01-CT06 — Tentativa de cadastro com nome vazio\n- **Pré-condição:** Admin autenticado na tela de gestão de usuários\n- **Objetivo:** Verificar comportament"
   },
-  "precisao": 0.5714,
+  "precisao": 0.5,
   "recall": 0.4,
-  "f1": 0.4706,
-  "verbosidade_media": 30.57,
-  "pct_extraneous": 14.29,
+  "f1": 0.4444,
+  "verbosidade_media": 20.25,
+  "pct_extraneous": 0.0,
   "vp": 4,
-  "fp": 3,
+  "fp": 4,
   "fn": 6
 }

@@ -1,0 +1,56 @@
+[
+  {
+    "id_caso": "US04-CT01",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "Flash real é exatamente 'Usuário desativado com sucesso.' (routes.py::deactivate) e login bloqueado via auth/service.py."
+  },
+  {
+    "id_caso": "US04-CT02",
+    "correto": false,
+    "categoria_defeito": "Incorrect Fact",
+    "justificativa": "repository.deactivate_user faz UPDATE incondicional por id (sem checar status atual); como atualizado_em sempre muda, rowcount>0 mesmo se já INATIVO — a 2ª desativação 'sucede' silenciosamente (mesma flash de sucesso), não retorna nenhum erro."
+  },
+  {
+    "id_caso": "US04-CT03",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "@login_required redireciona (302) para auth.login quando não há user_id na sessão."
+  },
+  {
+    "id_caso": "US04-CT04",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "rowcount=0 quando o id não existe — service.deactivate_user retorna False, routes.py::deactivate flasheia 'Usuário não encontrado.'"
+  },
+  {
+    "id_caso": "US04-CT05",
+    "correto": false,
+    "categoria_defeito": "Incorrect Fact",
+    "justificativa": "Mensagem citada ('Sessão expirada, faça login novamente') não existe no código — login_required flasheia 'Voce precisa fazer login.', texto diferente do alegado."
+  },
+  {
+    "id_caso": "US04-CT06",
+    "correto": false,
+    "categoria_defeito": "Incorrect Fact",
+    "justificativa": "Não existe sistema de permissões granulares/admin de nível limitado — require_role('ADMIN') só checa um papel único; 'admin de nível limitado' é uma funcionalidade inventada."
+  },
+  {
+    "id_caso": "US04-CT07",
+    "correto": false,
+    "categoria_defeito": "Incorrect Fact",
+    "justificativa": "Não existe endpoint de API JSON para desativação — a rota é um form POST HTML que sempre redireciona com flash, nunca retorna JSON nem os códigos HTTP descritos."
+  },
+  {
+    "id_caso": "US04-CT08",
+    "correto": false,
+    "categoria_defeito": "Incorrect Fact",
+    "justificativa": "Não existe endpoint de API JSON para desativação — a rota é um form POST HTML que sempre redireciona com flash, nunca retorna JSON nem os códigos HTTP descritos."
+  },
+  {
+    "id_caso": "US04-CT09",
+    "correto": false,
+    "categoria_defeito": "Incorrect Fact",
+    "justificativa": "Mesmo sem concorrência real, uma 2ª desativação sequencial já não retorna erro (idempotente); o código não implementa nenhuma checagem/409 de conflito."
+  }
+]

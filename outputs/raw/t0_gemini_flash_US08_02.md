@@ -1,48 +1,34 @@
 ### US08-CT01 — Aprovar indicação de monitor para disciplina sem monitor prévio
-- **Pré-condição:** Admin logado. Existe uma indicação de monitor para uma disciplina sem monitor ativo com status "Pendente de aprovação".
-- **Objetivo:** Aprovar uma indicação de monitor para uma disciplina que não possui monitor ativo.
-- **Resultado esperado:** O vínculo do aluno com a disciplina muda para "Ativo". O aluno indicado passa a ter acesso como monitor da disciplina.
+- **Pré-condição:** Admin logado. Existe uma indicação de monitor com status "Pendente de aprovação" para uma disciplina que *não* possui um monitor ativo.
+- **Objetivo:** Verificar a aprovação bem-sucedida de uma indicação de monitor para uma disciplina sem monitor prévio.
+- **Resultado esperado:** O status do vínculo da indicação muda para "Ativo". O aluno indicado obtém acesso e funcionalidades de monitor para a disciplina. A indicação processada não aparece mais na lista de pendentes de aprovação.
 - **Tipo:** principal
-- **Critérios cobertos:** Cenário 1
+- **Critérios cobertos:** Cenário 1, Cenário 4
 
-### US08-CT02 — Aprovar alteração de monitor para disciplina com monitor prévio (confirmando)
-- **Pré-condição:** Admin logado. Existe uma indicação de alteração de monitor para uma disciplina que já possui monitor ativo, com status "Pendente de aprovação de alteração de monitor".
-- **Objetivo:** Aprovar uma alteração de monitor para uma disciplina que já possui monitor ativo, aceitando a confirmação da substituição.
-- **Resultado esperado:** O sistema solicita confirmação da alteração do monitor antigo pelo novo. Após aceita, o vínculo do aluno novo muda para "Ativo" e apenas ele passa a ter acesso como monitor da disciplina. O monitor antigo é desativado ou tem seu acesso removido.
+### US08-CT02 — Aprovar alteração de monitor (confirmando substituição)
+- **Pré-condição:** Admin logado. Existe uma indicação de monitor com status "Pendente de aprovação de alteração de monitor" para uma disciplina que *já* possui um monitor ativo.
+- **Objetivo:** Verificar a aprovação bem-sucedida de uma alteração de monitor, confirmando a substituição do monitor antigo pelo novo.
+- **Resultado esperado:** O sistema solicita confirmação para a alteração do monitor. Após aceitar a confirmação, o status do vínculo do *novo* monitor muda para "Ativo". O vínculo do *monitor antigo* para esta disciplina é desativado ou tem seu status alterado para indicar inatividade/substituição. Apenas o aluno novo tem acesso e funcionalidades de monitor para a disciplina. A indicação processada não aparece mais na lista de pendentes de aprovação.
 - **Tipo:** principal
-- **Critérios cobertos:** Cenário 2
+- **Critérios cobertos:** Cenário 2, Cenário 4
 
-### US08-CT03 — Rejeitar indicação de monitor com motivo
-- **Pré-condição:** Admin logado. Existe uma indicação de monitor para uma disciplina com status "Pendente de aprovação" (ou "Pendente de aprovação de alteração de monitor").
-- **Objetivo:** Rejeitar uma indicação de monitor informando um motivo válido.
-- **Resultado esperado:** O vínculo do aluno com a disciplina muda para "Rejeitado" e o motivo informado é registrado.
-- **Tipo:** principal
-- **Critérios cobertos:** Cenário 3
-
-### US08-CT04 — Indicação aprovada não aparece mais na lista de pendentes
-- **Pré-condição:** Admin logado. Uma indicação foi aprovada (cenários US08-CT01 ou US08-CT02 foram executados com sucesso).
-- **Objetivo:** Verificar que uma indicação aprovada não é mais exibida na lista de indicações pendentes.
-- **Resultado esperado:** Ao retornar à lista de indicações pendentes, a indicação que foi processada (aprovada) não aparece mais.
-- **Tipo:** principal (follow-up)
-- **Critérios cobertos:** Cenário 4
-
-### US08-CT05 — Indicação rejeitada não aparece mais na lista de pendentes
-- **Pré-condição:** Admin logado. Uma indicação foi rejeitada (cenário US08-CT03 foi executado com sucesso).
-- **Objetivo:** Verificar que uma indicação rejeitada não é mais exibida na lista de indicações pendentes.
-- **Resultado esperado:** Ao retornar à lista de indicações pendentes, a indicação que foi processada (rejeitada) não aparece mais.
-- **Tipo:** principal (follow-up)
-- **Critérios cobertos:** Cenário 4
-
-### US08-CT06 — Tentar rejeitar indicação sem informar o motivo
-- **Pré-condição:** Admin logado. Existe uma indicação de monitor com status "Pendente de aprovação" (ou "Pendente de aprovação de alteração de monitor").
-- **Objetivo:** Tentar rejeitar uma indicação de monitor sem fornecer um motivo.
-- **Resultado esperado:** O sistema impede a rejeição e/ou exibe uma mensagem de erro informando que o motivo é obrigatório. O status do vínculo permanece inalterado.
-- **Tipo:** negativo
-- **Critérios cobertos:** Cenário 3 (a confirmar se o motivo é obrigatório para rejeição)
-
-### US08-CT07 — Tentar aprovar alteração de monitor mas não confirmar a substituição
-- **Pré-condição:** Admin logado. Existe uma indicação de alteração de monitor para uma disciplina que já possui monitor ativo, com status "Pendente de aprovação de alteração de monitor".
-- **Objetivo:** Iniciar o processo de aprovação de alteração de monitor, mas cancelar ou não aceitar a etapa de confirmação da substituição.
-- **Resultado esperado:** O vínculo do aluno indicado permanece com o status "Pendente de aprovação de alteração de monitor". O monitor antigo continua ativo.
+### US08-CT03 — Aprovar alteração de monitor (cancelando substituição)
+- **Pré-condição:** Admin logado. Existe uma indicação de monitor com status "Pendente de aprovação de alteração de monitor" para uma disciplina que *já* possui um monitor ativo.
+- **Objetivo:** Verificar o comportamento do sistema ao aprovar uma alteração de monitor, mas cancelar a confirmação da substituição.
+- **Resultado esperado:** O sistema solicita confirmação para a alteração do monitor. Após *cancelar* a confirmação, o status do vínculo do novo monitor e do monitor antigo *não* são alterados. A indicação *permanece* com o status "Pendente de aprovação de alteração de monitor" e *ainda aparece* na lista de pendentes.
 - **Tipo:** alternativo
-- **Critérios cobertos:** Cenário 2 (a confirmar comportamento em caso de não aceitação da confirmação)
+- **Critérios cobertos:** Cenário 2 (a confirmar)
+
+### US08-CT04 — Rejeitar indicação de monitor com motivo válido
+- **Pré-condição:** Admin logado. Existe uma indicação de monitor com status "Pendente de aprovação".
+- **Objetivo:** Verificar a rejeição bem-sucedida de uma indicação de monitor, informando um motivo válido.
+- **Resultado esperado:** O sistema solicita um motivo para a rejeição. Após informar um motivo e confirmar a rejeição, o status do vínculo da indicação muda para "Rejeitado". O motivo informado é registrado e associado à indicação. A indicação processada não aparece mais na lista de pendentes de aprovação.
+- **Tipo:** principal
+- **Critérios cobertos:** Cenário 3, Cenário 4
+
+### US08-CT05 — Rejeitar indicação de monitor sem motivo
+- **Pré-condição:** Admin logado. Existe uma indicação de monitor com status "Pendente de aprovação".
+- **Objetivo:** Verificar o comportamento do sistema ao tentar rejeitar uma indicação sem informar o motivo.
+- **Resultado esperado:** O sistema exibe uma mensagem de erro ou validação indicando que o motivo é obrigatório. O status do vínculo da indicação *não* é alterado e permanece "Pendente de aprovação". A indicação *ainda aparece* na lista de pendentes.
+- **Tipo:** erro/validação
+- **Critérios cobertos:** Cenário 3 (a confirmar obrigatoriedade do motivo)

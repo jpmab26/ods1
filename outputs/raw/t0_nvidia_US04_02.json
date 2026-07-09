@@ -1,0 +1,24 @@
+{
+  "tratamento": "t0_nvidia",
+  "user_story_id": "US04",
+  "repeticao": 2,
+  "timestamp": "2026-07-05T14:10:42.477866+00:00",
+  "latencia_s": 40.989,
+  "tokens_entrada": 601,
+  "tokens_saida": 917,
+  "custo_usd": 0.0,
+  "model_backend": "nvidia",
+  "pipeline": "zero_shot",
+  "modo": "real",
+  "intermediarios": {
+    "casos_atuais": "### US04-CT01 — Desativar usuário com status ativo\n- **Pré-condição:** Admin autenticado na tela de gestão de usuários; usuário alvo cadastrado e com status **ativo**\n- **Objetivo:** Validar desativação bem-sucedida de usuário ativo\n- **Resultado esperado:** Sistema altera status do usuário para inativo, remove acesso e exibe confirmação\n- **Tipo:** principal\n- **Critérios cobertos:** Cenário 1\n\n### US04-CT02 — Tentar desativar usuário já desativado\n- **Pré-condição:** Admin autenticado na tela de gestão de usuários; usuário alvo cadastrado e com status **inativo**\n- **Objetivo:** Validar tratamento de erro ao desativar usuário já inativo\n- **Resultado esperado:** Sistema não altera estado, retorna mensagem de erro informando que usuário já está desativado\n- **Tipo:** alternativo\n- **Critérios cobertos:** Cenário 2\n\n### US04-CT03 — Tentar desativar usuário inexistente\n- **Pré-condição:** Admin autenticado na tela de gestão de usuários; ID de usuário que não existe na base\n- **Objetivo:** Validar comportamento ao solicitar desativação de ID inexistente (partição de equivalência: usuário inexistente)\n- **Resultado esperado:** Sistema retorna erro de recurso não encontrado\n- **Tipo:** exceção\n- **Critérios cobertos:** a confirmar\n\n### US04-CT04 — Usuário não-admin tenta desativar outro usuário\n- **Pré-condição:** Usuário com perfil **monitor/coordenador** (não admin) autenticado; usuário alvo ativo\n- **Objetivo:** Validar restrição de permissão para ação administrativa (partição de equivalência: ator sem permissão)\n- **Resultado esperado:** Sistema nega acesso (403/redirecionamento) e não altera status do alvo\n- **Tipo:** exceção\n- **Critérios cobertos:** a confirmar\n\n### US04-CT05 — Admin tenta desativar a si mesmo\n- **Pré-condição:** Admin autenticado na tela de gestão de usuários; admin seleciona o próprio usuário (ativo)\n- **Objetivo:** Validar regra de auto-desativação (partição de equivalência: alvo = ator)\n- **Resultado esperado:** Sistema impede a ação e exibe "
+  },
+  "precisao": 0.8,
+  "recall": 1.0,
+  "f1": 0.8889,
+  "verbosidade_media": 22.0,
+  "pct_extraneous": 0.0,
+  "vp": 4,
+  "fp": 1,
+  "fn": 0
+}

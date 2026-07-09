@@ -1,0 +1,24 @@
+{
+  "tratamento": "t0_nvidia_super",
+  "user_story_id": "US04",
+  "repeticao": 2,
+  "timestamp": "2026-07-05T14:19:40.297897+00:00",
+  "latencia_s": 21.576,
+  "tokens_entrada": 601,
+  "tokens_saida": 1623,
+  "custo_usd": 0.0,
+  "model_backend": "nvidia_super",
+  "pipeline": "zero_shot",
+  "modo": "real",
+  "intermediarios": {
+    "casos_atuais": "### US04-CT01 — Desativa usuário ativo\n- **Pré-condição:** Admin autenticado na tela de gestão de usuários; existe pelo menos um usuário com status ativo.\n- **Objetivo:** Validar que o admin consegue desativar um usuário ativo.\n- **Resultado esperado:** O acesso do usuário selecionado é alterado para inativo; sistema exibe mensagem de sucesso.\n- **Tipo:** principal\n- **Critérios cobertos:** AC1\n\n### US04-CT02 — Tenta desativar usuário já desativado\n- **Pré-condição:** Admin autenticado na tela de gestão de usuários; existe um usuário com status já inativo.\n- **Objetivo:** Verificar que o sistema impede a desativação de um usuário já inativo.\n- **Resultado esperado:** Sistema retorna erro indicando que o usuário já está desativado; nenhum cambio de estado ocorre.\n- **Tipo:** principal\n- **Critérios cobertos:** AC2\n\n### US04-CT03 — Admin não autenticado tenta desativar usuário\n- **Pré-condição:** Não há sessão de admin autenticado; tenta acessar a funcionalidade de desativação via requisição direta.\n- **Objetivo:** Verificar comportamento quando admin não autenticado tenta executar a ação.\n- **Resultado esperado:** Sistema nega o acesso (redireciona para login ou retorna erro de autorização). Como a história não especifica explicitamente o requisito de autenticação para este caso, marcamos a confirmação necessária.\n- **Tipo:** alternativo\n- **Critérios cobertos:** a confirmar\n\n### US04-CT04 — Tentativa de desativar usuário inexistente\n- **Pré-condição:** Admin autenticado na tela de gestão de usuários; tenta desativar um ID de usuário que não está cadastrado.\n- **Objetivo:** Verificar tratamento de tentativa de desativar usuário inexistente.\n- **Resultado esperado:** Sistema retorna erro indicando que o usuário não foi encontrado. Como a história não trata desse caso, marcamos a confirmação necessária.\n- **Tipo:** alternativo\n- **Critérios cobertos:** a confirmar"
+  },
+  "precisao": 0.75,
+  "recall": 1.0,
+  "f1": 0.8571,
+  "verbosidade_media": 29.5,
+  "pct_extraneous": 0.0,
+  "vp": 3,
+  "fp": 1,
+  "fn": 0
+}

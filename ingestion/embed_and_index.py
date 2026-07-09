@@ -53,7 +53,7 @@ def index_chunks(chunks: list[Chunk], embeddings: list[list[float]]) -> None:
 
     ids = [f"chunk_{i}" for i in range(len(chunks))]
     documents = [c.texto for c in chunks]
-    metadatas = [{"fonte": c.fonte, "tipo": c.tipo} for c in chunks]
+    metadatas = [{"fonte": c.fonte, "tipo": c.tipo, "rotas": c.rotas} for c in chunks]
 
     collection.add(
         ids=ids,

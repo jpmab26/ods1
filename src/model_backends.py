@@ -1,5 +1,5 @@
 """
-Seletor de backend de modelo por MODEL_BACKEND ∈ {gemini, gemini_flash, nvidia, nvidia_super, openai_oss, dryrun}.
+Seletor de backend de modelo por MODEL_BACKEND ∈ {gemini_flash, nvidia, nvidia_super, openai_oss, dryrun}.
 
 IDs de modelo verificados em 29/06/2026 — confirmar na documentação do provedor
 antes de usar em produção:
@@ -8,8 +8,7 @@ antes de usar em produção:
 
 Backends disponíveis
 --------------------
-  gemini       → gemini-2.5-flash-lite                              (Google AI Studio, GOOGLE_API_KEY)
-  gemini_flash → gemini-2.5-flash                                   (Google AI Studio, GOOGLE_API_KEY) — T0 only
+  gemini_flash → gemini-2.5-flash                                   (Google AI Studio, GOOGLE_API_KEY) — T0 + T1
   nvidia       → nvidia/nemotron-3-ultra-550b-a55b:free             (OpenRouter via LiteLLM, OPENROUTER_API_KEY) — T0 only
   nvidia_super → nvidia/nemotron-3-super-120b-a12b:free             (OpenRouter via LiteLLM, OPENROUTER_API_KEY)
   openai_oss   → openai/gpt-oss-120b:free                           (OpenRouter via LiteLLM, OPENROUTER_API_KEY)
@@ -18,9 +17,8 @@ Backends disponíveis
 import os
 
 # Identificadores canônicos — abstraídos para facilitar migração quando
-# um modelo for descontinuado (ex.: gemini-2.5-flash-lite → gemini-3.1-flash-lite).
+# um modelo for descontinuado (ex.: gemini-2.5-flash → gemini-3.1-flash).
 # Override via env var *_MODEL_ID (útil quando o modelo padrão está indisponível).
-_GEMINI_MODEL_ID = os.getenv("GEMINI_MODEL_ID", "gemini-2.5-flash-lite")
 _GEMINI_FLASH_MODEL_ID = os.getenv("GEMINI_FLASH_MODEL_ID", "gemini-2.5-flash")
 _NVIDIA_MODEL_ID = os.getenv(
     "NVIDIA_MODEL_ID",
@@ -50,14 +48,11 @@ def get_model(agent_role: str):
     Retorna o identificador de modelo para o backend selecionado.
 
     Returns:
-        str          — para os backends 'gemini' e 'gemini_flash'
+        str          — para o backend 'gemini_flash'
         LiteLlm      — para os backends 'nvidia', 'nvidia_super', 'openai_oss'
         DryRunModel  — para backend 'dryrun'
     """
     backend = os.getenv("MODEL_BACKEND", _BACKEND)
-
-    if backend == "gemini":
-        return _GEMINI_MODEL_ID
 
     if backend == "gemini_flash":
         return _GEMINI_FLASH_MODEL_ID
@@ -71,5 +66,5 @@ def get_model(agent_role: str):
         from src.dry_run import DryRunModel
         return DryRunModel(model=f"dryrun/{agent_role}", agent_role=agent_role)
 
-    valid = "gemini, gemini_flash, nvidia, nvidia_super, openai_oss, dryrun"
+    valid = "gemini_flash, nvidia, nvidia_super, openai_oss, dryrun"
     raise ValueError(f"MODEL_BACKEND inválido: '{backend}'. Use: {valid}.")

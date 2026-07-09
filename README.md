@@ -97,7 +97,7 @@ gerar JSON, eliminando uma classe inteira de falhas de parsing:
 - **Resultado esperado:** Usuário criado; senha temporária exibida; flash de sucesso
 - **Tipo:** principal
 - **Critérios cobertos:** Cenário 1
-- **Verificação:** SUPORTADO — evidência: assert 'PENDENTE' in body — fonte: backend/tests/test_us01.py (tipo: código)
+- **Verificação:** SUPORTADO — evidência: cria usuário com status PENDENTE — fonte: backend/usuarios/service.py#create_user (tipo: código)
 - **Origem:** A1
 - **Aprovado humano:** pendente
 ```
@@ -112,24 +112,23 @@ que pedir direto ao modelo (zero-shot)? E isso compensa usar um modelo menor?**
 
 | Tratamento | Pipeline | Backend |
 |------------|----------|---------|
-| T0-Gemini | zero-shot | gemini-2.5-flash-lite |
-| T0-GeminiFlash | zero-shot | gemini-2.5-flash *(modelo maior, só zero-shot)* |
+| T0-GeminiFlash | zero-shot | gemini-2.5-flash |
 | T0-Nvidia | zero-shot | nemotron-ultra-550b *(modelo maior, só zero-shot)* |
 | T0-NvidiaSuper | zero-shot | nemotron-super-120b |
 | T0-OpenAI-OSS | zero-shot | gpt-oss-120b |
 | **T1** | multiagente | gemini-2.5-flash *(par direto com T0-GeminiFlash)* |
 | **T2** | multiagente | nemotron-super-120b *(par direto com T0-NvidiaSuper)* |
-| ~~T3~~ | ~~multiagente~~ | ~~gpt-oss-120b~~ — **ABANDONADO**: `gpt-oss-120b:free` sofreu rate limiting upstream persistente no OpenRouter durante toda a janela de execução; nenhuma das 6 chaves disponíveis obteve resposta após 5 tentativas com espera de 65 s cada. |
+| ~~T3~~ | ~~multiagente~~ | ~~gpt-oss-120b~~ — **ABANDONADO DEFINITIVAMENTE**: `gpt-oss-120b:free` sofre rate limiting upstream persistente no OpenRouter, retentado múltiplas vezes ao longo do projeto (inclusive com checkpoint por estágio, que ajudou a execução a avançar mais no pipeline mas não o suficiente para completar). Investigação descartou limitação de contexto do modelo (131k tokens) como causa. |
 
 Cada Tx-pipeline tem um T0 com o **mesmo modelo** (comparação isolando o efeito
-da arquitetura) e os dois T0 extras (GeminiFlash, Nvidia-Ultra) servem para
-comparar um modelo grande em zero-shot contra um modelo pequeno com pipeline.
-T3 foi descartado por indisponibilidade da API; a análise comparativa usa apenas T1 e T2.
+da arquitetura) e o T0 extra (Nvidia-Ultra) serve para comparar um modelo
+grande em zero-shot contra um modelo pequeno com pipeline. T3 foi descartado
+por indisponibilidade da API; a análise comparativa usa T0 (4 backends) + T1 + T2.
 
 Métricas calculadas (`eval/metrics.py`, `eval/statistics.py`) sobre os casos
 gerados, comparados ao oráculo manual caso a caso:
 
-- **Precisão, Recall, F1** — correspondência semântica com o oráculo (VP/FP/FN), rotulada em `eval/labeling.py` (interativo, para uso humano; a rodada efetiva deste checkpoint usou rotulagem assistida por LLM por restrição de tempo — ver `docs/analise_resultados.md`, limitação declarada)
+- **Precisão, Recall, F1** — correspondência semântica com o oráculo (VP/FP/FN). Rotulagem 100% humana: os 438 casos gerados foram revisados individualmente por um desenvolvedor contra o código real do `monitoria-app` (não contra a user story em prosa nem por LLM-juiz) — ver `documento_completo.md`, Seção 2.5.
 - **Taxonomia de defeito** (Travassos et al., 1999) para os falsos positivos: Incorrect Fact, Ambiguity, Inconsistency, Extraneous Information
 - **Verbosidade média** e **% de informação supérflua** (efeito colateral do RAG)
 - **Significância estatística**: teste de Friedman entre tratamentos + pós-teste de Wilcoxon pareado com correção de Holm
@@ -137,11 +136,18 @@ gerados, comparados ao oráculo manual caso a caso:
 
 ### Oráculo (gold standard)
 
-`data/oracle/oraculo_consolidado.md` — 19 casos aprovados manualmente por ≥ 2
-revisores, cobrindo as 2 US efetivamente testadas: **US01** (EP01 —
-autenticação), **US08** (EP02 — aprovação de monitores). Escala de relevância
-1/3/5, Kappa ponderado linear entre revisores como critério de concordância.
-Protocolo completo e justificativa da seleção em
+`data/oracle/oraculo_consolidado.md` — 27 casos cobrindo as 4 US efetivamente
+testadas: **US01** (EP01 — cadastro de usuários), **US04** (EP01 — admin
+desativa usuário), **US07** (EP02 — professor indica monitor), **US08** (EP02
+— aprovação de indicação de monitor). US01/US08 revisadas por ≥ 2 revisores
+humanos; US04/US07 construídas em rodada posterior com "revisores" simulados
+por LLM (Kappa abaixo da meta — ver `data/oracle/selecao_us_oraculo.md`).
+Escala de relevância 1/3/5, Kappa ponderado linear como critério de
+concordância. Todos os 27 casos passaram por revisão humana final contra o
+código real do `monitoria-app` e estão `Aprovado humano: sim`. Toda evidência
+ancorada em código executável, nunca em `backend/tests/` (essa pasta foi
+escrita às pressas, sem revisão, e é excluída deliberadamente do RAG e do
+oráculo). Protocolo completo e justificativa da seleção em
 `data/oracle/selecao_us_oraculo.md`.
 
 Nenhum código gera o oráculo automaticamente — é um artefato humano editado
@@ -159,7 +165,7 @@ make bootstrap               # cria .venv e instala dependências
 make ingest                  # clona monitoria-app e processa user stories
 make index                   # gera embeddings e popula ChromaDB
 make smoke-adk                # valida o pipeline sem chamadas de API (dryrun)
-make smoke-gemini             # valida integração real com Gemini
+make smoke-gemini-flash       # valida integração real com Gemini Flash
 ```
 
 ### Backends disponíveis
@@ -168,17 +174,18 @@ Selecione com `MODEL_BACKEND=<valor>` (em `.env` ou na linha de comando):
 
 | `MODEL_BACKEND` | Modelo | Chave necessária |
 |-----------------|--------|-----------------|
-| `gemini` | gemini-2.5-flash-lite | `GOOGLE_API_KEY` |
-| `gemini_flash` | gemini-2.5-flash | `GOOGLE_API_KEY` |
-| `nvidia` | nemotron-3-ultra-550b (free) — **zero-shot only**, ver nota abaixo | `OPENROUTER_API_KEY` |
-| `nvidia_super` | nemotron-3-super-120b (free) | `OPENROUTER_API_KEY` |
-| `openai_oss` | gpt-oss-120b (free) | `OPENROUTER_API_KEY` |
+| `gemini_flash` | gemini-2.5-flash (free tier) | `GOOGLE_API_KEY` |
+| `nvidia` | nemotron-3-ultra-550b (free tier) — **zero-shot only**, ver nota abaixo | `OPENROUTER_API_KEY` |
+| `nvidia_super` | nemotron-3-super-120b (free tier) | `OPENROUTER_API_KEY` |
+| `openai_oss` | gpt-oss-120b (free tier) | `OPENROUTER_API_KEY` |
 | `dryrun` | fixture local, sem API | — |
+
+Todos os backends usados no experimento rodam em tier gratuito — custo em US$ é 0,00 em todas as execuções (ver `documento_completo.md`, Seção 4.3).
 
 `nvidia` (Nemotron Ultra 550B) só roda no tratamento T0 (zero-shot) — `eval/runner.py`
 rejeita `--pipeline multiagent --backend nvidia` com erro explícito. O modelo é grande
-demais para justificar o custo das ~6 chamadas extra por execução que o pipeline
-multiagente faz (A1+A2+A1b+A3+A1c+A4).
+demais para justificar o custo das até 14 chamadas extra por execução que o pipeline
+multiagente pode fazer (A1 + até 3×[A2,A1b] + até 3×[A3,A1c] + A4).
 
 ### Rotação de chaves
 
@@ -209,12 +216,24 @@ Fallback: se nenhuma `GOOGLE_API_KEY_N` existir, usa `GOOGLE_API_KEY` (chave
 ### Comandos principais
 
 ```bash
-make run-all      # executa T0×5 + T1 + T2 (T3 abandonado — ver tabela acima)
-make eval         # rotulagem assistida + métricas + significância estatística
+make run-all      # executa T0×4 + T1 + T2 (T3 abandonado — ver tabela acima)
+make eval         # rotulagem humana interativa + métricas + significância estatística
 make consolidate  # gera tabelas e resultados_consolidados.json
-make test         # pytest (39 testes)
+make test         # pytest
 make clean        # remove artefatos gerados
 ```
+
+Sem terminal interativo disponível (ex.: execução automatizada), a rotulagem
+pode ser feita editando diretamente `outputs/rotulagens/{execução}.labels.json`
+no mesmo formato que `eval/labeling.py` produziria, seguida de:
+
+```bash
+python -m eval.metrics
+python -m eval.statistics
+```
+
+O julgamento (VP/FP contra o código real do sistema-alvo) continua humano em
+qualquer um dos dois caminhos — não há LLM-juiz no projeto.
 
 ---
 
@@ -223,21 +242,23 @@ make clean        # remove artefatos gerados
 ```
 src/
   agents/       — A1…A4 (LlmAgent)
-  tools/        — retriever.py (RAG), exit_tools.py
+  tools/        — retriever.py (RAG híbrido, com metadado de rota/call-graph)
   model_backends.py — get_model(role), seletor por MODEL_BACKEND
   parsers.py    — Markdown → list[dict]
-  pipeline.py   — SequentialAgent + LoopAgents
+  pipeline.py   — build_pipeline (atômico) / build_pipeline_stages (com checkpoint)
   zero_shot.py  — runner zero-shot sem pipeline
 ingestion/
   clone_repo.py, parse_user_stories.py — ingestão do monitoria-app
+  chunk_repository.py — chunking + análise estática de call-graph (rotas Flask)
   embed_and_index.py  — ChromaDB + embeddings locais
 eval/
-  runner.py       — orquestrador de experimentos, rotação de chaves
-  labeling.py     — rotulagem VP/FP/FN assistida
-  metrics.py      — precisão, recall, F1, verbosidade
-  statistics.py   — Friedman, Wilcoxon, kappa
-  consolidate.py  — artefatos finais em Markdown
-  instrumentation.py — tokens, latência, custo
+  runner.py             — orquestrador de experimentos, rotação de chaves, checkpoint por estágio
+  labeling.py           — rotulagem VP/FP/FN humana interativa
+  retrieval_eval.py     — avaliação empírica de recall@k do RAG
+  metrics.py            — precisão, recall, F1, verbosidade
+  statistics.py         — Friedman, Wilcoxon, kappa
+  consolidate.py        — artefatos finais em Markdown
+  instrumentation.py    — tokens, latência, custo
 prompts/        — Markdown, um arquivo por agente
 data/
   oracle/       — oraculo_consolidado.md, selecao_us_oraculo.md

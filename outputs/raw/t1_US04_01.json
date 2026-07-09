@@ -1,0 +1,26 @@
+{
+  "tratamento": "t1",
+  "user_story_id": "US04",
+  "repeticao": 1,
+  "timestamp": "2026-07-06T14:26:59.431166+00:00",
+  "latencia_s": 169.24,
+  "tokens_entrada": 231500,
+  "tokens_saida": 15203,
+  "custo_usd": 0.0,
+  "model_backend": "gemini_flash",
+  "pipeline": "multiagent",
+  "modo": "real",
+  "intermediarios": {
+    "casos_atuais": "### US04-CT01 — Desativação de usuário ativo\n- **Pré-condição:** Admin autenticado na tela de gestão de usuários. Existe um usuário ativo (Aluno, Monitor ou Professor) que não é o próprio admin.\n- **Objetivo:** Verificar se o admin consegue desativar um usuário ativo e se o acesso é removido.\n- **Resultado esperado:** O status do usuário é alterado para \"INATIVO\". O usuário desativado não consegue mais fazer login no sistema e é apresentada uma mensagem de sucesso para o admin.\n- **Tipo:** principal\n- **Critérios cobertos:** Cenário 1: Desativa usuário ativo\n- **Origem:** US04, docs/entrega-sprint-1.md, docs/artefatos-qscrum-sprint-1.md, docs/criterios-de-aceitacao.md (US02-Cenário 4), docs/sprints/sprint-1.md\n\n### US04-CT02 — Tentativa de desativar usuário já inativo\n- **Pré-condição:** Admin autenticado na tela de gestão de usuários. Existe um usuário com status \"INATIVO\".\n- **Objetivo:** Verificar o comportamento do sistema ao tentar desativar um usuário que já está inativo.\n- **Resultado esperado:** O sistema retorna a mensagem de erro \"Usuário não encontrado.\" e o status do usuário permanece \"INATIVO\".\n- **Tipo:** alternativo\n- **Critérios cobertos:** Cenário 2: Usuário já desativado\n- **Origem:** US04\n\n### US04-CT03 — Admin tenta desativar a si mesmo\n- **Pré-condição:** Admin autenticado na tela de gestão de usuários.\n- **Objetivo:** Verificar se um admin pode desativar sua própria conta.\n- **Resultado esperado:** O sistema impede a desativação da própria conta do admin, retornando a mensagem de erro \"Você não pode desativar o próprio usuário.\".\n- **Tipo:** alternativo\n- **Critérios cobertos:** Validação: admin não pode desativar a si mesmo (previne lock-out)\n- **Origem:** docs/sprints/sprint-1.md\n\n### US04-CT04 — Desativação de Professor com Disciplinas Ativas\n- **Pré-condição:** Admin autenticado. Existe um Professor ativo responsável por uma ou mais disciplinas ativas.\n- **Objetivo:** Verificar o comportamento do sistema ao desativar um professor com víncul",
+    "critica_cobertura": "## Lacunas identificadas\n_Nenhuma lacuna identificada nesta rodada._",
+    "relatorio_factual": "## Verificação factual\n### US04-CT01\n- **Status:** SUPORTADO\n- **Evidência:**\n  - \"Admin pode desativar qualquer usuário, alterando status para `INATIVO`. Usuário inativo não consegue autenticar — verificação feita no fluxo de login. Operação disponível na tela de gestão de usuários.\" (docs/entrega-sprint-1.md, confiança: alta)\n  - \"Endpoint POST `/usuarios/<user_id>/desativar` para marcar usuário como INATIVO. [...] Usuário inativo não consegue fazer login (validação no serviço de autenticação). Mensagens de sucesso/erro ao usuário.\" (docs/sprints/sprint-1.md, confiança: alta)\n  - Trecho de código da rota `backend/usuarios/routes.py#deactivate` (rota: POST /<int:user_id>/desativar): `flash(\"Usuário desativado com sucesso.\", \"success\")` (confiança: alta)\n  - \"Cenário 4: Usuário inativo Given: usuário com status 'Inativo' na tela de login When: informa credenciais corretas Then: login é negado com mensagem de que a conta está inativa\" (docs/criterios-de-aceitacao.md, confiança: alta)\n- **Fonte:** docs/entrega-sprint-1.md (tipo: documentação), docs/artefatos-qscrum-sprint-1.md (tipo: documentação), docs/sprints/sprint-1.md (tipo: documentação), backend/usuarios/routes.py (tipo: código), docs/criterios-de-aceitacao.md (tipo: documentação)\n\n### US04-CT02\n- **Status:** SUPORTADO\n- **Evidência:** O trecho de código da rota `backend/usuarios/routes.py#deactivate` (rota: POST /<int:user_id>/desativar) implementa: `else: flash(\"Usuário não encontrado.\", \"error\")`. Esta mensagem é retornada quando a desativação do serviço não é bem-sucedida, o que ocorreria para um usuário já inativo. O status permaneceria \"INATIVO\" conforme esperado, já que a operação não seria realizada.\n- **Fonte:** backend/usuarios/routes.py#deactivate (tipo: código, confiança: alta)\n\n### US04-CT03\n- **Status:** SUPORTADO\n- **Evidência:**\n  - \"Validação: admin não pode desativar a si mesmo (previne lock-out)\" (docs/sprints/sprint-1.md, confiança: alta)\n  - Trecho de código da rota `backend/usuarios/routes"
+  },
+  "precisao": 0.5,
+  "recall": 1.0,
+  "f1": 0.6667,
+  "verbosidade_media": 29.75,
+  "pct_extraneous": 0.0,
+  "vp": 4,
+  "fp": 4,
+  "fn": 0
+}

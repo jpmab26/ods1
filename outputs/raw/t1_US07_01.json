@@ -1,0 +1,25 @@
+{
+  "tratamento": "t1",
+  "user_story_id": "US07",
+  "repeticao": 1,
+  "timestamp": "2026-07-07T11:57:37.279532+00:00",
+  "latencia_s": 162.557,
+  "tokens_entrada": 113792,
+  "tokens_saida": 10746,
+  "custo_usd": 0.0,
+  "model_backend": "gemini_flash",
+  "pipeline": "multiagent",
+  "modo": "real",
+  "intermediarios": {
+    "casos_atuais": "### US07-CT01 — Indicação bem-sucedida de aluno como monitor\n- **Pré-condição:** Professor autenticado com acesso à tela de indicação de monitores para uma de suas disciplinas. Existe um aluno ativo cadastrado no sistema.\n- **Objetivo:** Verificar a criação de um vínculo de monitoria com status \"Pendente de aprovação\" ao indicar um aluno válido para uma disciplina do professor.\n- **Resultado esperado:** O vínculo de monitoria é criado entre o professor, a disciplina e o aluno indicado, com o status \"Pendente de aprovação\". O professor visualiza a indicação no histórico ou lista de indicações.\n- **Tipo:** principal\n- **Critérios cobertos:** Cenário 1: Indicação bem-sucedida\n- **Origem:** US07\n\n### US07-CT02 — Tentativa de indicação de usuário sem papel aluno\n- **Pré-condição:** Professor autenticado com acesso à tela de indicação de monitores para uma de suas disciplinas. Existe um usuário ativo no sistema que NÃO possui o papel \"ALUNO\" (ex: outro professor ou admin).\n- **Objetivo:** Validar que o sistema impede a indicação de um usuário que não possua o papel \"ALUNO\".\n- **Resultado esperado:** Ao tentar indicar o usuário sem papel \"ALUNO\", o sistema exibe uma mensagem de erro indicando \"papel inválido\" ou similar, e o vínculo de monitoria não é criado.\n- **Tipo:** exceção\n- **Critérios cobertos:** Cenário 2: Indicação de usuário sem papel aluno\n- **Origem:** US07\n\n### US07-CT03 — Tentativa de indicação para disciplina de outro professor\n- **Pré-condição:** Professor autenticado com acesso à tela de indicação de monitores. Existe pelo menos uma disciplina no sistema que NÃO é de responsabilidade do professor autenticado.\n- **Objetivo:** Verificar que o professor não consegue indicar um aluno como monitor para uma disciplina que não lhe pertence.\n- **Resultado esperado:** A disciplina de outro professor não é listada como uma opção disponível para o professor autenticado na tela de indicação. Caso haja tentativa de manipulação (e.g., via requisição direta), o backend ",
+    "critica_cobertura": "## Lacunas identificadas\n### LC06 — Tentativa de indicação por usuário sem papel \"professor\"\n- **Tipo:** erro\n- **Justificativa:** A user story e o contexto (`docs/logica-tecnica-sprint-2.md` e `docs/entrega-sprint-2.md`) afirmam explicitamente que a funcionalidade (`GET/POST /monitorias/indicar`) é para \"professor only\". Embora haja casos para indicar um *usuário sem papel aluno* (US07-CT02) e para *disciplina de outro professor* (US07-CT03), não há um caso que verifique se um usuário com papel diferente de \"professor\" (ex: \"aluno\" ou \"admin\") tenta acessar ou realizar a indicação. O sistema deve rejeitar a operação com um erro de permissão ou acesso negado.\n\n### LC07 — Indicação sem seleção de aluno\n- **Tipo:** borda\n- **Justificativa:** O Cenário 1 e os casos de teste correlatos assumem que um aluno é selecionado. No entanto, um usuário pode tentar confirmar a indicação sem ter selecionado um aluno (input vazio). O sistema deve apresentar uma mensagem de erro indicando que um aluno precisa ser selecionado, tanto na interface quanto via validação de backend.\n\n### LC08 — Re-indicação de aluno com vínculo \"Rejeitado\" ou \"Terminado\"\n- **Tipo:** alternativo\n- **Justificativa:** Os casos existentes cobrem a indicação de um aluno ativo (US07-CT04) e a tentativa de indicação duplicada para um status \"Pendente\" (US07-CT05). Contudo, não endereçam o cenário em que um professor tenta indicar um aluno que *já teve um vínculo de monitoria* para a mesma disciplina, mas esse vínculo foi previamente \"Rejeitado\" pelo admin (US08, Cenário 2) ou \"Terminado\" (status futuro). Espera-se que o sistema permita uma nova indicação, criando um novo vínculo \"Pendente de aprovação\", visto que o status anterior não impede novas tentativas."
+  },
+  "precisao": 0.6364,
+  "recall": 1.0,
+  "f1": 0.7778,
+  "verbosidade_media": 25.18,
+  "pct_extraneous": 0.0,
+  "vp": 7,
+  "fp": 4,
+  "fn": 0
+}

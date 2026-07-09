@@ -63,7 +63,8 @@ def _load_bm25_corpus(collection) -> None:
     all_data = collection.get(include=["documents", "metadatas"])
     _bm25_ids = all_data["ids"]
     _bm25_docs = {
-        cid: {"texto": doc, "fonte": meta.get("fonte", ""), "tipo": meta.get("tipo", "")}
+        cid: {"texto": doc, "fonte": meta.get("fonte", ""), "tipo": meta.get("tipo", ""),
+              "rotas": meta.get("rotas", "")}
         for cid, doc, meta in zip(_bm25_ids, all_data["documents"], all_data["metadatas"])
     }
     tokenized = [_tokenize(doc) for doc in all_data["documents"]]
@@ -164,6 +165,7 @@ def recuperar_contexto(query: str, k: int = RETRIEVAL_K) -> list[dict]:
             "texto": doc["texto"],
             "fonte": doc["fonte"],
             "tipo": doc["tipo"],
+            "rotas": doc.get("rotas", ""),
             "similaridade": round(sim, 4) if sim is not None else None,
             "confianca": _confianca(sim, entry["canais"]),
             "canais": entry["canais"],
@@ -186,8 +188,10 @@ def formatar_contexto_markdown(resultados: list[dict]) -> str:
     for r in resultados:
         sim_txt = f"{r['similaridade']:.2f}" if r["similaridade"] is not None else "—"
         canais_txt = "+".join(r["canais"])
+        rotas_txt = r.get("rotas") or "sem rota associada"
         blocos.append(
-            f"### Fonte: {r['fonte']} (tipo: {r['tipo']}, confiança: {r['confianca']}, "
-            f"similaridade: {sim_txt}, canal: {canais_txt})\n```\n{r['texto']}\n```"
+            f"### Fonte: {r['fonte']} (tipo: {r['tipo']}, rota: {rotas_txt}, "
+            f"confiança: {r['confianca']}, similaridade: {sim_txt}, canal: {canais_txt})\n"
+            f"```\n{r['texto']}\n```"
         )
     return "\n\n".join(blocos)

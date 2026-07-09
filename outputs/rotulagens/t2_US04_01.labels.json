@@ -1,0 +1,86 @@
+[
+  {
+    "id_caso": "US04-CT01",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "deactivate_user faz UPDATE status=INATIVO sem checar status atual; usuário existente é sempre desativado com sucesso, incluindo login subsequente bloqueado por auth/service.py::authenticate_user (checa status=='INATIVO')."
+  },
+  {
+    "id_caso": "US04-CT02",
+    "correto": false,
+    "categoria_defeito": "Incorrect Fact",
+    "justificativa": "repository.deactivate_user faz UPDATE incondicional por id (sem checar status atual); como atualizado_em sempre muda, rowcount>0 mesmo se já INATIVO — a 2ª desativação 'sucede' silenciosamente (mesma flash de sucesso), não retorna nenhum erro."
+  },
+  {
+    "id_caso": "US04-CT03",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "routes.py::deactivate compara user_id com session['user_id'] ANTES de chamar o service — bloqueia com 'Você não pode desativar o próprio usuário.'"
+  },
+  {
+    "id_caso": "US04-CT04",
+    "correto": true,
+    "extraneous": true,
+    "justificativa": "id inexistente não casa nenhuma linha na UPDATE — rowcount=0, service retorna False, routes.py flasheia 'Usuário não encontrado.' (o 'ou' cobre a alegação real, ainda que não seja literalmente HTTP 404)."
+  },
+  {
+    "id_caso": "US04-CT05",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "@require_role('ADMIN') redireciona para home com flash de erro quando o papel da sessão não é ADMIN."
+  },
+  {
+    "id_caso": "US04-CT06",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "deactivate_user faz UPDATE status=INATIVO sem checar status atual; usuário existente é sempre desativado com sucesso, incluindo login subsequente bloqueado por auth/service.py::authenticate_user (checa status=='INATIVO')."
+  },
+  {
+    "id_caso": "US04-CT07",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "deactivate_user não filtra por status atual — um usuário PENDENTE é processado da mesma forma que ATIVO, transicionando para INATIVO normalmente."
+  },
+  {
+    "id_caso": "US04-CT08",
+    "correto": true,
+    "extraneous": true,
+    "justificativa": "A rota é registrada só com @bp.post — Flask retorna 405 Method Not Allowed automaticamente para GET nesse path."
+  },
+  {
+    "id_caso": "US04-CT09",
+    "correto": false,
+    "categoria_defeito": "Ambiguity",
+    "justificativa": "Campo Resultado esperado está vazio — o caso não faz nenhuma asserção verificável."
+  },
+  {
+    "id_caso": "US04-CT10",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "@login_required redireciona (302) para auth.login quando não há user_id na sessão."
+  },
+  {
+    "id_caso": "US04-CT11",
+    "correto": true,
+    "extraneous": true,
+    "justificativa": "O UPDATE só altera as colunas status e atualizado_em — nome, email e papel não são tocados pela query."
+  },
+  {
+    "id_caso": "US04-CT12",
+    "correto": false,
+    "categoria_defeito": "Incorrect Fact",
+    "justificativa": "login_required só checa a presença de session['user_id'], nunca revalida o status do usuário no banco a cada requisição — uma sessão já ativa continua funcionando após a desativação; só uma NOVA tentativa de login seria bloqueada (auth/service.py)."
+  },
+  {
+    "id_caso": "US04-CT13",
+    "correto": true,
+    "extraneous": true,
+    "justificativa": "Flash real é literalmente 'Usuário desativado com sucesso.' com categoria 'success', citação exata confirmada em usuarios/routes.py::deactivate."
+  },
+  {
+    "id_caso": "US04-CT14",
+    "correto": false,
+    "categoria_defeito": "Incorrect Fact",
+    "justificativa": "Não existe uma mensagem de erro para esse caso — desativar um usuário já INATIVO produz a MESMA flash de sucesso ('Usuário desativado com sucesso.'), não um erro."
+  }
+]

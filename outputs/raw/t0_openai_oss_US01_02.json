@@ -2,23 +2,23 @@
   "tratamento": "t0_openai_oss",
   "user_story_id": "US01",
   "repeticao": 2,
-  "timestamp": "2026-06-30T17:58:01.059587+00:00",
-  "latencia_s": 61.066,
+  "timestamp": "2026-07-05T19:53:54.813712+00:00",
+  "latencia_s": 37.846,
   "tokens_entrada": 594,
-  "tokens_saida": 1239,
+  "tokens_saida": 950,
   "custo_usd": 0.0,
   "model_backend": "openai_oss",
   "pipeline": "zero_shot",
   "modo": "real",
   "intermediarios": {
-    "casos_atuais": "### US01-CT01 — Cadastro com dados válidos (perfil aluno)  \n- **Pré‑condição:** Admin autenticado na tela de gestão de usuários; email a ser cadastrado ainda não existe no banco.  \n- **Objetivo:** Verificar criação de usuário com perfil *aluno* usando informações corretas.  \n- **Resultado esperado:** Sistema cria o usuário com status **Pendente** e exibe senha temporária ao admin.  \n- **Tipo:** principal  \n- **Critérios cobertos:** AC1  \n\n### US01-CT02 — Cadastro com dados válidos (perfil professor)  \n- **Pré‑condição:** Admin autenticado; email inexistente.  \n- **Objetivo:** Verificar criação de usuário com perfil *professor*.  \n- **Resultado esperado:** Usuário criado com status **Pendente** e senha temporária mostrada ao admin.  \n- **Tipo:** principal  \n- **Critérios cobertos:** AC1  \n\n### US01-CT03 — Cadastro com dados válidos (perfil admin)  \n- **Pré‑condição:** Admin autenticado; email inexistente.  \n- **Objetivo:** Verificar criação de usuário com perfil *admin*.  \n- **Resultado esperado:** Usuário criado com status **Pendente** e senha temporária exibida.  \n- **Tipo:** principal  \n- **Critérios cobertos:** AC1  \n\n### US01-CT04 — Tentativa de cadastro com email já existente  \n- **Pré‑condição:** Admin autenticado; email já cadastrado no sistema (qualquer perfil).  \n- **Objetivo:** Garantir que o sistema impede duplicação de email.  \n- **Resultado esperado:** Cadastro rejeitado com mensagem **'Email já cadastrado'**.  \n- **Tipo:** negativo  \n- **Critérios cobertos:** AC2  \n\n### US01-CT05 — Campo nome vazio  \n- **Pré‑condição:** Admin autenticado; email inexistente.  \n- **Objetivo:** Verificar validação de campo obrigatório *nome*.  \n- **Resultado esperado:** Sistema impede o cadastro e exibe mensagem de erro indicando que o nome é obrigatório.  \n- **Tipo:** negativo  \n- **Critérios cobertos:** a confirmar  \n\n### US01-CT06 — Campo email vazio  \n- **Pré‑condição:** Admin autenticado; nome preenchido, perfil selecionado.  \n- **Objetivo:** Verificar validação de c"
+    "casos_atuais": "### US01-CT01 — Cadastro de usuário com perfil aluno válido\n- **Pré‑condição:** Admin autenticado e na tela de gestão de usuários; email a ser cadastrado ainda não existe no sistema.\n- **Objetivo:** Verificar criação de usuário com perfil **aluno**.\n- **Resultado esperado:** Sistema cria o usuário com status **Pendente**, exibe senha temporária ao admin e permanece na tela de gestão.\n- **Tipo:** principal\n- **Critérios cobertos:** AC1\n\n### US01-CT02 — Cadastro de usuário com perfil professor válido\n- **Pré‑condição:** Admin autenticado e na tela de gestão de usuários; email não cadastrado.\n- **Objetivo:** Verificar criação de usuário com perfil **professor**.\n- **Resultado esperado:** Usuário criado com status **Pendente**, senha temporária exibida ao admin.\n- **Tipo:** principal\n- **Critérios cobertos:** AC1\n\n### US01-CT03 — Cadastro de usuário com perfil admin válido\n- **Pré‑condição:** Admin autenticado e na tela de gestão de usuários; email ainda inexistente.\n- **Objetivo:** Verificar criação de usuário com perfil **admin**.\n- **Resultado esperado:** Usuário criado com status **Pendente**, senha temporária exibida ao admin.\n- **Tipo:** principal\n- **Critérios cobertos:** AC1\n\n### US01-CT04 — Rejeição de cadastro com email já existente\n- **Pré‑condição:** Admin autenticado; email a ser cadastrado já pertence a outro usuário no sistema.\n- **Objetivo:** Garantir que o sistema impede duplicidade de email.\n- **Resultado esperado:** Cadastro é rejeitado e mensagem **‘Email já cadastrado’** é exibida ao admin.\n- **Tipo:** principal\n- **Critérios cobertos:** AC2\n\n### US01-CT05 — Campo nome vazio\n- **Pré‑condição:** Admin autenticado na tela de gestão de usuários.\n- **Objetivo:** Testar validação de campo obrigatório **nome**.\n- **Resultado esperado:** Sistema impede o cadastro e exibe mensagem de erro indicando que o nome é obrigatório.\n- **Tipo:** robustez\n- **Critérios cobertos:** a confirmar\n\n### US01-CT06 — Campo email vazio\n- **Pré‑condição:** Admin autenticado na "
   },
-  "precisao": 0.5833,
-  "recall": 0.7,
-  "f1": 0.6364,
-  "verbosidade_media": 22.67,
-  "pct_extraneous": 0.0,
-  "vp": 7,
-  "fp": 5,
-  "fn": 3
+  "precisao": 0.8,
+  "recall": 0.8,
+  "f1": 0.8,
+  "verbosidade_media": 20.2,
+  "pct_extraneous": 10.0,
+  "vp": 8,
+  "fp": 2,
+  "fn": 2
 }

@@ -1,19 +1,110 @@
 [
-  {"id_caso": "US08-CT01", "correto": true, "extraneous": true},
-  {"id_caso": "US08-CT02", "correto": false, "categoria_defeito": "Incorrect Fact"},
-  {"id_caso": "US08-CT03", "correto": false, "categoria_defeito": "Incorrect Fact"},
-  {"id_caso": "US08-CT04", "correto": true, "extraneous": false},
-  {"id_caso": "US08-CT05", "correto": true, "extraneous": false},
-  {"id_caso": "US08-CT06", "correto": false, "categoria_defeito": "Ambiguity"},
-  {"id_caso": "US08-CT07", "correto": true, "extraneous": false},
-  {"id_caso": "US08-CT08", "correto": true, "extraneous": false},
-  {"id_caso": "US08-CT09", "correto": false, "categoria_defeito": "Incorrect Fact"},
-  {"id_caso": "US08-CT10", "correto": false, "categoria_defeito": "Incorrect Fact"},
-  {"id_caso": "US08-CT11", "correto": false, "categoria_defeito": "Incorrect Fact"},
-  {"id_caso": "US08-CT12", "correto": false, "categoria_defeito": "Incorrect Fact"},
-  {"id_caso": "US08-CT13", "correto": true, "extraneous": false},
-  {"id_caso": "US08-CT14", "correto": false, "categoria_defeito": "Incorrect Fact"},
-  {"id_caso": "US08-CT15", "correto": false, "categoria_defeito": "Incorrect Fact"},
-  {"id_caso": "US08-CT16", "correto": false, "categoria_defeito": "Incorrect Fact"},
-  {"id_caso": "US08-CT17", "correto": false, "categoria_defeito": "Incorrect Fact"}
+  {
+    "id_caso": "US08-CT01",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "approve_monitoria: SELECT confirma status=PENDENTE_APROVACAO + disciplina ATIVA; sem outro monitor ativo do aluno, UPDATE status='ATIVO' sucede."
+  },
+  {
+    "id_caso": "US08-CT02",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "Análise correta e grounded em código: approve_monitoria não solicita confirmação; se passar ALUNO_JA_MONITOR, aprova diretamente, podendo resultar em dois monitores ativos na mesma disciplina."
+  },
+  {
+    "id_caso": "US08-CT03",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "reject_monitoria faz UPDATE status='REJEITADO', motivo_rejeicao=%s WHERE id=%s AND status='PENDENTE_APROVACAO' — motivo é persistido."
+  },
+  {
+    "id_caso": "US08-CT04",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "list_pending_monitorias() filtra WHERE status='PENDENTE_APROVACAO' — uma vez aprovada/rejeitada, o status muda e a linha some da consulta."
+  },
+  {
+    "id_caso": "US08-CT05",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "approve_monitoria bloqueia com 'Aluno já possui monitoria ativa.' quando o aluno já tem outra monitoria com status ATIVO (id diferente) — checagem é por aluno, não por disciplina."
+  },
+  {
+    "id_caso": "US08-CT06",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "Análise correta: não há etapa de confirmação em approve_monitoria; o cenário de 'recusar confirmação' de fato não pode ocorrer, como o caso conclui."
+  },
+  {
+    "id_caso": "US08-CT07",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "Análise correta: reject_monitoria aceita motivo vazio/só espaços sem bloquear a rejeição."
+  },
+  {
+    "id_caso": "US08-CT08",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "SELECT em approve_monitoria/UPDATE em reject_monitoria exigem status='PENDENTE_APROVACAO' — para qualquer outro status, cai no caminho NAO_ENCONTRADA, flash 'Monitoria não encontrada ou já processada.' (a mensagem já cobre 'já processada')."
+  },
+  {
+    "id_caso": "US08-CT09",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "SELECT em approve_monitoria/UPDATE em reject_monitoria exigem status='PENDENTE_APROVACAO' — para qualquer outro status, cai no caminho NAO_ENCONTRADA, flash 'Monitoria não encontrada ou já processada.' (a mensagem já cobre 'já processada')."
+  },
+  {
+    "id_caso": "US08-CT10",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "approve_monitoria bloqueia com 'Aluno já possui monitoria ativa.' quando o aluno já tem outra monitoria com status ATIVO (id diferente) — checagem é por aluno, não por disciplina."
+  },
+  {
+    "id_caso": "US08-CT11",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "Análise correta e grounded em código: não há lógica de substituição — M_old e M_new ficariam ambos ATIVO simultaneamente."
+  },
+  {
+    "id_caso": "US08-CT12",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "approve_monitoria bloqueia com 'Aluno já possui monitoria ativa.' quando o aluno já tem outra monitoria com status ATIVO (id diferente) — checagem é por aluno, não por disciplina."
+  },
+  {
+    "id_caso": "US08-CT13",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "Se M_new==M_old já tiver uma linha ATIVO com id diferente da pendente processada, ALUNO_JA_MONITOR (id<>monitoria_id) bloqueia a aprovação — raciocínio consistente com o código."
+  },
+  {
+    "id_caso": "US08-CT14",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "Hedge correto: como não existe status distinto de 'alteração de monitor', o comportamento realmente é idêntico ao de uma rejeição comum (CT03)."
+  },
+  {
+    "id_caso": "US08-CT15",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "SELECT em approve_monitoria/UPDATE em reject_monitoria exigem status='PENDENTE_APROVACAO' — para qualquer outro status, cai no caminho NAO_ENCONTRADA, flash 'Monitoria não encontrada ou já processada.' (a mensagem já cobre 'já processada')."
+  },
+  {
+    "id_caso": "US08-CT16",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "Análise correta: approve_monitoria só verifica ALUNO_JA_MONITOR, sem nenhuma etapa de confirmação de substituição."
+  },
+  {
+    "id_caso": "US08-CT18",
+    "correto": true,
+    "extraneous": true,
+    "justificativa": "status=ATIVO é a condição real usada por outras consultas (has_active_monitoria/get_active_by_aluno) para reconhecer o aluno como monitor da disciplina — endpoint específico é ilustrativo."
+  },
+  {
+    "id_caso": "US08-CT19",
+    "correto": true,
+    "extraneous": true,
+    "justificativa": "motivo_rejeicao é persistido na coluna e recuperável por qualquer consulta subsequente — endpoint específico é ilustrativo."
+  }
 ]

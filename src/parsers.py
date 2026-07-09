@@ -13,8 +13,10 @@ import re
 from typing import Any
 
 
-# Separador de blocos de caso: linha que começa com "### "
-_BLOCO_RE = re.compile(r"(?=^### )", re.MULTILINE)
+# Separador de blocos de caso: linha que começa com "###" (tolera zero ou mais espaços
+# depois — alguns modelos omitem o espaço, ex.: "###US08-CT01"; sem isso o bloco inteiro
+# vira texto não reconhecido e o caso desaparece silenciosamente da contagem).
+_BLOCO_RE = re.compile(r"(?=^###(?!#))", re.MULTILINE)
 # Campo no formato "- **Nome:** valor"
 _CAMPO_RE = re.compile(r"^- \*\*([^:]+):\*\*\s*(.*)$")
 
@@ -43,11 +45,11 @@ def parse_markdown_casos(texto_md: str) -> list[dict[str, Any]]:
 
     for bloco in blocos:
         bloco = bloco.strip()
-        if not bloco.startswith("### "):
+        if not re.match(r"^###(?!#)", bloco):
             continue
 
         linhas = bloco.splitlines()
-        cabecalho = linhas[0][4:].strip()  # remove "### "
+        cabecalho = linhas[0][3:].strip()  # remove "###" (com ou sem espaço em seguida)
 
         # Separa ID e nome: "US01-CT01 — Nome" ou "US01-CT01 - Nome"
         if " — " in cabecalho:
@@ -92,14 +94,14 @@ def parse_markdown_lacunas(texto_md: str) -> list[dict[str, str]]:
         - **Justificativa:** ...
     """
     lacunas: list[dict[str, str]] = []
-    blocos = re.split(r"(?=^### LC)", texto_md, flags=re.MULTILINE)
+    blocos = re.split(r"(?=^###\s*LC)", texto_md, flags=re.MULTILINE)
 
     for bloco in blocos:
         bloco = bloco.strip()
-        if not bloco.startswith("### LC"):
+        if not re.match(r"^###\s*LC", bloco):
             continue
         linhas = bloco.splitlines()
-        cabecalho = linhas[0][4:].strip()
+        cabecalho = re.sub(r"^###\s*LC", "LC", linhas[0]).strip()
         if " — " in cabecalho:
             id_, descricao = cabecalho.split(" — ", 1)
         else:

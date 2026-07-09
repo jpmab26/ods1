@@ -1,0 +1,26 @@
+{
+  "tratamento": "t2",
+  "user_story_id": "US07",
+  "repeticao": 2,
+  "timestamp": "2026-07-06T00:21:28.122087+00:00",
+  "latencia_s": 1048.999,
+  "tokens_entrada": 1837317,
+  "tokens_saida": 65142,
+  "custo_usd": 0.0,
+  "model_backend": "nvidia_super",
+  "pipeline": "multiagent",
+  "modo": "real",
+  "intermediarios": {
+    "casos_atuais": "### US07-CT01 — Indicação bem‑sucedida\n- **Pré-condição:** Professor **P** autenticado no sistema; professor **P** possui ao menos uma disciplina **D** cujo `professor_id = P.id`; existe ao menos um aluno **A** com papel `ALUNO` cadastrado no sistema.\n- **Objetivo:** Validar que uma indicação de monitor seja criada com sucesso.\n- **Resultado esperado:** O sistema cria um vínculo de monitoria entre **A** e **D** com status **PENDENTE_APROVACAO**; exibe mensagem de sucesso (ex.: “Indicação enviada para aprovação.”); o vínculo aparece no histórico de indicações do professor na mesma tela com o status “Pendente de aprovação”.\n- **Tipo:** principal\n- **Critérios cobertos:** Cenário 1 – Indicação bem‑sucedida (US07)\n- **Origem:** US07 – Cenário 1 (user_stories/individual/us07.md); fluxo indicado em docs/logica-tecnica-sprint-2.md (passo 4‑5)\n\n### US07-CT02 — Indicação de usuário sem papel “aluno”\n- **Pré-condição:** Professor **P** autenticado; existe pelo menos um usuário **U** cujo papel seja **PROFESSOR** ou **ADMIN**; professor **P** possui disciplina **D** (como no CT01).\n- **Objetivo:** Validar que o sistema rejeite a indicação quando o usuário não possui papel de aluno.\n- **Resultado esperado:** O sistema rejeita a operação; exibe mensagem de erro indicando “papel inválido” ou similar (ex.: “Somente usuários com papel ALUNO podem ser indicados”); nenhum vínculo é criado.\n- **Tipo:** erro\n- **Critérios cobertos:** Cenário 2 – Indicação de usuário sem papel aluno (US07)\n- **Origem:** US07 – Cenário 2 (user_stories/individual/us07.md); validação de papel do aluno descrita em docs/logica-tecnica-sprint-2.md (passo 4)\n\n### US07-CT03 — Disciplina de outro professor não aparece nas opções\n- **Pré-condição:** Professor **P1** autenticado; existe disciplina **D2** cujo `professor_id = P2` (diferente de P1); professor **P1** possui ao menos uma disciplina própria **D1**.\n- **Objetivo:** Validar que a lista de disciplinas disponíveis para indicação contenha apenas as discipli",
+    "critica_cobertura": "## Lacunas identificadas\n_Nenhuma lacuna identificada nesta rodada._",
+    "relatorio_factual": "**Casos de Teste para US07 – Professor indica aluno como monitor**\n\n### US07-CT01 — Indicação bem‑sucedida\n- **Pré-condição:** Professor **P** autenticado no sistema; professor **P** possui ao menos uma disciplina **D** cujo `professor_id = P.id`; existe ao menos um aluno **A** com papel `ALUNO` cadastrado no sistema.\n- **Objetivo:** Validar que uma indicação de monitor seja criada com sucesso.\n- **Resultado esperado:** O sistema cria um vínculo de monitoria entre **A** e **D** com status **PENDENTE_APROVACAO**; exibe mensagem de sucesso (ex.: “Indicação enviada para aprovação.”); o vínculo aparece no histórico de indicações do professor na mesma tela com o status “Pendente de aprovação”.\n- **Tipo:** principal\n- **Critérios cobertos:** Cenário 1 – Indicação bem‑sucedida (US07)\n- **Origem:** US07 – Cenário 1 (user_stories/individual/us07.md); fluxo indicado em docs/logica-tecnica-sprint-2.md (passo 4‑5)\n\n### US07-CT02 — Indicação de usuário sem papel “aluno”\n- **Pré-condição:** Professor **P** autenticado; existe pelo menos um usuário **U** cujo papel seja **PROFESSOR** ou **ADMIN**; professor **P** possui disciplina **D** (como no CT01).\n- **Objetivo:** Validar que o sistema rejeite a indicação quando o usuário não possui papel de aluno.\n- **Resultado esperado:** O sistema rejeita a operação; exibe mensagem de erro indicando “papel inválido” ou similar (ex.: “Somente usuários com papel ALUNO podem ser indicados”); nenhum vínculo é criado.\n- **Tipo:** erro\n- **Critérios cobertos:** Cenário 2 – Indicação de usuário sem papel aluno (US07)\n- **Origem:** US07 – Cenário 2 (user_stories/individual/us07.md); validação de papel do aluno descrita em docs/logica-tecnica-sprint-2.md (passo 4)\n\n### US07-CT03 — Disciplina de outro professor não aparece nas opções\n- **Pré-condição:** Professor **P1** autenticado; existe disciplina **D2** cujo `professor_id = P2` (diferente de P1); professor **P1** possui ao menos uma disciplina própria **D1**.\n- **Objetivo:** Validar que a lista d"
+  },
+  "precisao": 1.0,
+  "recall": 1.0,
+  "f1": 1.0,
+  "verbosidade_media": 27.17,
+  "pct_extraneous": 0.0,
+  "vp": 12,
+  "fp": 0,
+  "fn": 0
+}

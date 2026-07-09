@@ -1,0 +1,50 @@
+[
+  {
+    "id_caso": "US04-CT01",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "deactivate_user faz UPDATE status=INATIVO sem checar status atual; usuário existente é sempre desativado com sucesso, incluindo login subsequente bloqueado por auth/service.py::authenticate_user (checa status=='INATIVO')."
+  },
+  {
+    "id_caso": "US04-CT02",
+    "correto": false,
+    "categoria_defeito": "Incorrect Fact",
+    "justificativa": "Usuário já INATIVO ainda tem seu id existente na tabela — a UPDATE incondicional casa pelo id e rowcount>0, retornando sucesso silencioso ('Usuário desativado com sucesso.'), não 'Usuário não encontrado.'"
+  },
+  {
+    "id_caso": "US04-CT03",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "routes.py::deactivate compara user_id com session['user_id'] ANTES de chamar o service — bloqueia com 'Você não pode desativar o próprio usuário.'"
+  },
+  {
+    "id_caso": "US04-CT04",
+    "correto": false,
+    "categoria_defeito": "Ambiguity",
+    "justificativa": "Resultado esperado não afirma um comportamento verificável (hedged 'a confirmar'/sem asserção), apesar de o comportamento real do sistema ser determinístico."
+  },
+  {
+    "id_caso": "US04-CT05",
+    "correto": false,
+    "categoria_defeito": "Ambiguity",
+    "justificativa": "Resultado esperado não afirma um comportamento verificável (hedged 'a confirmar'/sem asserção), apesar de o comportamento real do sistema ser determinístico."
+  },
+  {
+    "id_caso": "US04-CT06",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "rowcount=0 quando o id não existe — service.deactivate_user retorna False, routes.py::deactivate flasheia 'Usuário não encontrado.'"
+  },
+  {
+    "id_caso": "US04-CT07",
+    "correto": false,
+    "categoria_defeito": "Incorrect Fact",
+    "justificativa": "login_required só checa a presença de session['user_id'], nunca revalida o status do usuário no banco a cada requisição — uma sessão já ativa continua funcionando após a desativação; só uma NOVA tentativa de login seria bloqueada (auth/service.py)."
+  },
+  {
+    "id_caso": "US04-CT08",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "@require_role('ADMIN') redireciona para home com flash de erro quando o papel da sessão não é ADMIN."
+  }
+]

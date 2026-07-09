@@ -1,6 +1,26 @@
 [
-  {"id_caso": "US01-CT01", "correto": true, "extraneous": false},
-  {"id_caso": "US01-CT02", "correto": true, "extraneous": false},
-  {"id_caso": "US01-CT03", "correto": true, "extraneous": false},
-  {"id_caso": "US01-CT04", "correto": true, "extraneous": false}
+  {
+    "id_caso": "US01-CT01",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "Cadastro com papel válido cria usuário com status PENDENTE, senha temporária de 10 caracteres alfanuméricos exibida ao admin, hash armazenado (create_user/repository.create_user)."
+  },
+  {
+    "id_caso": "US01-CT02",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "Cadastro com papel válido cria usuário com status PENDENTE, senha temporária de 10 caracteres alfanuméricos exibida ao admin, hash armazenado (create_user/repository.create_user)."
+  },
+  {
+    "id_caso": "US01-CT03",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "Cadastro com papel válido cria usuário com status PENDENTE, senha temporária de 10 caracteres alfanuméricos exibida ao admin, hash armazenado (create_user/repository.create_user)."
+  },
+  {
+    "id_caso": "US01-CT04",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "get_user_by_email não filtra por status e compara email já normalizado (strip+lower) — duplicidade detectada corretamente."
+  }
 ]

@@ -1,10 +1,56 @@
 [
-  {"id_caso": "US08-CT01", "correto": true, "extraneous": false},
-  {"id_caso": "US08-CT02", "correto": false, "categoria_defeito": "Incorrect Fact"},
-  {"id_caso": "US08-CT03", "correto": false, "categoria_defeito": "Incorrect Fact"},
-  {"id_caso": "US08-CT04", "correto": true, "extraneous": false},
-  {"id_caso": "US08-CT05", "correto": false, "categoria_defeito": "Incorrect Fact"},
-  {"id_caso": "US08-CT06", "correto": true, "extraneous": false},
-  {"id_caso": "US08-CT07", "correto": true, "extraneous": true},
-  {"id_caso": "US08-CT08", "correto": true, "extraneous": true}
+  {
+    "id_caso": "US08-CT01",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "approve_monitoria: SELECT confirma status=PENDENTE_APROVACAO + disciplina ATIVA; sem outro monitor ativo do aluno, UPDATE status='ATIVO' sucede."
+  },
+  {
+    "id_caso": "US08-CT02",
+    "correto": false,
+    "categoria_defeito": "Incorrect Fact",
+    "justificativa": "approve_monitoria não implementa nenhuma lógica de confirmação nem de substituição de monitor — só verifica PENDENTE_APROVACAO+disciplina ATIVA e ALUNO_JA_MONITOR (checagem por aluno, não por disciplina). Se dois alunos diferentes forem aprovados para a mesma disciplina, ambos ficam com status ATIVO simultaneamente; nenhum 'monitor antigo' é desativado nem há tela de confirmação."
+  },
+  {
+    "id_caso": "US08-CT03",
+    "correto": false,
+    "categoria_defeito": "Incorrect Fact",
+    "justificativa": "Não existe nenhuma etapa de confirmação (aceitar/cancelar) em aprovar()/rejeitar() — cada rota processa a ação diretamente em um único POST, sem tela intermediária."
+  },
+  {
+    "id_caso": "US08-CT04",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "reject_monitoria faz UPDATE status='REJEITADO', motivo_rejeicao=%s WHERE id=%s AND status='PENDENTE_APROVACAO' — motivo é persistido."
+  },
+  {
+    "id_caso": "US08-CT05",
+    "correto": false,
+    "categoria_defeito": "Incorrect Fact",
+    "justificativa": "routes.py::rejeitar lê motivo=request.form.get('motivo','').strip() sem qualquer validação de vazio — repository.reject_monitoria aceita motivo_rejeicao vazio/None sem bloquear a rejeição."
+  },
+  {
+    "id_caso": "US08-CT06",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "list_pending_monitorias() filtra WHERE status='PENDENTE_APROVACAO' — uma vez aprovada/rejeitada, o status muda e a linha some da consulta."
+  },
+  {
+    "id_caso": "US08-CT07",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "list_pending_monitorias() filtra WHERE status='PENDENTE_APROVACAO' — uma vez aprovada/rejeitada, o status muda e a linha some da consulta."
+  },
+  {
+    "id_caso": "US08-CT08",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "SELECT em approve_monitoria/UPDATE em reject_monitoria exigem status='PENDENTE_APROVACAO' — para qualquer outro status, cai no caminho NAO_ENCONTRADA, flash 'Monitoria não encontrada ou já processada.' (a mensagem já cobre 'já processada')."
+  },
+  {
+    "id_caso": "US08-CT09",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "SELECT em approve_monitoria/UPDATE em reject_monitoria exigem status='PENDENTE_APROVACAO' — para qualquer outro status, cai no caminho NAO_ENCONTRADA, flash 'Monitoria não encontrada ou já processada.' (a mensagem já cobre 'já processada')."
+  }
 ]

@@ -1,0 +1,24 @@
+{
+  "tratamento": "t0_nvidia",
+  "user_story_id": "US04",
+  "repeticao": 1,
+  "timestamp": "2026-07-05T14:10:01.487826+00:00",
+  "latencia_s": 71.565,
+  "tokens_entrada": 601,
+  "tokens_saida": 1038,
+  "custo_usd": 0.0,
+  "model_backend": "nvidia",
+  "pipeline": "zero_shot",
+  "modo": "real",
+  "intermediarios": {
+    "casos_atuais": "### US04-CT01 — Desativar usuário ativo com sucesso\n- **Pré-condição:** Admin autenticado na tela de gestão de usuários; usuário alvo existe e está ativo\n- **Objetivo:** Validar desativação de usuário ativo pelo admin\n- **Resultado esperado:** Sistema desativa o acesso do usuário e confirma a operação\n- **Tipo:** principal\n- **Critérios cobertos:** Cenário 1\n\n### US04-CT02 — Tentar desativar usuário já desativado\n- **Pré-condição:** Admin autenticado na tela de gestão de usuários; usuário alvo existe e já está desativado\n- **Objetivo:** Validar tratamento de erro ao desativar usuário inativo\n- **Resultado esperado:** Sistema retorna erro informando que o usuário já está desativado\n- **Tipo:** alternativo\n- **Critérios cobertos:** Cenário 2\n\n### US04-CT03 — Tentar desativar usuário inexistente\n- **Pré-condição:** Admin autenticado na tela de gestão de usuários; ID de usuário inexistente informado\n- **Objetivo:** Validar comportamento ao desativar usuário que não existe (partição: usuário inexistente)\n- **Resultado esperado:** Sistema retorna erro de usuário não encontrado\n- **Tipo:** alternativo\n- **Critérios cobertos:** a confirmar\n\n### US04-CT04 — Admin tenta desativar a si mesmo\n- **Pré-condição:** Admin autenticado na tela de gestão de usuários; admin seleciona o próprio usuário para desativar\n- **Objetivo:** Validar regra de auto-desativação (partição: usuário alvo = admin logado)\n- **Resultado esperado:** Sistema impede a auto-desativação ou solicita confirmação especial\n- **Tipo:** fronteira\n- **Critérios cobertos:** a confirmar\n\n### US04-CT05 — Usuário não-admin tenta acessar função de desativar\n- **Pré-condição:** Usuário com perfil não-admin autenticado; tenta acessar endpoint/tela de desativação\n- **Objetivo:** Validar controle de autorização (partição: perfil sem permissão de admin)\n- **Resultado esperado:** Sistema nega acesso (403/redirect) e não executa desativação\n- **Tipo:** segurança\n- **Critérios cobertos:** a confirmar\n\n### US04-CT06 — Desativação"
+  },
+  "precisao": 0.8333,
+  "recall": 1.0,
+  "f1": 0.9091,
+  "verbosidade_media": 17.17,
+  "pct_extraneous": 0.0,
+  "vp": 5,
+  "fp": 1,
+  "fn": 0
+}

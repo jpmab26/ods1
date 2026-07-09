@@ -1,0 +1,24 @@
+{
+  "tratamento": "t0_nvidia",
+  "user_story_id": "US07",
+  "repeticao": 2,
+  "timestamp": "2026-07-05T14:17:01.553755+00:00",
+  "latencia_s": 210.927,
+  "tokens_entrada": 684,
+  "tokens_saida": 2273,
+  "custo_usd": 0.0,
+  "model_backend": "nvidia",
+  "pipeline": "zero_shot",
+  "modo": "real",
+  "intermediarios": {
+    "casos_atuais": "### US07-CT01 — Indicação bem-sucedida de aluno válido\n- **Pré-condição:** Professor autenticado na tela de uma disciplina de sua responsabilidade; existe aluno com papel \"aluno\" cadastrado no sistema.\n- **Objetivo:** Validar criação de vínculo de monitoria com status \"Pendente de aprovação\" ao indicar aluno elegível.\n- **Resultado esperado:** Vínculo criado e exibido com status \"Pendente de aprovação\"; mensagem de sucesso apresentada.\n- **Tipo:** principal\n- **Critérios cobertos:** AC1\n\n### US07-CT02 — Indicação de usuário sem papel aluno\n- **Pré-condição:** Professor autenticado na tela de uma disciplina de sua responsabilidade; existe usuário cadastrado sem papel \"aluno\" (ex.: professor, administrador, usuário externo).\n- **Objetivo:** Validar rejeição da indicação quando o usuário selecionado não possui papel \"aluno\".\n- **Resultado esperado:** Sistema impede a indicação e exibe mensagem de erro \"Papel inválido\" (ou similar); nenhum vínculo é criado.\n- **Tipo:** principal\n- **Critérios cobertos:** AC2\n\n### US07-CT03 — Disciplina de outro professor não aparece nas opções\n- **Pré-condição:** Professor autenticado; existem disciplinas de sua responsabilidade e disciplinas de outros professores cadastradas.\n- **Objetivo:** Validar que apenas disciplinas do professor logado são listadas para indicação de monitor.\n- **Resultado esperado:** Na tela de indicação, somente disciplinas sob responsabilidade do professor são exibidas; disciplinas de outros professores não aparecem na lista.\n- **Tipo:** principal\n- **Critérios cobertos:** AC3\n\n### US07-CT04 — Indicação de aluno já vinculado como monitor na mesma disciplina\n- **Pré-condição:** Professor autenticado na tela de uma disciplina de sua responsabilidade; aluno já possui vínculo de monitoria ativo ou pendente nessa disciplina.\n- **Objetivo:** Verificar comportamento ao tentar indicar aluno já monitor da disciplina (regra não especificada nos critérios).\n- **Resultado esperado:** Sistema impede nova indicação e exibe m"
+  },
+  "precisao": 0.6667,
+  "recall": 0.8,
+  "f1": 0.7273,
+  "verbosidade_media": 30.0,
+  "pct_extraneous": 0.0,
+  "vp": 4,
+  "fp": 2,
+  "fn": 1
+}

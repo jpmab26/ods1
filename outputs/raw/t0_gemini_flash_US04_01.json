@@ -1,0 +1,24 @@
+{
+  "tratamento": "t0_gemini_flash",
+  "user_story_id": "US04",
+  "repeticao": 1,
+  "timestamp": "2026-07-05T13:48:37.921484+00:00",
+  "latencia_s": 11.847,
+  "tokens_entrada": 547,
+  "tokens_saida": 296,
+  "custo_usd": 0.0,
+  "model_backend": "gemini_flash",
+  "pipeline": "zero_shot",
+  "modo": "real",
+  "intermediarios": {
+    "casos_atuais": "### US04-CT01 — Desativar usuário ativo com sucesso\n- **Pré-condição:** Admin autenticado na tela de gestão de usuários; Usuário 'monitor_ativo' está ativo no sistema e visível para desativação.\n- **Objetivo:** Verificar que um admin consegue desativar com sucesso um usuário que está ativo.\n- **Resultado esperado:** O acesso do usuário 'monitor_ativo' é desativado (status alterado para inativo); Sistema exibe uma mensagem de sucesso ou notificação de desativação.\n- **Tipo:** principal\n- **Critérios cobertos:** Cenário 1\n\n### US04-CT02 — Tentar desativar usuário já desativado\n- **Pré-condição:** Admin autenticado na tela de gestão de usuários (ou enviando uma requisição); Usuário 'monitor_desativado' já está desativado no sistema.\n- **Objetivo:** Validar que o sistema impede a desativação de um usuário que já está inativo e retorna um erro apropriado.\n- **Resultado esperado:** Sistema retorna uma mensagem de erro (e.g., \"Usuário já está desativado\") ou um código de erro apropriado; O status do usuário 'monitor_desativado' permanece inativo.\n- **Tipo:** exceção\n- **Critérios cobertos:** Cenário 2"
+  },
+  "precisao": 0.5,
+  "recall": 0.3333,
+  "f1": 0.4,
+  "verbosidade_media": 38.5,
+  "pct_extraneous": 0.0,
+  "vp": 1,
+  "fp": 1,
+  "fn": 2
+}

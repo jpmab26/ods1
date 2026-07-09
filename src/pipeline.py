@@ -23,8 +23,17 @@ from src.agents.a4_curador import build_a4
 from src.config import MAX_ITERATIONS
 
 
-def build_pipeline() -> SequentialAgent:
-    """Constrói o pipeline A1 → Loop[A2,A1b] → Loop[A3,A1c] → A4.
+def build_pipeline_stages() -> list[tuple[str, object]]:
+    """Constrói os 4 estágios do pipeline A1 → Loop[A2,A1b] → Loop[A3,A1c] → A4 como
+    agentes independentes, cada um o root de sua própria execução (via Runner), em vez de
+    um único SequentialAgent atômico.
+
+    Permite a eval/runner.py rodar cada estágio separadamente sobre a MESMA sessão e pular
+    estágios já concluídos numa nova tentativa da mesma execução (dentro do mesmo processo)
+    — não perde o progresso (e a cota de API já gasta) de estágios anteriores quando um
+    estágio posterior falha (ex.: cota diária gratuita esgotada no meio do pipeline).
+    Checkpoint é por estágio, não por iteração de loop — uma falha no meio de um LoopAgent
+    ainda reinicia aquele loop específico do zero, mas não os estágios já concluídos antes.
 
     Cada LoopAgent requer uma instância distinta de A1 (ADK impõe parent único
     por instância). A1b e A1c são instâncias independentes com a mesma config.
@@ -52,7 +61,21 @@ def build_pipeline() -> SequentialAgent:
         max_iterations=MAX_ITERATIONS,
     )
 
+    return [
+        ("a1", a1),
+        ("loop_cobertura", loop_cobertura),
+        ("loop_factual", loop_factual),
+        ("a4", a4),
+    ]
+
+
+def build_pipeline() -> SequentialAgent:
+    """Constrói o pipeline A1 → Loop[A2,A1b] → Loop[A3,A1c] → A4 como um único
+    SequentialAgent atômico (usado por smoke-adk e testes — sem checkpoint entre estágios;
+    para execução real com retomada de progresso, ver build_pipeline_stages() em
+    eval/runner.py::_run_multiagent_staged_async)."""
+    estagios = build_pipeline_stages()
     return SequentialAgent(
         name="pipeline_cogerador",
-        sub_agents=[a1, loop_cobertura, loop_factual, a4],
+        sub_agents=[agente for _, agente in estagios],
     )

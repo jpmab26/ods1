@@ -1,0 +1,26 @@
+[
+  {
+    "id_caso": "US07-CT01",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "create_indicacao insere com status PENDENTE_APROVACAO quando não há vínculo prévio."
+  },
+  {
+    "id_caso": "US07-CT02",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "usuarios_repository.list_active_students() só retorna papel='ALUNO' e status='ATIVO' — qualquer outro papel cai fora de allowed_alunos e é rejeitado com 'Aluno inválido.'"
+  },
+  {
+    "id_caso": "US07-CT03",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "usuarios_repository.list_active_students() só retorna papel='ALUNO' e status='ATIVO' — qualquer outro papel cai fora de allowed_alunos e é rejeitado com 'Aluno inválido.'"
+  },
+  {
+    "id_caso": "US07-CT04",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "disciplinas = disciplinas_service.list_by_professor(professor_id) — só disciplinas do professor logado são listadas/selecionáveis na UI."
+  }
+]

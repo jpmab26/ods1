@@ -1,0 +1,24 @@
+{
+  "tratamento": "t0_gemini_flash",
+  "user_story_id": "US04",
+  "repeticao": 2,
+  "timestamp": "2026-07-05T13:48:47.798426+00:00",
+  "latencia_s": 9.876,
+  "tokens_entrada": 547,
+  "tokens_saida": 240,
+  "custo_usd": 0.0,
+  "model_backend": "gemini_flash",
+  "pipeline": "zero_shot",
+  "modo": "real",
+  "intermediarios": {
+    "casos_atuais": "### US04-CT01 — Desativar usuário ativo com sucesso\n- **Pré-condição:** Admin autenticado na tela de gestão de usuários. Usuário alvo cadastrado e ativo.\n- **Objetivo:** Validar a desativação bem-sucedida de um usuário ativo por um admin.\n- **Resultado esperado:** O acesso do usuário alvo é desativado e o usuário não consegue mais acessar o sistema.\n- **Tipo:** principal\n- **Critérios cobertos:** Cenário 1\n\n### US04-CT02 — Tentar desativar usuário já desativado\n- **Pré-condição:** Admin autenticado na tela de gestão de usuários. Usuário alvo cadastrado e já desativado.\n- **Objetivo:** Validar que o sistema impede a desativação de um usuário que já está desativado.\n- **Resultado esperado:** O sistema retorna uma mensagem de erro informando que o usuário já está desativado. O estado do usuário alvo permanece desativado.\n- **Tipo:** alternativo/erro\n- **Critérios cobertos:** Cenário 2"
+  },
+  "precisao": 0.5,
+  "recall": 0.3333,
+  "f1": 0.4,
+  "verbosidade_media": 31.0,
+  "pct_extraneous": 0.0,
+  "vp": 1,
+  "fp": 1,
+  "fn": 2
+}

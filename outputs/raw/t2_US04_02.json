@@ -1,0 +1,26 @@
+{
+  "tratamento": "t2",
+  "user_story_id": "US04",
+  "repeticao": 2,
+  "timestamp": "2026-07-05T21:14:20.748888+00:00",
+  "latencia_s": 389.774,
+  "tokens_entrada": 593539,
+  "tokens_saida": 35260,
+  "custo_usd": 0.0,
+  "model_backend": "nvidia_super",
+  "pipeline": "multiagent",
+  "modo": "real",
+  "intermediarios": {
+    "casos_atuais": "###US04-CT01 — Desativa usuário ativo\n- **Pré-condição:** Admin autenticado na tela de gestão de usuários; existe usuário com status ATIVO.  \n- **Objetivo:** Validar que o admin pode desativar um usuário ativo.  \n- **Resultado esperado:** O status do usuário é alterado para INATIVO e o sistema exibe mensagem de sucesso.  \n- **Tipo:** principal  \n- **Critérios cobertos:** AC1 (Cenário 1: Desativa usuário ativo)  \n- **Origem:** A1  \n\n### US04-CT02 — Tentativa de desativar usuário já inativo\n- **Pré-condição:** Admin autenticado na tela de gestão de usuários; existe usuário com status INATIVO.  \n- **Objetivo:** Validar que o sistema impede a desativação de usuário já inativo.  \n- **Resultado esperado:** Sistema retorna erro indicando que o usuário já está desativado e não altera o status.  \n- **Tipo:** alternativa  \n- **Critérios cobertos:** AC2 (Cenário 2: Usuário já desativado)  \n- **Origem:** A1  \n\n### US04-CT03 — Tentativa de autodesativação (admin tenta desativar a si mesmo)\n- **Pré-condição:** Admin autenticado na tela de gestão de usuários; o usuário selecionado é o próprio admin logado.  \n- **Objetivo:** Validar que o sistema impede o admin de se desativar a si mesmo (prevenção de lock‑out).  \n- **Resultado esperado:** Sistema retorna erro indicando que não é permitido desativar o próprio usuário e mantém o status ATIVO.  \n- **Tipo:** excepcional  \n- **Critérios cobertos:** a confirmar (regra de não auto‑desativação mencionada em docs/sprints/sprint‑1.md)  \n- **Origem:** F1  \n\n### US04-CT04 — Após desativação, usuário não consegue fazer login\n- **Pré-condição:** Admin autenticado desativa um usuário ATIVO (conforme CT01); o usuário agora está INATIVO.  \n- **Objetivo:** Validar que usuário desativado não pode autenticar no sistema.  \n- **Resultado esperado:** Ao tentar login com credenciais válidas, o sistema retorna erro de credenciais inválidas/conta inativa e não concede acesso.  \n- **Tipo:** alternativa  \n- **Critérios cobertos:** a confirmar (regra de usuár",
+    "critica_cobertura": "## Lacunas identificadas\n_Nenhuma lacuna identificada nesta rodada._",
+    "relatorio_factual": "## Verificação factual### US04-CT01 — Desativa usuário ativo\n- **Status:** SUPORTADO  \n- **Evidência:** \"Admin pode desativar qualquer usuário, alterando status para `INATIVO`.\" e \"Cenário 1: Desativa usuário ativo: ... Then: o acesso deste usuário é desativado\".  \n- **Fonte:** docs/entrega-sprint-1.md#___US04___Admin_desativa_um_usu_rio (tipo: documentação) e user_stories/individual/us04.md (tipo: us)\n\n### US04-CT02 — Tentativa de desativar usuário já inativo\n- **Status:** SUPORTADO  \n- **Evidência:** \"Cenário 2: Usuário já desativado: Given: requisição para desativar usuário já desativado Then: retorna erro pelo usuário já estar desativado\".  \n- **Fonte:** user_stories/individual/us04.md (tipo: us)\n\n### US04-CT03 — Tentativa de autodesativação (admin tenta desativar a si mesmo)\n- **Status:** SUPORTADO  \n- **Evidência:** `if user_id == session.get(\"user_id\"): flash(\"Você não pode desativar o próprio usuário.\", \"error\")` e \"Validação: admin não pode desativar a si mesmo (previne lock‑out)\".  \n- **Fonte:** backend/usuarios/routes.py#deactivate (tipo: código) e docs/sprints/sprint-1.md#___2__Hist_rias_Entregues__EP01_ (tipo: documentação)\n\n### US04-CT04 — Após desativação, usuário não consegue fazer login\n- **Status:** SUPORTADO  \n- **Evidência:** \"Cenário 4: Usuário inativo: Given: usuário com status \"Inativo\" na tela de login When: informa credenciais corretas Then: login é negado com mensagem de que a conta está inativa\" e \"Usuário inativo não consegue autenticar — verificação feita no fluxo de login\".  \n- **Fonte:** docs/criterios-de-aceitacao.md#___EP01___Perfis_e_Autentica__o (tipo: documentação) e docs/entrega-sprint-1.md#___US04___Admin_desativa_um_usu_rio (tipo: documentação)\n\n### US04-CT05 — Tentativa de desativar usuário inexistente\n- **Status:** SUPORTADO  \n- **Evidência:** `else: flash(\"Usuário não encontrado.\", \"error\")` quando `service.deactivate_user(user_id)` retorna `False`.  \n- **Fonte:** backend/usuarios/routes.py#deactivate (tipo: código)\n\n### US0"
+  },
+  "precisao": 0.8571,
+  "recall": 1.0,
+  "f1": 0.9231,
+  "verbosidade_media": 22.0,
+  "pct_extraneous": 0.0,
+  "vp": 6,
+  "fp": 1,
+  "fn": 0
+}

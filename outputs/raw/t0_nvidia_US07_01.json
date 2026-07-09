@@ -1,0 +1,24 @@
+{
+  "tratamento": "t0_nvidia",
+  "user_story_id": "US07",
+  "repeticao": 1,
+  "timestamp": "2026-07-05T14:13:30.626215+00:00",
+  "latencia_s": 168.148,
+  "tokens_entrada": 684,
+  "tokens_saida": 1598,
+  "custo_usd": 0.0,
+  "model_backend": "nvidia",
+  "pipeline": "zero_shot",
+  "modo": "real",
+  "intermediarios": {
+    "casos_atuais": "### US07-CT01 — Indicação bem-sucedida de aluno válido\n- **Pré-condição:** Professor autenticado na tela de uma disciplina de sua responsabilidade; existe aluno com papel \"aluno\" não vinculado como monitor nessa disciplina\n- **Objetivo:** Validar criação de vínculo de monitoria com status inicial correto\n- **Resultado esperado:** Sistema cria vínculo com status \"Pendente de aprovação\" e exibe confirmação\n- **Tipo:** principal\n- **Critérios cobertos:** Cenário 1\n\n### US07-CT02 — Tentativa de indicação de usuário com papel \"professor\"\n- **Pré-condição:** Professor autenticado na tela de sua disciplina; usuário alvo possui papel \"professor\" (sem papel \"aluno\")\n- **Objetivo:** Validar rejeição quando usuário indicado não tem papel \"aluno\"\n- **Resultado esperado:** Sistema rejeita a indicação e exibe mensagem de papel inválido\n- **Tipo:** alternativo\n- **Critérios cobertos:** Cenário 2\n\n### US07-CT03 — Tentativa de indicação de usuário com papel \"admin\"\n- **Pré-condição:** Professor autenticado na tela de sua disciplina; usuário alvo possui papel \"admin\" (sem papel \"aluno\")\n- **Objetivo:** Validar rejeição para usuário administrador sem papel discente\n- **Resultado esperado:** Sistema rejeita a indicação e exibe mensagem de papel inválido\n- **Tipo:** alternativo\n- **Critérios cobertos:** Cenário 2\n\n### US07-CT04 — Tentativa de indicação de usuário sem papel definido\n- **Pré-condição:** Professor autenticado na tela de sua disciplina; usuário alvo não possui nenhum papel atribuído\n- **Objetivo:** Validar rejeição para usuário sem papel \"aluno\"\n- **Resultado esperado:** Sistema rejeita a indicação e exibe mensagem de papel inválido\n- **Tipo:** alternativo\n- **Critérios cobertos:** Cenário 2\n\n### US07-CT05 — Disciplina de outro professor não listada nas opções\n- **Pré-condição:** Professor autenticado; existe disciplina cadastrada sob responsabilidade de outro professor\n- **Objetivo:** Validar que disciplinas de outros professores não aparecem para seleção\n- **Resultado esp"
+  },
+  "precisao": 0.8,
+  "recall": 1.0,
+  "f1": 0.8889,
+  "verbosidade_media": 20.2,
+  "pct_extraneous": 10.0,
+  "vp": 8,
+  "fp": 2,
+  "fn": 0
+}

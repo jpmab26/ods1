@@ -1,0 +1,25 @@
+{
+  "tratamento": "t1",
+  "user_story_id": "US04",
+  "repeticao": 2,
+  "timestamp": "2026-07-07T03:33:06.405585+00:00",
+  "latencia_s": 24.413,
+  "tokens_entrada": 25695,
+  "tokens_saida": 2033,
+  "custo_usd": 0.0,
+  "model_backend": "gemini_flash",
+  "pipeline": "multiagent",
+  "modo": "real",
+  "intermediarios": {
+    "casos_atuais": "### US04-CT01 — Desativar usuário ativo com sucesso\n- **Pré-condição:** Admin autenticado na tela de gestão de usuários. Usuário (não o próprio admin) com status \"Ativo\" existe no sistema.\n- **Objetivo:** Validar que o admin consegue desativar um usuário ativo, e que o acesso deste usuário é removido.\n- **Resultado esperado:** O status do usuário é alterado para \"INATIVO\". Ao tentar realizar login, o usuário desativado tem o acesso negado com mensagem de que a conta está inativa.\n- **Tipo:** Principal\n- **Critérios cobertos:** Cenário 1\n- **Origem:** A1\n\n### US04-CT02 — Tentativa de desativar usuário já inativo\n- **Pré-condição:** Admin autenticado na tela de gestão de usuários. Usuário com status \"Inativo\" já existe no sistema.\n- **Objetivo:** Validar o comportamento do sistema ao tentar desativar um usuário que já se encontra inativo.\n- **Resultado esperado:** O sistema retorna uma mensagem de erro informando que o usuário já está desativado. O status do usuário permanece \"INATIVO\".\n- **Tipo:** Exceção\n- **Critérios cobertos:** Cenário 2\n- **Origem:** A1\n\n### US04-CT03 — Tentativa de desativar o próprio usuário admin\n- **Pré-condição:** Admin autenticado na tela de gestão de usuários.\n- **Objetivo:** Verificar se o admin é impedido de desativar a si mesmo.\n- **Resultado esperado:** O sistema impede a desativação do próprio usuário admin e exibe uma mensagem de erro apropriada (ex: \"Não é possível desativar a si mesmo\"). O status do usuário admin permanece \"Ativo\".\n- **Tipo:** Exceção\n- **Critérios cobertos:** Validação: admin não pode desativar a si mesmo (previne lock-out)\n- **Origem:** A1",
+    "critica_cobertura": "## Lacunas identificadas\n### LC01 — Tentativa de desativar usuário inexistente\n- **Tipo:** erro\n- **Justificativa:** A US04 e os casos de teste atuais não abordam o que acontece quando o admin tenta desativar um `user_id` que não corresponde a nenhum usuário no sistema. É uma condição de erro comum para operações que manipulam entidades, e a US05 (Admin muda a senha do usuário manualmente) possui um cenário explícito para \"Usuário inexistente\", indicando que este é um comportamento esperado para ser tratado em fluxos de gestão de usuários.\n\n### LC02 — Admin desativa usuário com status 'Pendente'\n- **Tipo:** alternativo\n- **Justificativa:** O Cenário 1 da US04 foca na desativação de um \"usuário ativo\". Contudo, o contexto (US01, US02, e o \"Fluxo de Primeiro Acesso\") estabelece que usuários podem ter o status \"Pendente\" ao serem criados. Se um usuário \"Pendente\" não concluir o primeiro acesso ou for criado por engano, um admin deve ter a capacidade de desativá-lo, removendo o acesso antes mesmo que ele seja \"ativo\". Esta é uma condição intermediária de status não coberta explicitamente.\n\n### LC03 — Tentativa de desativação por usuário não autorizado ou não autenticado\n- **Tipo:** erro\n- **Justificativa:** A US04 pressupõe um \"admin autenticado\". No entanto, é crucial testar as condições de segurança onde um usuário não-admin (ex: aluno, professor, monitor) ou um usuário não autenticado tenta acessar o endpoint de desativação. O contexto (especificamente as seções \"Endpoints\" em `docs/sprints/sprint-1.md` e `user_stories/individual/us01.md`, que mencionam \"(admin only)\") reforça a necessidade de validação de autorização para esta funcionalidade."
+  },
+  "precisao": 0.6667,
+  "recall": 0.6667,
+  "f1": 0.6667,
+  "verbosidade_media": 22.67,
+  "pct_extraneous": 0.0,
+  "vp": 2,
+  "fp": 1,
+  "fn": 1
+}

@@ -2,23 +2,23 @@
   "tratamento": "t0_nvidia",
   "user_story_id": "US08",
   "repeticao": 1,
-  "timestamp": "2026-06-30T17:44:50.507924+00:00",
-  "latencia_s": 18.462,
+  "timestamp": "2026-07-05T14:06:43.718636+00:00",
+  "latencia_s": 194.103,
   "tokens_entrada": 796,
-  "tokens_saida": 1980,
+  "tokens_saida": 2161,
   "custo_usd": 0.0,
   "model_backend": "nvidia",
   "pipeline": "zero_shot",
   "modo": "real",
   "intermediarios": {
-    "casos_atuais": "### US08-CT01 — Aprovação de indicação para disciplina sem monitor (caminho principal)\n- **Pré-condição:** Existe indicação com status \"Pendente de aprovação\" para disciplina que não possui monitor ativo; admin autenticado\n- **Objetivo:** Validar aprovação simples de nova indicação\n- **Resultado esperado:** Status muda para \"Ativo\"; aluno indicado ganha acesso como monitor da disciplina; indicação removida da lista de pendentes\n- **Tipo:** principal\n- **Critérios cobertos:** Cenário 1, Cenário 4\n\n### US08-CT02 — Aprovação de indicação para disciplina com monitor — confirmação de substituição\n- **Pré-condição:** Existe indicação com status \"Pendente de aprovação de alteração de monitor\" para disciplina que já possui monitor ativo; admin autenticado\n- **Objetivo:** Validar aprovação com confirmação de troca de monitor\n- **Resultado esperado:** Sistema exibe confirmação; ao confirmar, status muda para \"Ativo\"; novo aluno ganha acesso como monitor; monitor anterior perde acesso; indicação removida da lista de pendentes\n- **Tipo:** principal\n- **Critérios cobertos:** Cenário 2, Cenário 4\n\n### US08-CT03 — Aprovação de indicação para disciplina com monitor — cancelamento na confirmação\n- **Pré-condição:** Existe indicação com status \"Pendente de aprovação de alteração de monitor\" para disciplina com monitor ativo; admin autenticado\n- **Objetivo:** Validar que cancelar na confirmação mantém estado original\n- **Resultado esperado:** Sistema exibe confirmação; ao cancelar, status permanece \"Pendente de aprovação de alteração de monitor\"; monitor atual mantém acesso; indicação permanece na lista de pendentes\n- **Tipo:** alternativa\n- **Critérios cobertos:** Cenário 2 (confirmação negada), Cenário 4 (não sai da fila)\n\n### US08-CT04 — Rejeição de indicação com motivo válido\n- **Pré-condição:** Existe indicação com status \"Pendente de aprovação\" (ou \"Pendente de aprovação de alteração de monitor\"); admin autenticado\n- **Objetivo:** Validar rejeição com registro de motivo\n- **Resu"
+    "casos_atuais": "### US08-CT01 — Aprovação de indicação para disciplina sem monitor\n- **Pré-condição:** Admin autenticado; existe indicação com status \"Pendente de aprovação\" para disciplina sem monitor atual\n- **Objetivo:** Validar aprovação simples de nova monitoria\n- **Resultado esperado:** Vínculo muda para \"Ativo\"; aluno indicado passa a ter acesso como monitor da disciplina\n- **Tipo:** principal\n- **Critérios cobertos:** Cenário 1\n\n### US08-CT02 — Aprovação de indicação para disciplina com monitor — confirma substituição\n- **Pré-condição:** Admin autenticado; existe indicação com status \"Pendente de aprovação de alteração de monitor\" (disciplina já possui monitor ativo)\n- **Objetivo:** Validar fluxo de substituição de monitor com confirmação positiva\n- **Resultado esperado:** Sistema exibe confirmação; ao aceitar, vínculo muda para \"Ativo\"; apenas o novo aluno passa a ter acesso como monitor; monitor anterior perde acesso\n- **Tipo:** principal\n- **Critérios cobertos:** Cenário 2\n\n### US08-CT03 — Aprovação de indicação para disciplina com monitor — cancela substituição\n- **Pré-condição:** Admin autenticado; existe indicação com status \"Pendente de aprovação de alteração de monitor\"\n- **Objetivo:** Validar cancelamento da substituição quando admin não confirma\n- **Resultado esperado:** Sistema exibe confirmação; ao cancelar, indicação permanece com status \"Pendente de aprovação de alteração de monitor\"; monitor atual mantém acesso\n- **Tipo:** alternativo\n- **Critérios cobertos:** Cenário 2\n\n### US08-CT04 — Rejeição de indicação com motivo válido\n- **Pré-condição:** Admin autenticado; existe indicação com status \"Pendente de aprovação\"\n- **Objetivo:** Validar rejeição com registro de motivo\n- **Resultado esperado:** Vínculo muda para \"Rejeitado\"; motivo informado é registrado e visível no histórico\n- **Tipo:** principal\n- **Critérios cobertos:** Cenário 3\n\n### US08-CT05 — Rejeição de indicação sem informar motivo\n- **Pré-condição:** Admin autenticado; existe indicação com status "
   },
-  "precisao": 0.5,
-  "recall": 0.5556,
-  "f1": 0.5263,
-  "verbosidade_media": 26.9,
-  "pct_extraneous": 0.0,
-  "vp": 5,
-  "fp": 5,
-  "fn": 4
+  "precisao": 0.6364,
+  "recall": 0.7778,
+  "f1": 0.7,
+  "verbosidade_media": 22.55,
+  "pct_extraneous": 18.18,
+  "vp": 7,
+  "fp": 4,
+  "fn": 2
 }

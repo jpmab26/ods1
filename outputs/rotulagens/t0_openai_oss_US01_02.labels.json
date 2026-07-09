@@ -1,14 +1,62 @@
 [
-  {"id_caso": "US01-CT01", "correto": true, "extraneous": false},
-  {"id_caso": "US01-CT02", "correto": true, "extraneous": false},
-  {"id_caso": "US01-CT03", "correto": true, "extraneous": false},
-  {"id_caso": "US01-CT04", "correto": true, "extraneous": false},
-  {"id_caso": "US01-CT05", "correto": true, "extraneous": false},
-  {"id_caso": "US01-CT06", "correto": true, "extraneous": false},
-  {"id_caso": "US01-CT07", "correto": false, "categoria_defeito": "Incorrect Fact"},
-  {"id_caso": "US01-CT08", "correto": true, "extraneous": false},
-  {"id_caso": "US01-CT09", "correto": false, "categoria_defeito": "Ambiguity"},
-  {"id_caso": "US01-CT10", "correto": false, "categoria_defeito": "Ambiguity"},
-  {"id_caso": "US01-CT11", "correto": false, "categoria_defeito": "Ambiguity"},
-  {"id_caso": "US01-CT12", "correto": false, "categoria_defeito": "Incorrect Fact"}
+  {
+    "id_caso": "US01-CT01",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "Cadastro com papel válido cria usuário com status PENDENTE, senha temporária de 10 caracteres alfanuméricos exibida ao admin, hash armazenado (create_user/repository.create_user)."
+  },
+  {
+    "id_caso": "US01-CT02",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "Cadastro com papel válido cria usuário com status PENDENTE, senha temporária de 10 caracteres alfanuméricos exibida ao admin, hash armazenado (create_user/repository.create_user)."
+  },
+  {
+    "id_caso": "US01-CT03",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "Cadastro com papel válido cria usuário com status PENDENTE, senha temporária de 10 caracteres alfanuméricos exibida ao admin, hash armazenado (create_user/repository.create_user)."
+  },
+  {
+    "id_caso": "US01-CT04",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "get_user_by_email não filtra por status e compara email já normalizado (strip+lower) — duplicidade detectada corretamente."
+  },
+  {
+    "id_caso": "US01-CT05",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "'if not nome' bloqueia string vazia; mensagem real é 'Nome e email sao obrigatorios.' — comportamento de rejeição correto independente do texto exato."
+  },
+  {
+    "id_caso": "US01-CT06",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "'if not nome' bloqueia string vazia; mensagem real é 'Nome e email sao obrigatorios.' — comportamento de rejeição correto independente do texto exato."
+  },
+  {
+    "id_caso": "US01-CT07",
+    "correto": false,
+    "categoria_defeito": "Incorrect Fact",
+    "justificativa": "create_user não valida formato de email (regex) — só presença, trim e duplicidade case-insensitive. Email sintaticamente inválido (sem @, sem domínio, etc.) é aceito normalmente."
+  },
+  {
+    "id_caso": "US01-CT08",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "role='' não está em VALID_ROLES={ALUNO,PROFESSOR,ADMIN} — rejeitado com 'Papel invalido.'"
+  },
+  {
+    "id_caso": "US01-CT09",
+    "correto": true,
+    "extraneous": true,
+    "justificativa": "Senha sempre tem exatamente 10 caracteres alfanuméricos (_generate_temp_password) — 10>=8 é tecnicamente verdadeiro, ainda que a regra de '8 ou mais' não seja a real."
+  },
+  {
+    "id_caso": "US01-CT10",
+    "correto": false,
+    "categoria_defeito": "Incorrect Fact",
+    "justificativa": "Não existe fluxo de duas etapas (confirmação/cancelamento) em usuarios/routes.py::index — o POST cria o usuário diretamente em uma única submissão; não há uma etapa de 'confirmação' a cancelar."
+  }
 ]

@@ -1,0 +1,50 @@
+[
+  {
+    "id_caso": "US07-CT01",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "create_indicacao insere com status PENDENTE_APROVACAO quando não há vínculo prévio."
+  },
+  {
+    "id_caso": "US07-CT02",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "usuarios_repository.list_active_students() só retorna papel='ALUNO' e status='ATIVO' — qualquer outro papel cai fora de allowed_alunos e é rejeitado com 'Aluno inválido.'"
+  },
+  {
+    "id_caso": "US07-CT03",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "disciplinas = disciplinas_service.list_by_professor(professor_id) — só disciplinas do professor logado são listadas/selecionáveis na UI."
+  },
+  {
+    "id_caso": "US07-CT04",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "'(ex.: 403 Forbidden)' é ilustrativo; o comportamento real (rejeição de autorização via 'Disciplina inválida.' server-side) está coberto pela alegação genérica de 'erro de autorização'."
+  },
+  {
+    "id_caso": "US07-CT05",
+    "correto": false,
+    "categoria_defeito": "Incorrect Fact",
+    "justificativa": "Não existe mensagem distinta para indicação duplicada — o ON DUPLICATE KEY UPDATE faz no-op silencioso (preserva status/professor_id) e o mesmo flash de sucesso genérico é sempre exibido; não há um aviso de 'já existe' ou rejeição visível ao professor."
+  },
+  {
+    "id_caso": "US07-CT06",
+    "correto": false,
+    "categoria_defeito": "Incorrect Fact",
+    "justificativa": "Mensagem real é 'Aluno inválido.' — não 'Selecione um aluno', que não existe no código."
+  },
+  {
+    "id_caso": "US07-CT07",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "Rota requer @login_required + @require_role('PROFESSOR') — sem sessão de professor válida, o acesso é negado/redirecionado."
+  },
+  {
+    "id_caso": "US07-CT08",
+    "correto": false,
+    "categoria_defeito": "Incorrect Fact",
+    "justificativa": "Mensagem real é 'Aluno inválido.' — não 'Aluno inativo não pode ser indicado como monitor', que não existe no código (ainda que o comportamento de rejeição em si esteja correto)."
+  }
+]

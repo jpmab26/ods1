@@ -1,0 +1,74 @@
+[
+  {
+    "id_caso": "US07-CT01",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "create_indicacao insere com status PENDENTE_APROVACAO quando não há vínculo prévio."
+  },
+  {
+    "id_caso": "US07-CT02",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "usuarios_repository.list_active_students() só retorna papel='ALUNO' e status='ATIVO' — qualquer outro papel cai fora de allowed_alunos e é rejeitado com 'Aluno inválido.'"
+  },
+  {
+    "id_caso": "US07-CT03",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "routes.py::indicar valida disciplina_id contra allowed_disciplinas (derivado da sessão do professor) no backend, independente do que o frontend envia — POST forjado com disciplina alheia é rejeitado com 'Disciplina inválida.'"
+  },
+  {
+    "id_caso": "US07-CT04",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "Rota requer @login_required + @require_role('PROFESSOR') — sem sessão de professor válida, o acesso é negado/redirecionado."
+  },
+  {
+    "id_caso": "US07-CT05",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "disciplina_id=9999 não pertence a allowed_disciplinas do professor — rejeitado com 'Disciplina inválida.' ('ex.: 404' é ilustrativo, coberto pelo 'ou')."
+  },
+  {
+    "id_caso": "US07-CT06",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "aluno_id=9999 não está em allowed_alunos — rejeitado com 'Aluno inválido.' ('ex.: 404' é ilustrativo, coberto pelo 'ou')."
+  },
+  {
+    "id_caso": "US07-CT07",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "Para status atual PENDENTE_APROVACAO/ATIVO, o IF() do ON DUPLICATE KEY UPDATE preserva os valores — nenhuma linha nova é criada, mas o flash de sucesso genérico ('Indicação enviada para aprovação.') é sempre exibido, sem distinguir esse caso."
+  },
+  {
+    "id_caso": "US07-CT08",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "usuarios_repository.list_active_students() só retorna papel='ALUNO' e status='ATIVO' — qualquer outro papel cai fora de allowed_alunos e é rejeitado com 'Aluno inválido.'"
+  },
+  {
+    "id_caso": "US07-CT09",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "Para status atual PENDENTE_APROVACAO/ATIVO, o IF() do ON DUPLICATE KEY UPDATE preserva os valores — nenhuma linha nova é criada, mas o flash de sucesso genérico ('Indicação enviada para aprovação.') é sempre exibido, sem distinguir esse caso."
+  },
+  {
+    "id_caso": "US07-CT10",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "ON DUPLICATE KEY UPDATE em create_indicacao reseta status='REJEITADO' para 'PENDENTE_APROVACAO', atualiza professor_id e limpa motivo_rejeicao."
+  },
+  {
+    "id_caso": "US07-CT11",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "create_indicacao não valida vínculo prévio em disciplina_alunos — matrícula na disciplina não é pré-requisito para a indicação."
+  },
+  {
+    "id_caso": "US07-CT12",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "disciplina_id/aluno_id vazios/None não passam nas checagens 'not disciplina_id'/'not aluno_id' — operação é rejeitada (alegação genérica, sem mensagem específica errada)."
+  }
+]

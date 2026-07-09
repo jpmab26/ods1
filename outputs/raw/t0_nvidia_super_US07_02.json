@@ -1,0 +1,24 @@
+{
+  "tratamento": "t0_nvidia_super",
+  "user_story_id": "US07",
+  "repeticao": 2,
+  "timestamp": "2026-07-05T14:20:22.558522+00:00",
+  "latencia_s": 15.849,
+  "tokens_entrada": 684,
+  "tokens_saida": 1450,
+  "custo_usd": 0.0,
+  "model_backend": "nvidia_super",
+  "pipeline": "zero_shot",
+  "modo": "real",
+  "intermediarios": {
+    "casos_atuais": "###US07-CT01 — Indicação bem-sucedida de aluno como monitor\n- **Pré-condição:** Professor autenticado na tela de uma disciplina que lhe é responsável; disciplina possui pelo menos um aluno cadastrado com papel \"aluno\"\n- **Objetivo:** Verificar que a indicação de um aluno como monitor cria vínculo com status \"Pendente de aprovação\"\n- **Resultado esperado:** Sistema confirma a indicação e exibe o vínculo criado com status \"Pendente de aprovação\"\n- **Tipo:** principal\n- **Critérios cobertos:** AC1\n\n### US07-CT02 — Indicação de usuário com papel professor (não aluno)\n- **Pré-condição:** Professor autenticado na tela de uma disciplina que lhe é responsável; lista de usuários disponíveis inclui pelo menos um usuário com papel \"professor\"\n- **Objetivo:** Validar que o sistema rejeita a indicação quando o usuário selecionado não possui papel \"aluno\"\n- **Resultado esperado:** Sistema impede a confirmação e exibe mensagem informando que o papel do usuário é inválido para monitoria\n- **Tipo:** negativo\n- **Critérios cobertos:** AC2\n\n### US07-CT03 — Indicação de usuário com papel administrativo (não aluno)\n- **Pré-condição:** Professor autenticado na tela de uma disciplina que lhe é responsável; lista de usuários disponíveis inclui pelo menos um usuário com papel \"administrador\"\n- **Objetivo:** Validar que o sistema rejeita a indicação quando o usuário selecionado não possui papel \"aluno\"\n- **Resultado esperado:** Sistema impede a confirmação e exibe mensagem informando que o papel do usuário é inválido para monitoria\n- **Tipo:** negativo\n- **Critérios cobertos:** AC2\n\n### US07-CT04 — Disciplina não pertencente ao professor não aparece nas opções\n- **Pré-condição:** Professor autenticado; existe pelo menos uma disciplina cadastrada no sistema que não é de sua responsabilidade\n- **Objetivo:** Garantir que o professor só possa indicar monitor para disciplinas sob sua responsabilidade\n- **Resultado esperado:** Ao abrir a lista de disciplinas para indicação, a disciplina não perten"
+  },
+  "precisao": 0.8333,
+  "recall": 1.0,
+  "f1": 0.9091,
+  "verbosidade_media": 32.17,
+  "pct_extraneous": 16.67,
+  "vp": 5,
+  "fp": 1,
+  "fn": 0
+}

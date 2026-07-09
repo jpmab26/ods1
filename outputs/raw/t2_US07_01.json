@@ -1,0 +1,26 @@
+{
+  "tratamento": "t2",
+  "user_story_id": "US07",
+  "repeticao": 1,
+  "timestamp": "2026-07-05T22:02:23.215946+00:00",
+  "latencia_s": 1648.259,
+  "tokens_entrada": 1015776,
+  "tokens_saida": 105834,
+  "custo_usd": 0.0,
+  "model_backend": "nvidia_super",
+  "pipeline": "multiagent",
+  "modo": "real",
+  "intermediarios": {
+    "casos_atuais": "### US07-CT01 — Indicação bem‑sucedida de aluno como monitor\n- **Pré-condição:** Professor autenticado na tela de uma das suas disciplinas; disciplina possui pelo menos um aluno com papel \"ALUNO\" cadastrado no sistema.\n- **Objetivo:** Verificar que a indicação de um aluno válido cria um vínculo com status \"Pendente de aprovação\".\n- **Resultado esperado:** Após selecionar um aluno e confirmar a indicação, o sistema cria o vínculo de monitoria com status \"Pendente de aprovação\" e exibe essa indicação no histórico do professor.\n- **Tipo:** principal\n- **Critérios cobertos:** AC1 (Cenário 1: Indicação bem‑sucedida)\n- **Origem:** US07 (user story), docs/logica-tecnica-sprint-2.md\n\n### US07-CT02 — Indicação de usuário sem papel de aluno\n- **Pré-condição:** Professor autenticado na tela de uma de suas disciplinas; existe ao menos um usuário cadastrado no sistema cujo papel não seja \"ALUNO\" (ex.: professor ou admin).\n- **Objetivo:** Validar que o sistema rejeita a indicação quando o usuário selecionado não possui o papel de aluno.\n- **Resultado esperado:** Ao confirmar a indicação, o sistema exibe mensagem de erro indicando \"papel inválido\" ou equivalente e não cria o vínculo.\n- **Tipo:** negativo\n- **Critérios cobertos:** AC2 (Cenário 2: Indicação de usuário sem papel aluno)\n- **Origem:** US07 (user story), docs/logica-tecnica-sprint-2.md\n\n### US07-CT03 — Tentativa de indicação para disciplina de outro professor\n- **Pré-condição:** Professor A autenticado; existe disciplina D cuja responsável é o professor B (professor A não é responsável por D).\n- **Objetivo:** Assegurar que a disciplina de outro professor não apareça nas opções disponíveis para indicação, impedindo a ação.\n- **Resultado esperado:** Na tela de indicação, a disciplina D não está listada entre as disciplinas do professor A; portanto, o professor não consegue selecioná-la e não há possibilidade de criar o vínculo.\n- **Tipo:** negativo\n- **Critérios cobertos:** AC3 (Cenário 3: Disciplina de outro professor)\n-",
+    "critica_cobertura": "## Lacunas identificadas\n_Nenhuma lacuna identificada nesta rodada._",
+    "relatorio_factual": "## Verificação factual\n### US07-CT01\n- **Status:** SUPORTADO  \n- **Evidência:** “Backend valida: disciplina pertence ao professor (verificação server‑side); aluno tem papel ALUNO. Vínculo criado com status PENDENTE_APROVACAO.”  \n- **Fonte:** docs/logica-tecnica-sprint-2.md#___US07___Professor_indica_aluno_como_monitor (tipo: documentação, confiança: alta)\n\n### US07-CT02\n- **Status:** SUPORTADO  \n- **Evidência:** Mesmo trecho acima – a validação verifica se o aluno tem papel ALUNO; caso contrário, o sistema rejeita com mensagem de “papel inválido”.  \n- **Fonte:** docs/logica-tecnica-sprint-2.md#___US07___Professor_indica_aluno_como_monitor (tipo: documentação, confiança: alta)\n\n### US07-CT03\n- **Status:** SUPORTADO  \n- **Evidência:** “Sistema exibe apenas as disciplinas do professor logado (filtradas por professor_id = session[\\\"user_id\\\"])” e “Backend valida: disciplina pertence ao professor (verificação server‑side)”. Também o cenário da US03 afirma que a disciplina de outro professor não aparece nas opções.  \n- **Fonte:** docs/logica-tecnica-sprint-2.md#___US07___Professor_indica_aluno_como_monitor (tipo: documentação, confiança alta)\n\n### US07-CT04\n- **Status:** SUPORTADO  \n- **Evidência:** Pré‑condição de autenticação de professor nas US e a matriz de acesso indica que o endpoint GET/POST /monitorias/indicar é permitido apenas para o papel PROFESSOR.  \n- **Fonte:** user_stories/individual/us07.md (tipo: user story, confiança: alta); docs/sprints/sprint-2.md#___4__Restri__es_de_Acesso_Implementadas (tipo: documentação, confiança: léxica)\n\n### US07-CT05\n- **Status:** NAO_VERIFICAVEL  \n- **Evidência:** Nenhum trecho encontrado que trate da proibição de indicação duplicada enquanto o vínculo está com status PENDENTE. Os pontos de atenção da US07 mencionam apenas validação de propriedade da disciplina e de papel do aluno, não unicidade de pendência.  \n- **Fonte:** ausência de evidência no contexto fornecido.\n\n### US07-CT06\n- **Status:** NAO_SUPORTADO  \n- **Evidência:"
+  },
+  "precisao": 0.8182,
+  "recall": 1.0,
+  "f1": 0.9,
+  "verbosidade_media": 36.91,
+  "pct_extraneous": 9.09,
+  "vp": 9,
+  "fp": 2,
+  "fn": 0
+}

@@ -2,23 +2,23 @@
   "tratamento": "t0_nvidia",
   "user_story_id": "US01",
   "repeticao": 1,
-  "timestamp": "2026-06-30T17:44:16.643042+00:00",
-  "latencia_s": 84.237,
+  "timestamp": "2026-07-05T13:51:18.526424+00:00",
+  "latencia_s": 60.635,
   "tokens_entrada": 599,
-  "tokens_saida": 1677,
+  "tokens_saida": 1716,
   "custo_usd": 0.0,
   "model_backend": "nvidia",
   "pipeline": "zero_shot",
   "modo": "real",
   "intermediarios": {
-    "casos_atuais": "### US01-CT01 — Cadastro de aluno com dados válidos\n- **Pré-condição:** Admin autenticado na tela de gestão de usuários\n- **Objetivo:** Validar criação de usuário com papel Aluno\n- **Resultado esperado:** Usuário criado com status Pendente e senha temporária exibida ao admin\n- **Tipo:** principal\n- **Critérios cobertos:** AC1\n\n### US01-CT02 — Cadastro de professor com dados válidos\n- **Pré-condição:** Admin autenticado na tela de gestão de usuários\n- **Objetivo:** Validar criação de usuário com papel Professor\n- **Resultado esperado:** Usuário criado com status Pendente e senha temporária exibida ao admin\n- **Tipo:** principal\n- **Critérios cobertos:** AC1\n\n### US01-CT03 — Cadastro de admin com dados válidos\n- **Pré-condição:** Admin autenticado na tela de gestão de usuários\n- **Objetivo:** Validar criação de usuário com papel Admin\n- **Resultado esperado:** Usuário criado com status Pendente e senha temporária exibida ao admin\n- **Tipo:** principal\n- **Critérios cobertos:** AC1\n\n### US01-CT04 — Cadastro com email já existente\n- **Pré-condição:** Admin autenticado; email \"joao@email.com\" já cadastrado no sistema\n- **Objetivo:** Validar rejeição de email duplicado\n- **Resultado esperado:** Sistema rejeita com mensagem \"Email já cadastrado\"\n- **Tipo:** principal\n- **Critérios cobertos:** AC2\n\n### US01-CT05 — Cadastro com email em formato inválido\n- **Pré-condição:** Admin autenticado na tela de gestão de usuários\n- **Objetivo:** Validar rejeição de email mal formatado\n- **Resultado esperado:** Sistema rejeita com mensagem de erro de formato de email\n- **Tipo:** alternativo\n- **Critérios cobertos:** a confirmar\n\n### US01-CT06 — Cadastro sem preencher nome\n- **Pré-condição:** Admin autenticado na tela de gestão de usuários\n- **Objetivo:** Validar obrigatoriedade do campo nome\n- **Resultado esperado:** Sistema rejeita com mensagem indicando campo nome obrigatório\n- **Tipo:** alternativo\n- **Critérios cobertos:** a confirmar\n\n### US01-CT07 — Cadastro sem preencher email\n-"
+    "casos_atuais": "### US01-CT01 — Cadastro de aluno com dados válidos\n- **Pré-condição:** Admin autenticado na tela de gestão de usuários\n- **Objetivo:** Validar criação de usuário com papel Aluno\n- **Resultado esperado:** Usuário criado com status Pendente e senha temporária exibida ao admin\n- **Tipo:** principal\n- **Critérios cobertos:** AC1\n\n### US01-CT02 — Cadastro de professor com dados válidos\n- **Pré-condição:** Admin autenticado na tela de gestão de usuários\n- **Objetivo:** Validar criação de usuário com papel Professor (partição de equivalência de papel)\n- **Resultado esperado:** Usuário criado com status Pendente e senha temporária exibida ao admin\n- **Tipo:** principal\n- **Critérios cobertos:** AC1\n\n### US01-CT03 — Cadastro de admin com dados válidos\n- **Pré-condição:** Admin autenticado na tela de gestão de usuários\n- **Objetivo:** Validar criação de usuário com papel Admin (partição de equivalência de papel)\n- **Resultado esperado:** Usuário criado com status Pendente e senha temporária exibida ao admin\n- **Tipo:** principal\n- **Critérios cobertos:** AC1\n\n### US01-CT04 — Cadastro com email já existente\n- **Pré-condição:** Admin autenticado na tela de gestão de usuários; email já cadastrado na base\n- **Objetivo:** Validar rejeição de email duplicado\n- **Resultado esperado:** Sistema rejeita com mensagem 'Email já cadastrado'\n- **Tipo:** principal\n- **Critérios cobertos:** AC2\n\n### US01-CT05 — Cadastro com formato de email inválido\n- **Pré-condição:** Admin autenticado na tela de gestão de usuários\n- **Objetivo:** Validar tratamento de email com sintaxe inválida (partição de equivalência inválida)\n- **Resultado esperado:** Sistema rejeita o cadastro e exibe mensagem de erro de formato\n- **Tipo:** alternativo\n- **Critérios cobertos:** a confirmar\n\n### US01-CT06 — Cadastro com nome em branco\n- **Pré-condição:** Admin autenticado na tela de gestão de usuários\n- **Objetivo:** Validar obrigatoriedade do campo nome (partição de equivalência vazia)\n- **Resultado esperado:** Siste"
   },
-  "precisao": 0.7143,
-  "recall": 1.0,
-  "f1": 0.8333,
-  "verbosidade_media": 15.36,
-  "pct_extraneous": 0.0,
-  "vp": 10,
-  "fp": 4,
-  "fn": 0
+  "precisao": 0.8889,
+  "recall": 0.8,
+  "f1": 0.8421,
+  "verbosidade_media": 18.78,
+  "pct_extraneous": 11.11,
+  "vp": 8,
+  "fp": 1,
+  "fn": 2
 }

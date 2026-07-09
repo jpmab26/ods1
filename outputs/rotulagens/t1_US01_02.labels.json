@@ -1,11 +1,86 @@
 [
-  {"id_caso": "US01-CT01", "correto": false, "categoria_defeito": "Incorrect Fact"},
-  {"id_caso": "US01-CT02", "correto": true, "extraneous": false},
-  {"id_caso": "US01-CT03", "correto": true, "extraneous": false},
-  {"id_caso": "US01-CT04", "correto": true, "extraneous": false},
-  {"id_caso": "US01-CT05", "correto": false, "categoria_defeito": "Incorrect Fact"},
-  {"id_caso": "US01-CT06", "correto": true, "extraneous": false},
-  {"id_caso": "US01-CT07", "correto": true, "extraneous": false},
-  {"id_caso": "US01-CT08", "correto": false, "categoria_defeito": "Ambiguity"},
-  {"id_caso": "US01-CT09", "correto": false, "categoria_defeito": "Ambiguity"}
+  {
+    "id_caso": "US01-CT01",
+    "correto": false,
+    "categoria_defeito": "Incorrect Fact",
+    "justificativa": "Objetivo lista 'Aluno, Professor, Monitor, Admin' como perfis permitidos — VALID_ROLES é {ALUNO,PROFESSOR,ADMIN}; MONITOR não é aceito neste fluxo de cadastro."
+  },
+  {
+    "id_caso": "US01-CT02",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "get_user_by_email não filtra por status e compara email já normalizado (strip+lower) — duplicidade detectada corretamente."
+  },
+  {
+    "id_caso": "US01-CT03",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "'if not nome' bloqueia string vazia; mensagem real é 'Nome e email sao obrigatorios.' — comportamento de rejeição correto independente do texto exato."
+  },
+  {
+    "id_caso": "US01-CT04",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "'if not nome' bloqueia string vazia; mensagem real é 'Nome e email sao obrigatorios.' — comportamento de rejeição correto independente do texto exato."
+  },
+  {
+    "id_caso": "US01-CT05",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "role='' não está em VALID_ROLES={ALUNO,PROFESSOR,ADMIN} — rejeitado com 'Papel invalido.'"
+  },
+  {
+    "id_caso": "US01-CT06",
+    "correto": false,
+    "categoria_defeito": "Incorrect Fact",
+    "justificativa": "create_user não valida formato de email (regex) — só presença, trim e duplicidade case-insensitive. Email sintaticamente inválido (sem @, sem domínio, etc.) é aceito normalmente."
+  },
+  {
+    "id_caso": "US01-CT07",
+    "correto": true,
+    "extraneous": true,
+    "justificativa": "get_user_by_email não filtra por status e compara email já normalizado (strip+lower) — duplicidade detectada corretamente."
+  },
+  {
+    "id_caso": "US01-CT08",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "Papel fora de {ALUNO,PROFESSOR,ADMIN} (ex.: 'estagiario') não está em VALID_ROLES — rejeitado."
+  },
+  {
+    "id_caso": "US01-CT09",
+    "correto": false,
+    "categoria_defeito": "Incorrect Fact",
+    "justificativa": "'if not nome' roda ANTES do .strip() — uma string só de espaços é truthy, passa no check, e é armazenada como '' após nome.strip(). O sistema não rejeita nome só-com-espaços."
+  },
+  {
+    "id_caso": "US01-CT10",
+    "correto": true,
+    "extraneous": true,
+    "justificativa": "get_user_by_email não filtra por status e compara email já normalizado (strip+lower) — duplicidade detectada corretamente."
+  },
+  {
+    "id_caso": "US01-CT11",
+    "correto": false,
+    "categoria_defeito": "Incorrect Fact",
+    "justificativa": "Não há checagem de tamanho de nome/email no código Python; nome/email são VARCHAR(120) no schema, mas nenhuma validação graciosa existe — não há a mensagem de erro de validação de tamanho descrita pelo caso."
+  },
+  {
+    "id_caso": "US01-CT12",
+    "correto": false,
+    "categoria_defeito": "Incorrect Fact",
+    "justificativa": "Não há checagem de tamanho de nome/email no código Python; nome/email são VARCHAR(120) no schema, mas nenhuma validação graciosa existe — não há a mensagem de erro de validação de tamanho descrita pelo caso."
+  },
+  {
+    "id_caso": "US01-CT13",
+    "correto": true,
+    "extraneous": true,
+    "justificativa": "Não há validação de caracteres no campo nome — qualquer string não-vazia é aceita e armazenada via nome.strip()."
+  },
+  {
+    "id_caso": "US01-CT14",
+    "correto": true,
+    "extraneous": true,
+    "justificativa": "Sem validação de formato de email, endereço com '+tag' (formato válido, aliás) é aceito e armazenado normalmente."
+  }
 ]

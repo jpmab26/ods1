@@ -1,17 +1,182 @@
 [
-  {"id_caso": "US01-CT01", "correto": true, "extraneous": false},
-  {"id_caso": "US01-CT02", "correto": true, "extraneous": false},
-  {"id_caso": "US01-CT03", "correto": true, "extraneous": false},
-  {"id_caso": "US01-CT04", "correto": true, "extraneous": false},
-  {"id_caso": "US01-CT05", "correto": false, "categoria_defeito": "Incorrect Fact"},
-  {"id_caso": "US01-CT06", "correto": false, "categoria_defeito": "Incorrect Fact"},
-  {"id_caso": "US01-CT07", "correto": true, "extraneous": false},
-  {"id_caso": "US01-CT08", "correto": true, "extraneous": false},
-  {"id_caso": "US01-CT09", "correto": false, "categoria_defeito": "Incorrect Fact"},
-  {"id_caso": "US01-CT10", "correto": true, "extraneous": false},
-  {"id_caso": "US01-CT11", "correto": true, "extraneous": false},
-  {"id_caso": "US01-CT12", "correto": false, "categoria_defeito": "Incorrect Fact"},
-  {"id_caso": "US01-CT13", "correto": true, "extraneous": false},
-  {"id_caso": "US01-CT14", "correto": true, "extraneous": false},
-  {"id_caso": "US01-CT15", "correto": false, "categoria_defeito": "Inconsistency"}
+  {
+    "id_caso": "US01-CT01",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "Cadastro com papel válido cria usuário com status PENDENTE, senha temporária de 10 caracteres alfanuméricos exibida ao admin, hash armazenado (create_user/repository.create_user)."
+  },
+  {
+    "id_caso": "US01-CT02",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "get_user_by_email não filtra por status e compara email já normalizado (strip+lower) — duplicidade detectada corretamente."
+  },
+  {
+    "id_caso": "US01-CT03",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "'if not nome' bloqueia string vazia; mensagem real é 'Nome e email sao obrigatorios.' — comportamento de rejeição correto independente do texto exato."
+  },
+  {
+    "id_caso": "US01-CT04",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "'if not nome' bloqueia string vazia; mensagem real é 'Nome e email sao obrigatorios.' — comportamento de rejeição correto independente do texto exato."
+  },
+  {
+    "id_caso": "US01-CT05",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "role='' não está em VALID_ROLES={ALUNO,PROFESSOR,ADMIN} — rejeitado com 'Papel invalido.'"
+  },
+  {
+    "id_caso": "US01-CT06",
+    "correto": false,
+    "categoria_defeito": "Incorrect Fact",
+    "justificativa": "create_user não valida formato de email (regex) — só presença, trim e duplicidade case-insensitive. Email sintaticamente inválido (sem @, sem domínio, etc.) é aceito normalmente."
+  },
+  {
+    "id_caso": "US01-CT07",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "Papel fora de {ALUNO,PROFESSOR,ADMIN} (ex.: 'estagiario') não está em VALID_ROLES — rejeitado."
+  },
+  {
+    "id_caso": "US01-CT08",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "Cadastro com papel válido cria usuário com status PENDENTE, senha temporária de 10 caracteres alfanuméricos exibida ao admin, hash armazenado (create_user/repository.create_user)."
+  },
+  {
+    "id_caso": "US01-CT09",
+    "correto": false,
+    "categoria_defeito": "Incorrect Fact",
+    "justificativa": "VALID_ROLES = {ALUNO, PROFESSOR, ADMIN} em usuarios/service.py — MONITOR não é aceito neste fluxo de cadastro, mesmo o ENUM do banco permitindo o valor para outros fluxos internos."
+  },
+  {
+    "id_caso": "US01-CT10",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "Cadastro com papel válido cria usuário com status PENDENTE, senha temporária de 10 caracteres alfanuméricos exibida ao admin, hash armazenado (create_user/repository.create_user)."
+  },
+  {
+    "id_caso": "US01-CT11",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "Cadastro com papel válido cria usuário com status PENDENTE, senha temporária de 10 caracteres alfanuméricos exibida ao admin, hash armazenado (create_user/repository.create_user)."
+  },
+  {
+    "id_caso": "US01-CT12",
+    "correto": true,
+    "extraneous": true,
+    "justificativa": "Cadastro com papel válido cria usuário com status PENDENTE, senha temporária de 10 caracteres alfanuméricos exibida ao admin, hash armazenado (create_user/repository.create_user)."
+  },
+  {
+    "id_caso": "US01-CT13",
+    "correto": true,
+    "extraneous": true,
+    "justificativa": "Cadastro com papel válido cria usuário com status PENDENTE, senha temporária de 10 caracteres alfanuméricos exibida ao admin, hash armazenado (create_user/repository.create_user)."
+  },
+  {
+    "id_caso": "US01-CT14",
+    "correto": true,
+    "extraneous": true,
+    "justificativa": "senha_temporaria=TRUE é hardcoded no INSERT de repository.create_user."
+  },
+  {
+    "id_caso": "US01-CT15",
+    "correto": true,
+    "extraneous": true,
+    "justificativa": "generate_password_hash (werkzeug) aplicado antes de repository.create_user — senha nunca armazenada em texto plano."
+  },
+  {
+    "id_caso": "US01-CT16",
+    "correto": false,
+    "categoria_defeito": "Incorrect Fact",
+    "justificativa": "'if not nome' roda ANTES do .strip() — uma string só de espaços é truthy, passa no check, e é armazenada como '' após nome.strip(). O sistema não rejeita nome só-com-espaços."
+  },
+  {
+    "id_caso": "US01-CT17",
+    "correto": false,
+    "categoria_defeito": "Incorrect Fact",
+    "justificativa": "create_user não valida formato de email (regex) — só presença, trim e duplicidade case-insensitive. Email sintaticamente inválido (sem @, sem domínio, etc.) é aceito normalmente."
+  },
+  {
+    "id_caso": "US01-CT18",
+    "correto": true,
+    "extraneous": true,
+    "justificativa": "get_user_by_email não filtra por status e compara email já normalizado (strip+lower) — duplicidade detectada corretamente."
+  },
+  {
+    "id_caso": "US01-CT19",
+    "correto": true,
+    "extraneous": true,
+    "justificativa": "normalized_email = email.strip().lower() roda antes da checagem de duplicidade e do INSERT — trim aplicado corretamente."
+  },
+  {
+    "id_caso": "US01-CT20",
+    "correto": true,
+    "extraneous": true,
+    "justificativa": "role=(papel or '').upper() NÃO faz strip — papel com espaços nas bordas permanece fora de VALID_ROLES e é rejeitado."
+  },
+  {
+    "id_caso": "US01-CT21",
+    "correto": true,
+    "extraneous": true,
+    "justificativa": "role=(papel or '').upper() normaliza para maiúsculas antes da validação; papel minúsculo é de fato aceito e salvo em maiúsculas."
+  },
+  {
+    "id_caso": "US01-CT22",
+    "correto": false,
+    "categoria_defeito": "Incorrect Fact",
+    "justificativa": "Não há checagem de tamanho de nome/email no código Python; nome/email são VARCHAR(120) no schema, mas nenhuma validação graciosa existe — não há a mensagem de erro de validação de tamanho descrita pelo caso."
+  },
+  {
+    "id_caso": "US01-CT23",
+    "correto": false,
+    "categoria_defeito": "Incorrect Fact",
+    "justificativa": "Não há checagem de tamanho de nome/email no código Python; nome/email são VARCHAR(120) no schema, mas nenhuma validação graciosa existe — não há a mensagem de erro de validação de tamanho descrita pelo caso."
+  },
+  {
+    "id_caso": "US01-CT24",
+    "correto": true,
+    "extraneous": true,
+    "justificativa": "get_user_by_email não filtra por status e compara email já normalizado (strip+lower) — duplicidade detectada corretamente."
+  },
+  {
+    "id_caso": "US01-CT25",
+    "correto": true,
+    "extraneous": true,
+    "justificativa": "nome.strip() é usado no INSERT (repository.create_user(nome.strip(), ...)) — trim aplicado corretamente ao nome armazenado."
+  },
+  {
+    "id_caso": "US01-CT26",
+    "correto": true,
+    "extraneous": true,
+    "justificativa": "get_user_by_email não filtra por status e compara email já normalizado (strip+lower) — duplicidade detectada corretamente."
+  },
+  {
+    "id_caso": "US01-CT27",
+    "correto": false,
+    "categoria_defeito": "Incorrect Fact",
+    "justificativa": "strip() só remove espaços nas bordas; um espaço interno (ex.: 'user @example.com') não é validado nem rejeitado — o email é aceito como está."
+  },
+  {
+    "id_caso": "US01-CT28",
+    "correto": false,
+    "categoria_defeito": "Incorrect Fact",
+    "justificativa": "Sem validação de formato, um email com múltiplos '@' é aceito normalmente."
+  },
+  {
+    "id_caso": "US01-CT29",
+    "correto": true,
+    "extraneous": true,
+    "justificativa": "Papel fora de {ALUNO,PROFESSOR,ADMIN} (ex.: 'estagiario') não está em VALID_ROLES — rejeitado."
+  },
+  {
+    "id_caso": "US01-CT30",
+    "correto": true,
+    "extraneous": true,
+    "justificativa": "role=(papel or '').upper() normaliza para maiúsculas antes da validação; papel misto é de fato aceito e salvo em maiúsculas."
+  }
 ]

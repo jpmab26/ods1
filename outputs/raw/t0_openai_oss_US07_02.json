@@ -1,0 +1,24 @@
+{
+  "tratamento": "t0_openai_oss",
+  "user_story_id": "US07",
+  "repeticao": 2,
+  "timestamp": "2026-07-05T20:05:58.196333+00:00",
+  "latencia_s": 34.92,
+  "tokens_entrada": 670,
+  "tokens_saida": 914,
+  "custo_usd": 0.0,
+  "model_backend": "openai_oss",
+  "pipeline": "zero_shot",
+  "modo": "real",
+  "intermediarios": {
+    "casos_atuais": "### US07-CT01 — Indicação bem‑sucedida de aluno\n- **Pré‑condição:** Professor autenticado; disciplina pertence ao professor; aluno cadastrado possui papel “aluno” e ainda não é monitor na disciplina.\n- **Objetivo:** Verificar que o professor consegue indicar um aluno como monitor e que o vínculo é criado com status “Pendente de aprovação”.\n- **Resultado esperado:** O sistema grava o vínculo monitor‑disciplina com status “Pendente de aprovação” e exibe mensagem de sucesso.\n- **Tipo:** principal\n- **Critérios cobertos:** Cenário 1  \n\n### US07-CT02 — Indicação de usuário sem papel “aluno”\n- **Pré‑condição:** Professor autenticado; disciplina pertence ao professor; usuário selecionado possui papel diferente de “aluno” (ex.: “monitor”, “admin” ou nenhum papel).\n- **Objetivo:** Garantir que o sistema impede a indicação de usuários que não são alunos.\n- **Resultado esperado:** O sistema rejeita a ação e exibe mensagem “Papel inválido” ou equivalente.\n- **Tipo:** negativo\n- **Critérios cobertos:** Cenário 2  \n\n### US07-CT03 — Disciplina que não pertence ao professor não aparece\n- **Pré‑condição:** Professor autenticado; existe disciplina que pertence a outro professor.\n- **Objetivo:** Confirmar que disciplinas de responsabilidade de outro professor não são listadas nas opções de indicação.\n- **Resultado esperado:** A disciplina de outro professor não está presente na lista de disciplinas disponíveis para seleção.\n- **Tipo:** principal\n- **Critérios cobertos:** Cenário 3  \n\n### US07-CT04 — Tentativa de indicação com disciplina fora da lista (valor manipulado)\n- **Pré‑condição:** Professor autenticado; disciplina não pertence ao professor; tentativa de enviar requisição HTTP com ID de disciplina alheia (por exemplo, via inspeção de HTML).\n- **Objetivo:** Verificar se o back‑end valida a propriedade da disciplina independentemente da UI.\n- **Resultado esperado:** O servidor responde com erro de autorização (ex.: 403 Forbidden) e não cria vínculo.\n- **Tipo:** segurança / negati"
+  },
+  "precisao": 0.625,
+  "recall": 1.0,
+  "f1": 0.7692,
+  "verbosidade_media": 27.38,
+  "pct_extraneous": 0.0,
+  "vp": 5,
+  "fp": 3,
+  "fn": 0
+}

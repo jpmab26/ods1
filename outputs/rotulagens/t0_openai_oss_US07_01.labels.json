@@ -1,0 +1,44 @@
+[
+  {
+    "id_caso": "US07-CT01",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "create_indicacao insere com status PENDENTE_APROVACAO quando não há vínculo prévio."
+  },
+  {
+    "id_caso": "US07-CT02",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "usuarios_repository.list_active_students() só retorna papel='ALUNO' e status='ATIVO' — qualquer outro papel cai fora de allowed_alunos e é rejeitado com 'Aluno inválido.'"
+  },
+  {
+    "id_caso": "US07-CT03",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "disciplinas = disciplinas_service.list_by_professor(professor_id) — só disciplinas do professor logado são listadas/selecionáveis na UI."
+  },
+  {
+    "id_caso": "US07-CT04",
+    "correto": false,
+    "categoria_defeito": "Incorrect Fact",
+    "justificativa": "Mensagem real quando aluno_id é vazio/ausente é 'Aluno inválido.' — não 'Selecione um aluno para indicar', que não existe no código."
+  },
+  {
+    "id_caso": "US07-CT05",
+    "correto": false,
+    "categoria_defeito": "Incorrect Fact",
+    "justificativa": "Não existe mensagem distinta para indicação duplicada — o ON DUPLICATE KEY UPDATE faz no-op silencioso (preserva status/professor_id) e o mesmo flash de sucesso genérico é sempre exibido; não há um aviso de 'já existe' ou rejeição visível ao professor."
+  },
+  {
+    "id_caso": "US07-CT06",
+    "correto": false,
+    "categoria_defeito": "Incorrect Fact",
+    "justificativa": "Não existe nenhum status ou fluxo de 'alteração de monitor' no código — create_indicacao só cria PENDENTE_APROVACAO ou, via ON DUPLICATE, reseta REJEITADO; não há rejeição ativa nem criação de um vínculo com esse rótulo."
+  },
+  {
+    "id_caso": "US07-CT07",
+    "correto": false,
+    "categoria_defeito": "Incorrect Fact",
+    "justificativa": "routes.py::indicar chama service.create_indicacao diretamente, sem try/except — uma falha real de banco propagaria como erro 500 não tratado, não a mensagem amigável descrita."
+  }
+]

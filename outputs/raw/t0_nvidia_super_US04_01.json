@@ -1,0 +1,24 @@
+{
+  "tratamento": "t0_nvidia_super",
+  "user_story_id": "US04",
+  "repeticao": 1,
+  "timestamp": "2026-07-08T22:53:33.460932+00:00",
+  "latencia_s": 14.008,
+  "tokens_entrada": 601,
+  "tokens_saida": 1224,
+  "custo_usd": 0.0,
+  "model_backend": "nvidia_super",
+  "pipeline": "zero_shot",
+  "modo": "real",
+  "intermediarios": {
+    "casos_atuais": "### US04-CT01 — Desativar usuário ativo\n- **Pré-condição:** Admin autenticado na tela de gestão de usuários; existe pelo menos um usuário ativo no sistema.\n- **Objetivo:** Verificar que o sistema desativa o acesso do usuário selecionado.\n- **Resultado esperado:** O status do usuário muda para \"desativado\" e o sistema exibe confirmação de desativação.\n- **Tipo:** principal\n- **Critérios cobertos:** AC1\n\n### US04-CT02 — Tentativa de desativar usuário já desativado\n- **Pré-condição:** Admin autenticado na tela de gestão de usuários; existe um usuário com status já desativado.\n- **Objetivo:** Verificar que o sistema impede a desativação e retorna erro apropriado.\n- **Resultado esperado:** Sistema exibe mensagem de erro indicando que o usuário já está desativado e não altera o status.\n- **Tipo:** alternativo\n- **Critérios cobertos:** AC2\n\n### US04-CT03 — Tentativa de desativar usuário sem autenticação de admin\n- **Pré-condição:** Não há admin autenticado; usuário tenta acessar endpoint de desativação diretamente.\n- **Objetivo:** Verificar comportamento quando admin não está autenticado (regras não especificadas na US).\n- **Resultado esperado:** a confirmar\n- **Tipo:** negativo\n- **Critérios cobertos:** a confirmar\n\n### US04-CT04 — Tentativa de desativar usuário inexistente\n- **Pré-condição:** Admin autenticado; tenta desativar usuário com ID não cadastrado.\n- **Objetivo:** Verificar tratamento de usuário inexistente (não especificado na US).\n- **Resultado esperado:** a confirmar\n- **Tipo:** negativo\n- **Critérios cobertos:** a confirmar"
+  },
+  "precisao": 0.25,
+  "recall": 0.3333,
+  "f1": 0.2857,
+  "verbosidade_media": 19.25,
+  "pct_extraneous": 0.0,
+  "vp": 1,
+  "fp": 3,
+  "fn": 2
+}

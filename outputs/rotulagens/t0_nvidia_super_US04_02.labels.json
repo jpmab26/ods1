@@ -1,0 +1,26 @@
+[
+  {
+    "id_caso": "US04-CT01",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "deactivate_user faz UPDATE status=INATIVO sem checar status atual; usuário existente é sempre desativado com sucesso, incluindo login subsequente bloqueado por auth/service.py::authenticate_user (checa status=='INATIVO')."
+  },
+  {
+    "id_caso": "US04-CT02",
+    "correto": false,
+    "categoria_defeito": "Incorrect Fact",
+    "justificativa": "repository.deactivate_user faz UPDATE incondicional por id (sem checar status atual); como atualizado_em sempre muda, rowcount>0 mesmo se já INATIVO — a 2ª desativação 'sucede' silenciosamente (mesma flash de sucesso), não retorna nenhum erro."
+  },
+  {
+    "id_caso": "US04-CT03",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "@login_required redireciona (302) para auth.login quando não há user_id na sessão."
+  },
+  {
+    "id_caso": "US04-CT04",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "rowcount=0 quando o id não existe — service.deactivate_user retorna False, routes.py::deactivate flasheia 'Usuário não encontrado.'"
+  }
+]

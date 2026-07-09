@@ -1,0 +1,24 @@
+{
+  "tratamento": "t0_openai_oss",
+  "user_story_id": "US07",
+  "repeticao": 1,
+  "timestamp": "2026-07-05T14:53:33.676727+00:00",
+  "latencia_s": 33.45,
+  "tokens_entrada": 670,
+  "tokens_saida": 987,
+  "custo_usd": 0.0,
+  "model_backend": "openai_oss",
+  "pipeline": "zero_shot",
+  "modo": "real",
+  "intermediarios": {
+    "casos_atuais": "### US07-CT01 — Indicação bem‑sucedida de aluno como monitor  \n- **Pré‑condição:** Professor autenticado e visualizando a lista de disciplinas que possui; disciplina selecionada pertence ao professor; ao menos um usuário com papel “aluno” está cadastrado na base; o aluno selecionado não possui vínculo de monitoria ativo na mesma disciplina.  \n- **Objetivo:** Verificar que a indicação de um aluno para monitoria é criada corretamente.  \n- **Resultado esperado:** Após confirmar a indicação, o sistema cria o vínculo de monitoria com status “Pendente de aprovação” e exibe mensagem de sucesso.  \n- **Tipo:** principal  \n- **Critérios cobertos:** Cenário 1 – Indicação bem‑sucedida  \n\n### US07-CT02 — Tentativa de indicação de usuário sem papel “aluno”  \n- **Pré‑condição:** Professor autenticado; disciplina seleção válida; usuário selecionado possui papel diferente de “aluno” (ex.: “colaborador”, “admin”).  \n- **Objetivo:** Garantir que o sistema impede a indicação de usuários que não são alunos.  \n- **Resultado esperado:** Ao confirmar a indicação, o sistema rejeita a operação e exibe a mensagem “Papel inválido: o usuário não é aluno”.  \n- **Tipo:** principal  \n- **Critérios cobertos:** Cenário 2 – Indicação de usuário sem papel aluno  \n\n### US07-CT03 — Disciplina não pertence ao professor logado  \n- **Pré‑condição:** Professor autenticado; existe disciplina cadastrada que pertence a outro professor.  \n- **Objetivo:** Assegurar que disciplinas que não são de responsabilidade do professor não são apresentadas para indicação.  \n- **Resultado esperado:** Na tela de escolha de disciplinas, a disciplina de outro professor não aparece na lista; o professor não pode iniciar a indicação para ela.  \n- **Tipo:** principal  \n- **Critérios cobertos:** Cenário 3 – Disciplina de outro professor  \n\n### US07-CT04 — Professor tenta indicar aluno sem selecionar nenhum usuário  \n- **Pré‑condição:** Professor autenticado; disciplina válida selecionada; lista de alunos exibida, porém nenhuma lin"
+  },
+  "precisao": 0.4286,
+  "recall": 0.6,
+  "f1": 0.5,
+  "verbosidade_media": 30.86,
+  "pct_extraneous": 0.0,
+  "vp": 3,
+  "fp": 4,
+  "fn": 2
+}

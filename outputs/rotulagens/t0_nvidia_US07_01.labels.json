@@ -1,0 +1,62 @@
+[
+  {
+    "id_caso": "US07-CT01",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "create_indicacao insere com status PENDENTE_APROVACAO quando não há vínculo prévio."
+  },
+  {
+    "id_caso": "US07-CT02",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "usuarios_repository.list_active_students() só retorna papel='ALUNO' e status='ATIVO' — qualquer outro papel cai fora de allowed_alunos e é rejeitado com 'Aluno inválido.'"
+  },
+  {
+    "id_caso": "US07-CT03",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "usuarios_repository.list_active_students() só retorna papel='ALUNO' e status='ATIVO' — qualquer outro papel cai fora de allowed_alunos e é rejeitado com 'Aluno inválido.'"
+  },
+  {
+    "id_caso": "US07-CT04",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "usuarios_repository.list_active_students() só retorna papel='ALUNO' e status='ATIVO' — qualquer outro papel cai fora de allowed_alunos e é rejeitado com 'Aluno inválido.'"
+  },
+  {
+    "id_caso": "US07-CT05",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "disciplinas = disciplinas_service.list_by_professor(professor_id) — só disciplinas do professor logado são listadas/selecionáveis na UI."
+  },
+  {
+    "id_caso": "US07-CT06",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "routes.py::indicar valida disciplina_id contra allowed_disciplinas (derivado da sessão do professor) no backend, independente do que o frontend envia — POST forjado com disciplina alheia é rejeitado com 'Disciplina inválida.'"
+  },
+  {
+    "id_caso": "US07-CT07",
+    "correto": false,
+    "categoria_defeito": "Incorrect Fact",
+    "justificativa": "Aluno já monitor (PENDENTE ou ATIVO) na mesma disciplina: ON DUPLICATE KEY UPDATE faz no-op silencioso, sem exibir 'mensagem de vínculo existente' — o flash de sucesso genérico é mostrado do mesmo jeito."
+  },
+  {
+    "id_caso": "US07-CT08",
+    "correto": true,
+    "extraneous": false,
+    "justificativa": "A regra de bloqueio por acúmulo (ALUNO_JA_MONITOR) só existe em approve_monitoria — na indicação (create_indicacao) não há checagem contra outras disciplinas."
+  },
+  {
+    "id_caso": "US07-CT09",
+    "correto": true,
+    "extraneous": true,
+    "justificativa": "Se list_by_professor retorna lista vazia, o template renderiza sem opções de disciplina — consistente com estado vazio."
+  },
+  {
+    "id_caso": "US07-CT10",
+    "correto": false,
+    "categoria_defeito": "Incorrect Fact",
+    "justificativa": "aluno_id inexistente cai fora de allowed_alunos (derivado de list_active_students) e é rejeitado com 'Aluno inválido.', não uma mensagem de 'aluno não encontrado' distinta."
+  }
+]
